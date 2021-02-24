@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_anagrafica">
+
+    <fragment
+        android:id="@+id/nav_anagrafica"
+        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_anagrafica"
+        android:label="@string/Anagrafica_Vaccini"
+        tools:layout="@layout/fragment_anagrafica" />
+
+    <fragment
+        android:id="@+id/nav_dettaglio_consegne"
+        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_dettaglio_consegne"
+        android:label="@string/Consegne"
+        tools:layout="@layout/fragment_dettaglio_consegne" />
+
+    <fragment
+        android:id="@+id/nav_punti_somministrazione"
+        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_punti"
+        android:label="@string/Punti"
+        tools:layout="@layout/fragment_punti" />
+</navigation>
