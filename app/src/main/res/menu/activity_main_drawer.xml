@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/Anagrafica_Vaccini" />
         <item
-            android:id="@+id/nav_dettaglio_consegne"
+            android:id="@+id/nav_group_consegne"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/Consegne" />
+            android:title="@string/Group_Consegne" />
         <item
             android:id="@+id/nav_punti_somministrazione"
             android:icon="@drawable/ic_menu_slideshow"

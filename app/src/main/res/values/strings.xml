@@ -16,12 +16,17 @@
     <string name="Wash_Your_Hand">Wash your hands</string>
 
     <string name="Anagrafica_Vaccini">Anagrafica Vaccini</string>
-    <string name="Consegne">Dettaglio Consegne</string>
+    <string name="Group_Consegne">Raggruppamento Consegne</string>
     <string name="Punti">Punti Somministrazione</string>
     <string name="Somministrazione">Somministrazione</string>
 
     <string name="Internet_Missing">No internet connection - A connection is needed</string>
     <string name="API_Error" translatable="false">API Error - %1$s</string>
 
+    <string name="look_for_hint">Looking for..</string>
+    <string name="empty_text">No items to show..</string>
+    <string name="Last_delivery">Last delivery</string>
+
     <string name="Last_Update">Last Update..</string>
+    <string name="Dosi_Consegnate">Dosi Consegnate</string>
 </resources>

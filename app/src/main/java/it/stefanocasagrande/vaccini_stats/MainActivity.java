@@ -1,12 +1,9 @@
 package it.stefanocasagrande.vaccini_stats;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -24,6 +21,7 @@ import it.stefanocasagrande.vaccini_stats.Common.DB;
 import it.stefanocasagrande.vaccini_stats.Network.API;
 import it.stefanocasagrande.vaccini_stats.Network.CheckNetwork;
 import it.stefanocasagrande.vaccini_stats.Network.NetworkClient;
+import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.last_update_dataset;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_anagrafica, R.id.nav_dettaglio_consegne, R.id.nav_punti_somministrazione)
+                R.id.nav_anagrafica, R.id.nav_group_consegne, R.id.nav_punti_somministrazione)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -61,7 +59,15 @@ public class MainActivity extends AppCompatActivity {
         if (GlobalVariables.isNetworkConnected)
             getLastUpdate();
         else
-            Toast.makeText(this,getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
+        {
+            if (!Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(""))
+            {
+                /* ToDo Load data already in the db */
+            }
+            else
+                Toast.makeText(this,getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
@@ -78,7 +84,53 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    //region CheckLastUpdate
+
+    public void Check_Update(String last_update)
+    {
+        boolean debug=true;
+
+        if ((debug) || (Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("") || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)))
+        {
+            Common.Database.Set_Configurazione("ultimo_aggiornamento", last_update);
+            getconsegne_vaccini();
+        }
+        else
+        {
+            /* ToDo Load data already in the db */
+        }
+    }
+
+    //endregion
+
     //region API
+
+    public void getconsegne_vaccini()
+    {
+        Retrofit retrofit= NetworkClient.getRetrofitClient();
+
+        API VacciniAPIs = retrofit.create(API.class);
+
+        Call call = VacciniAPIs.getConsegneVaccini();
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+              /*This is the success callback. Though the response type is JSON, with Retrofit we get
+              the response in the form of WResponse POJO class
+              */
+                if (response.body()!=null) {
+                    consegne_vaccini_dataset wResponse = (consegne_vaccini_dataset) response.body();
+                    Common.Database.Insert_Consegne(wResponse.getData());
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     public void getLastUpdate()
     {
@@ -96,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
               */
                 if (response.body()!=null) {
                     last_update_dataset wResponse = (last_update_dataset) response.body();
+                    Check_Update(wResponse.ultimo_aggiornamento);
                 }
             }
 

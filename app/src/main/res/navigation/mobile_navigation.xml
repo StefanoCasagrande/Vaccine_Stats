@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_anagrafica" />
 
     <fragment
-        android:id="@+id/nav_dettaglio_consegne"
-        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_dettaglio_consegne"
-        android:label="@string/Consegne"
-        tools:layout="@layout/fragment_dettaglio_consegne" />
+        android:id="@+id/nav_group_consegne"
+        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_group_consegne"
+        android:label="@string/Group_Consegne"
+        tools:layout="@layout/fragment_group_consegne" />
 
     <fragment
         android:id="@+id/nav_punti_somministrazione"
