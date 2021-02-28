@@ -19,8 +19,8 @@ import static it.stefanocasagrande.vaccini_stats.Common.Common.AddDotToInteger;
 
 public class Delivery_Adapter extends ArrayAdapter<consegne_vaccini_data> {
 
-    private List<consegne_vaccini_data> list;
-    private Context context;
+    private final List<consegne_vaccini_data> list;
+    private final Context context;
 
     public Delivery_Adapter(Context v_context, int resource, List<consegne_vaccini_data> objects) {
         super(v_context, resource, objects);
