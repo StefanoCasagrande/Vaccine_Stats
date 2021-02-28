@@ -4,15 +4,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class consegne_vaccini_data implements Serializable {
-
-    @SerializedName("index")
-    @Expose
-    public Integer index;
 
     @SerializedName("area")
     @Expose
