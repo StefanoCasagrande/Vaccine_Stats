@@ -19,6 +19,14 @@
     <string name="Last_Update">Last Update..</string>
     <string name="Doses_Delivered">Doses Delivered</string>
 
+    <string name="Big_Title_Placeholder">Big Title Placeholder</string>
+    <string name="Small_Text_Placeholder">Small Text Placeholder</string>
+    <string name="Number_Placeholder">200.000</string>
+
+    <string name="Pfizer_BioNTech">Pfizer/BioNTech</string>
+    <string name="AstraZeneca">AstraZeneca</string>
+    <string name="Moderna">Moderna</string>
+    <string name="Other_Vaccines">Other Vaccines</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

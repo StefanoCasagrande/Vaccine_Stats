@@ -137,7 +137,37 @@ public class DB extends SQLiteOpenHelper {
 
     //region Consegne
 
-    public List<consegne_vaccini_data> Consegne_GroupBy_Area()
+    public List<consegne_vaccini_data> Get_Consegne(String area_name)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<consegne_vaccini_data> lista = new ArrayList<>();
+
+        String sql_query = "select area, fornitore, numero_dosi, data_consegna, codice_NUTS1, codice_NUTS2, codice_regione_ISTAT, nome_area from CONSEGNE_VACCINI where nome_area=" + Validate_String(area_name);
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()){
+            do {
+                consegne_vaccini_data var = new consegne_vaccini_data();
+
+                var.nome_area = c.getString(0);
+                var.fornitore = c.getString(1);
+                var.numero_dosi = c.getInt(2);
+                var.data_consegna = c.getString(3);
+                var.codice_NUTS1 = c.getString(4);
+                var.codice_NUTS2 = c.getString(5);
+                var.codice_regione_ISTAT = c.getInt(6);
+                var.nome_area = c.getString(7);
+
+                lista.add(var);
+
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return lista;
+    }
+    public List<consegne_vaccini_data> Get_Consegne_GroupBy_Area()
     {
         SQLiteDatabase db = this.getWritableDatabase();
         List<consegne_vaccini_data> lista = new ArrayList<>();

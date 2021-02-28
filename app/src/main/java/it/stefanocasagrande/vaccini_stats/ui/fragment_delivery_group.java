@@ -80,7 +80,7 @@ public class fragment_delivery_group extends Fragment {
             }
         });
 
-        full_list = Common.Database.Consegne_GroupBy_Area();
+        full_list = Common.Database.Get_Consegne_GroupBy_Area();
 
         Load_Data("");
 
