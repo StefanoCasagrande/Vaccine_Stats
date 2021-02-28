@@ -15,6 +15,8 @@
     <string name="look_for_hint">Looking for..</string>
     <string name="empty_text">No items to show..</string>
     <string name="Last_delivery">Last delivery</string>
+    <string name="Date_Delivery">Delivered on</string>
+    <string name="provider">Provider</string>
 
     <string name="Last_Update">Last Update..</string>
     <string name="Doses_Delivered">Doses Delivered</string>
@@ -22,6 +24,7 @@
     <string name="Big_Title_Placeholder">Big Title Placeholder</string>
     <string name="Small_Text_Placeholder">Small Text Placeholder</string>
     <string name="Number_Placeholder">200.000</string>
+    <string name="List_of_deliveries">List of deliveries</string>
 
     <string name="Pfizer_BioNTech">Pfizer/BioNTech</string>
     <string name="AstraZeneca">AstraZeneca</string>

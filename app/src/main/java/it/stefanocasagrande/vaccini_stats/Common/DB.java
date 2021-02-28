@@ -142,7 +142,7 @@ public class DB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         List<consegne_vaccini_data> lista = new ArrayList<>();
 
-        String sql_query = "select area, fornitore, numero_dosi, data_consegna, codice_NUTS1, codice_NUTS2, codice_regione_ISTAT, nome_area from CONSEGNE_VACCINI where nome_area=" + Validate_String(area_name);
+        String sql_query = "select area, fornitore, numero_dosi, data_consegna, codice_NUTS1, codice_NUTS2, codice_regione_ISTAT, nome_area from CONSEGNE_VACCINI where nome_area=" + Validate_String(area_name) + " order by data_consegna desc";
 
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){

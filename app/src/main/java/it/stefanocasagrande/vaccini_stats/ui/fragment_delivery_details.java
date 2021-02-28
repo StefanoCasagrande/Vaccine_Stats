@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
+import it.stefanocasagrande.vaccini_stats.Adapters.Delivery_Details_Adapter;
 import it.stefanocasagrande.vaccini_stats.Common.Common;
 import it.stefanocasagrande.vaccini_stats.R;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
@@ -31,6 +33,8 @@ public class fragment_delivery_details extends Fragment {
 
     TextView tv_vaccine_type4;
     TextView tv_vaccine_type4_doses;
+
+    ListView list;
 
     public fragment_delivery_details() {
         // Required empty public constructor
@@ -69,6 +73,8 @@ public class fragment_delivery_details extends Fragment {
         tv_vaccine_type4 = v.findViewById(R.id.tv_vaccine_type4);
         tv_vaccine_type4_doses = v.findViewById(R.id.tv_vaccine_type4_doses);
 
+        list = v.findViewById(R.id.listView);
+
         TextView tv_last_update = v.findViewById(R.id.tv_last_update);
         tv_last_update.setText(Common.get_dd_MM_yyyy(Common.Database.Get_Configurazione("ultimo_aggiornamento")));
 
@@ -79,9 +85,9 @@ public class fragment_delivery_details extends Fragment {
 
     public void Load_Data(String area_name)
     {
-        List<consegne_vaccini_data> lista = Common.Database.Get_Consegne(area_name);
+        List<consegne_vaccini_data> list_to_load = Common.Database.Get_Consegne(area_name);
 
-        tv_location.setText(lista.get(0).nome_area);
+        tv_location.setText(list_to_load.get(0).nome_area);
 
         tv_vaccine_type1.setText(getString(R.string.Pfizer_BioNTech));
         tv_vaccine_type2.setText(getString(R.string.AstraZeneca));
@@ -93,7 +99,7 @@ public class fragment_delivery_details extends Fragment {
         int doses_type3=0;
         int doses_type4=0;
 
-        for (consegne_vaccini_data var : lista)
+        for (consegne_vaccini_data var : list_to_load)
         {
             if (var.fornitore.toUpperCase().equals(getString(R.string.Pfizer_BioNTech).toUpperCase()))
                 doses_type1 += var.numero_dosi;
@@ -109,5 +115,8 @@ public class fragment_delivery_details extends Fragment {
         tv_vaccine_type2_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type2)));
         tv_vaccine_type3_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type3)));
         tv_vaccine_type4_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type4)));
+
+        Delivery_Details_Adapter adapter = new Delivery_Details_Adapter(getActivity(), R.layout.single_item_delivery,list_to_load);
+        list.setAdapter(adapter);
     }
 }
