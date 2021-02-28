@@ -1,6 +1,7 @@
 package it.stefanocasagrande.vaccini_stats;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -23,9 +24,13 @@ import it.stefanocasagrande.vaccini_stats.Common.DB;
 import it.stefanocasagrande.vaccini_stats.Network.API;
 import it.stefanocasagrande.vaccini_stats.Network.CheckNetwork;
 import it.stefanocasagrande.vaccini_stats.Network.NetworkClient;
+import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.last_update_dataset;
 import it.stefanocasagrande.vaccini_stats.ui.fragment_delivery_details;
+import it.stefanocasagrande.vaccini_stats.ui.fragment_delivery_group;
+import it.stefanocasagrande.vaccini_stats.ui.fragment_points;
+import it.stefanocasagrande.vaccini_stats.ui.fragment_summary_by_age;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,19 +63,6 @@ public class MainActivity extends AppCompatActivity {
         network.registerNetworkCallback();
 
         Common.Database = new DB(this);
-
-        if (GlobalVariables.isNetworkConnected)
-            getLastUpdate();
-        else
-        {
-             if (!Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(""))
-            {
-                /* ToDo Load data already in the db */
-            }
-            else
-                Toast.makeText(this,getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
-        }
-
     }
 
     @Override
@@ -87,16 +79,36 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    @Override
+    public void onBackPressed() {
+
+        switch (Common.Back_Action)
+        {
+            case Common.Back_To_Summary:
+                Common.Back_Action = Common.Back_To_Nowhere;
+                goToSummary();
+                break;
+            case Common.Back_To_Delivery_Group:
+                Common.Back_Action=Common.Back_To_Summary;
+                goToDelivery_Group();
+                break;
+            case Common.Back_To_Points:
+                Common.Back_Action=Common.Back_To_Summary;
+                goToPoints();
+                break;
+        }
+    }
+
     //region CheckLastUpdate
 
-    public void Check_Update(String last_update)
+    public void Check_Update(String last_update, fragment_summary_by_age var)
     {
         boolean debug=true;
 
         if ((debug) || (Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("") || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)))
         {
             Common.Database.Set_Configurazione("ultimo_aggiornamento", last_update);
-            getconsegne_vaccini();
+            getSummary_by_Age(var);
         }
         else
         {
@@ -108,13 +120,13 @@ public class MainActivity extends AppCompatActivity {
 
     //region API
 
-    public void getconsegne_vaccini()
+    public void getSummary_by_Age(fragment_summary_by_age var)
     {
         Retrofit retrofit= NetworkClient.getRetrofitClient();
 
         API VacciniAPIs = retrofit.create(API.class);
 
-        Call call = VacciniAPIs.getConsegneVaccini();
+        Call call = VacciniAPIs.getSummary_by_Age();
 
         call.enqueue(new Callback() {
             @Override
@@ -123,8 +135,13 @@ public class MainActivity extends AppCompatActivity {
               the response in the form of WResponse POJO class
               */
                 if (response.body()!=null) {
-                    consegne_vaccini_dataset wResponse = (consegne_vaccini_dataset) response.body();
-                    Common.Database.Insert_Consegne(wResponse.getData());
+                    anagrafica_vaccini_summary_dataset wResponse = (anagrafica_vaccini_summary_dataset) response.body();
+                    Common.Database.Insert_anagrafica_vaccini_summary(wResponse.getData());
+
+                    if (var.isVisible())
+                        var.newDataAvailable();
+
+                    getdeliveries();
                 }
             }
 
@@ -135,7 +152,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void getLastUpdate()
+    public void getdeliveries()
+    {
+        Retrofit retrofit= NetworkClient.getRetrofitClient();
+
+        API VacciniAPIs = retrofit.create(API.class);
+
+        Call call = VacciniAPIs.getVaccinesDeliveries();
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+              /*This is the success callback. Though the response type is JSON, with Retrofit we get
+              the response in the form of WResponse POJO class
+              */
+                if (response.body()!=null) {
+                    consegne_vaccini_dataset wResponse = (consegne_vaccini_dataset) response.body();
+                    Common.Database.Insert_Deliveries(wResponse.getData());
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void getLastUpdate(fragment_summary_by_age var)
     {
         Retrofit retrofit= NetworkClient.getRetrofitClient();
 
@@ -151,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
               */
                 if (response.body()!=null) {
                     last_update_dataset wResponse = (last_update_dataset) response.body();
-                    Check_Update(wResponse.ultimo_aggiornamento);
+                    Check_Update(wResponse.ultimo_aggiornamento, var);
                 }
             }
 
@@ -166,13 +210,33 @@ public class MainActivity extends AppCompatActivity {
 
     //region GoTo
 
+    public void goToSummary()
+    {
+        Fragment fragment = fragment_summary_by_age.newInstance();
+        String tag=getString(R.string.fragment_summary_by_age);
+        Show_Fragment(fragment, tag);
+    }
+
+    public void goToDelivery_Group()
+    {
+        Fragment fragment = fragment_delivery_group.newInstance();
+        String tag=getString(R.string.fragment_delivery_group);
+        Show_Fragment(fragment, tag);
+    }
+
+    public void goToPoints()
+    {
+        Fragment fragment = fragment_points.newInstance();
+        String tag=getString(R.string.fragment_points);
+        Show_Fragment(fragment, tag);
+    }
+
     public void goToDelivery_Details(String area_name)
     {
         Fragment fragment = fragment_delivery_details.newInstance(area_name);
         String tag=getString(R.string.fragment_detail_consegne);
         Show_Fragment(fragment, tag);
     }
-
 
     public void Show_Fragment(Fragment fragment, String tag)
     {

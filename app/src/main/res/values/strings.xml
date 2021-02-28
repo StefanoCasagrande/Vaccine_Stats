@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Vaccini Stats</string>
     <string name="fragment_detail_consegne">fragment_detail_consegne</string>
+    <string name="fragment_summary_by_age">fragment_summary_by_age</string>
+    <string name="fragment_delivery_group">fragment_delivery_group</string>
+    <string name="fragment_points">fragment_points</string>
     <string name="Menu_Title">Don\'t forget:</string>
     <string name="Wear_The_Mask">Wear the mask</string>
     <string name="Wash_Your_Hand">Wash your hands</string>

@@ -35,6 +35,13 @@ public class fragment_delivery_group extends Fragment {
         // Required empty public constructor
     }
 
+    public static fragment_delivery_group newInstance() {
+        fragment_delivery_group fragment = new fragment_delivery_group();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -110,10 +117,9 @@ public class fragment_delivery_group extends Fragment {
 
         adapter = new Delivery_Adapter(getActivity(), R.layout.single_item_delivery,list_to_load);
         list.setAdapter(adapter);
-        list.setOnItemClickListener((parent, view, position, id)-> {
-
+        list.setOnItemClickListener((parent, view, position, id)->{
+            Common.Back_Action = Common.Back_To_Delivery_Group;
             ((MainActivity)getActivity()).goToDelivery_Details(adapter.getItemList(position).nome_area);
-
         });
     }
 }

@@ -5,11 +5,15 @@ import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import java.time.Year;
-
 public class Common {
 
     public static DB Database;
+
+    public static int Back_Action=-1;
+    public static final int Back_To_Nowhere=-1;
+    public static final int Back_To_Summary=0;
+    public static final int Back_To_Delivery_Group=1;
+    public static final int Back_To_Points=2;
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager inputManager = (InputMethodManager) activity

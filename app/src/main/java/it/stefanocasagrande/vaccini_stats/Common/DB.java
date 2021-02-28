@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
 
 public class DB extends SQLiteOpenHelper {
@@ -28,7 +29,10 @@ public class DB extends SQLiteOpenHelper {
         String sql_query="CREATE TABLE CONFIGURATION (id INTEGER PRIMARY KEY, NAME nvarchar(150), VALUE nvarchar(150))";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE CONSEGNE_VACCINI (id INTEGER PRIMARY KEY, area nvarchar(150), fornitore nvarchar(150), numero_dosi INTEGER, data_consegna nvarchar(24), codice_NUTS1 nvarchar(150), codice_NUTS2 nvarchar(150), codice_regione_ISTAT INTEGER, nome_area nvarchar(150))";
+        sql_query="CREATE TABLE DELIVERIES (id INTEGER PRIMARY KEY, area nvarchar(150), fornitore nvarchar(150), numero_dosi INTEGER, data_consegna nvarchar(24), codice_NUTS1 nvarchar(150), codice_NUTS2 nvarchar(150), codice_regione_ISTAT INTEGER, nome_area nvarchar(150))";
+        sqLiteDatabase.execSQL(sql_query);
+
+        sql_query="CREATE TABLE SUMMARY_BY_AGE (id INTEGER PRIMARY KEY, fascia_anagrafica nvarchar(150), totale INTEGER, sesso_maschile INTEGER, sesso_femminile INTEGER, categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, prima_dose INTEGER, seconda_dose INTEGER)";
         sqLiteDatabase.execSQL(sql_query);
     }
 
@@ -135,14 +139,14 @@ public class DB extends SQLiteOpenHelper {
 
     //endregion
 
-    //region Consegne
+    //region Deliveries
 
     public List<consegne_vaccini_data> Get_Deliveries(String area_name)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         List<consegne_vaccini_data> lista = new ArrayList<>();
 
-        String sql_query = "select area, fornitore, numero_dosi, data_consegna, codice_NUTS1, codice_NUTS2, codice_regione_ISTAT, nome_area from CONSEGNE_VACCINI where nome_area=" + Validate_String(area_name) + " order by data_consegna desc";
+        String sql_query = "select area, fornitore, numero_dosi, data_consegna, codice_NUTS1, codice_NUTS2, codice_regione_ISTAT, nome_area from DELIVERIES where nome_area=" + Validate_String(area_name) + " order by data_consegna desc";
 
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){
@@ -172,7 +176,7 @@ public class DB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         List<consegne_vaccini_data> lista = new ArrayList<>();
 
-        String sql_query = "select Sum(numero_dosi), nome_area, max(data_consegna) from CONSEGNE_VACCINI group by nome_area";
+        String sql_query = "select Sum(numero_dosi), nome_area, max(data_consegna) from DELIVERIES group by nome_area";
 
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){
@@ -196,7 +200,7 @@ public class DB extends SQLiteOpenHelper {
         if (lista.size() == 0)
             return false;
 
-        if (Delete("CONSEGNE_VACCINI", "")) {
+        if (Delete("DELIVERIES", "")) {
 
             List<String> sql_insert_values = new ArrayList<>();
 
@@ -212,10 +216,79 @@ public class DB extends SQLiteOpenHelper {
                         Validate_String(var.nome_area)
                         ));
 
-            Insert_Multi("INSERT INTO CONSEGNE_VACCINI ( area, fornitore, numero_dosi, data_consegna, codice_NUTS1, codice_NUTS2, codice_regione_ISTAT, nome_area ) VALUES ", sql_insert_values);
+            Insert_Multi("INSERT INTO DELIVERIES ( area, fornitore, numero_dosi, data_consegna, codice_NUTS1, codice_NUTS2, codice_regione_ISTAT, nome_area ) VALUES ", sql_insert_values);
         }
 
         return true;
+    }
+
+    //endregion
+
+    //region Summary_By_Age
+
+    public boolean Insert_anagrafica_vaccini_summary(List<anagrafica_vaccini_summary_data> lista)
+    {
+        if (lista.size() == 0)
+            return false;
+
+        if (Delete("SUMMARY_BY_AGE", "")) {
+
+            List<String> sql_insert_values = new ArrayList<>();
+
+            for (anagrafica_vaccini_summary_data var : lista)
+                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                        Validate_String(var.fascia_anagrafica),
+                        var.totale,
+                        var.sesso_maschile,
+                        var.sesso_femminile,
+                        var.categoria_operatori_sanitari_sociosanitari,
+                        var.categoria_personale_non_sanitario,
+                        var.categoria_ospiti_rsa,
+                        var.categoria_over80,
+                        var.categoria_forze_armate,
+                        var.categoria_personale_scolastico,
+                        var.prima_dose,
+                        var.seconda_dose
+                ));
+
+            Insert_Multi("INSERT INTO SUMMARY_BY_AGE ( fascia_anagrafica, totale, sesso_maschile, sesso_femminile, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_ospiti_rsa, categoria_over80, categoria_forze_armate, categoria_personale_scolastico, prima_dose, seconda_dose ) VALUES ", sql_insert_values);
+        }
+
+        return true;
+    }
+
+    public List<anagrafica_vaccini_summary_data> Get_anagrafica_vaccini_summary()
+    {
+        String sql_query = "SELECT fascia_anagrafica, totale, sesso_maschile, sesso_femminile, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_ospiti_rsa, categoria_over80, categoria_forze_armate, categoria_personale_scolastico, prima_dose, seconda_dose from SUMMARY_BY_AGE ";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<anagrafica_vaccini_summary_data> lista = new ArrayList<>();
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()){
+            do {
+                anagrafica_vaccini_summary_data var = new anagrafica_vaccini_summary_data();
+
+                var.fascia_anagrafica = c.getString(0);
+                var.totale = c.getInt(1);
+                var.sesso_maschile = c.getInt(2);
+                var.sesso_femminile = c.getInt(3);
+                var.categoria_operatori_sanitari_sociosanitari = c.getInt(4);
+                var.categoria_personale_non_sanitario = c.getInt(5);
+                var.categoria_ospiti_rsa = c.getInt(6);
+                var.categoria_over80 = c.getInt(7);
+                var.categoria_forze_armate = c.getInt(8);
+                var.categoria_personale_scolastico = c.getInt(9);
+                var.prima_dose = c.getInt(10);
+                var.seconda_dose = c.getInt(11);
+                lista.add(var);
+
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return lista;
     }
 
     //endregion

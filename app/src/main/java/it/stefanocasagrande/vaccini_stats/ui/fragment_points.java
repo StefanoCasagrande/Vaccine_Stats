@@ -17,6 +17,13 @@ public class fragment_points extends Fragment {
         // Required empty public constructor
     }
 
+    public static fragment_points newInstance() {
+        fragment_points fragment = new fragment_points();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
