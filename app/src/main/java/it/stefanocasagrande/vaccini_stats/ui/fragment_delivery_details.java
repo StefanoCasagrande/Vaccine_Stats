@@ -85,7 +85,7 @@ public class fragment_delivery_details extends Fragment {
 
     public void Load_Data(String area_name)
     {
-        List<consegne_vaccini_data> list_to_load = Common.Database.Get_Consegne(area_name);
+        List<consegne_vaccini_data> list_to_load = Common.Database.Get_Deliveries(area_name);
 
         tv_location.setText(list_to_load.get(0).nome_area);
 

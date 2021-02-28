@@ -137,7 +137,7 @@ public class DB extends SQLiteOpenHelper {
 
     //region Consegne
 
-    public List<consegne_vaccini_data> Get_Consegne(String area_name)
+    public List<consegne_vaccini_data> Get_Deliveries(String area_name)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         List<consegne_vaccini_data> lista = new ArrayList<>();
@@ -167,7 +167,7 @@ public class DB extends SQLiteOpenHelper {
 
         return lista;
     }
-    public List<consegne_vaccini_data> Get_Consegne_GroupBy_Area()
+    public List<consegne_vaccini_data> Get_Deliveries_GroupBy_Area()
     {
         SQLiteDatabase db = this.getWritableDatabase();
         List<consegne_vaccini_data> lista = new ArrayList<>();
@@ -192,9 +192,9 @@ public class DB extends SQLiteOpenHelper {
         return lista;
     }
 
-    public void Insert_Consegne(List<consegne_vaccini_data> lista) {
+    public boolean Insert_Deliveries(List<consegne_vaccini_data> lista) {
         if (lista.size() == 0)
-            return;
+            return false;
 
         if (Delete("CONSEGNE_VACCINI", "")) {
 
@@ -214,6 +214,8 @@ public class DB extends SQLiteOpenHelper {
 
             Insert_Multi("INSERT INTO CONSEGNE_VACCINI ( area, fornitore, numero_dosi, data_consegna, codice_NUTS1, codice_NUTS2, codice_regione_ISTAT, nome_area ) VALUES ", sql_insert_values);
         }
+
+        return true;
     }
 
     //endregion
