@@ -16,21 +16,22 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.stefanocasagrande.vaccini_stats.Adapters.Consegne_Adapter;
+import it.stefanocasagrande.vaccini_stats.Adapters.Delivery_Adapter;
 import it.stefanocasagrande.vaccini_stats.Common.Common;
+import it.stefanocasagrande.vaccini_stats.MainActivity;
 import it.stefanocasagrande.vaccini_stats.R;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
 
 import static it.stefanocasagrande.vaccini_stats.Common.Common.hideKeyboard;
 
-public class fragment_group_consegne extends Fragment {
+public class fragment_delivery_group extends Fragment {
 
     ListView list;
     EditText textFilter;
-    private Consegne_Adapter adapter;
+    private Delivery_Adapter adapter;
     private List<consegne_vaccini_data> full_list;
 
-    public fragment_group_consegne() {
+    public fragment_delivery_group() {
         // Required empty public constructor
     }
 
@@ -55,11 +56,11 @@ public class fragment_group_consegne extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_group_consegne, container, false);
+        View v = inflater.inflate(R.layout.fragment_delivery_group, container, false);
 
         list = v.findViewById(R.id.listView);
         list.setEmptyView(v.findViewById(R.id.empty));
-        textFilter = v.findViewById(R.id.cercaEditText);
+        textFilter = v.findViewById(R.id.SearchEditText);
 
         textFilter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -107,9 +108,11 @@ public class fragment_group_consegne extends Fragment {
             }
         }
 
-        adapter = new Consegne_Adapter(getActivity(), R.layout.single_item_consegne,list_to_load);
+        adapter = new Delivery_Adapter(getActivity(), R.layout.single_item_delivery,list_to_load);
         list.setAdapter(adapter);
         list.setOnItemClickListener((parent, view, position, id)-> {
+
+            ((MainActivity)getActivity()).goToDelivery_Details(adapter.getItemList(position).nome_area);
 
         });
     }

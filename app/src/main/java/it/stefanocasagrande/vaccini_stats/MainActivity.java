@@ -6,6 +6,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +25,7 @@ import it.stefanocasagrande.vaccini_stats.Network.CheckNetwork;
 import it.stefanocasagrande.vaccini_stats.Network.NetworkClient;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.last_update_dataset;
+import it.stefanocasagrande.vaccini_stats.ui.fragment_delivery_details;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_anagrafica, R.id.nav_group_consegne, R.id.nav_punti_somministrazione)
+                R.id.nav_summary_by_age, R.id.nav_group_deliveries, R.id.nav_points)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             getLastUpdate();
         else
         {
-            if (!Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(""))
+             if (!Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(""))
             {
                 /* ToDo Load data already in the db */
             }
@@ -157,6 +160,27 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    //endregion
+
+    //region GoTo
+
+    public void goToDelivery_Details(String area_name)
+    {
+        Fragment fragment = fragment_delivery_details.newInstance(area_name);
+        String tag=getString(R.string.fragment_detail_consegne);
+        Show_Fragment(fragment, tag);
+    }
+
+
+    public void Show_Fragment(Fragment fragment, String tag)
+    {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment, tag)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
     }
 
     //endregion

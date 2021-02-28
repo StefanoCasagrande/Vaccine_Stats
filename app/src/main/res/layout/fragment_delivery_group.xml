@@ -12,7 +12,7 @@
         android:layout_margin="10dp">
 
         <EditText
-            android:id="@+id/cercaEditText"
+            android:id="@+id/SearchEditText"
             android:layout_width="match_parent"
             android:lines="1"
             android:hint="@string/look_for_hint"

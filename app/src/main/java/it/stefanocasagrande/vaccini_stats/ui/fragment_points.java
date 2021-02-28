@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import it.stefanocasagrande.vaccini_stats.R;
 
-public class fragment_anagrafica extends Fragment {
+public class fragment_points extends Fragment {
 
-    public fragment_anagrafica() {
+    public fragment_points() {
         // Required empty public constructor
     }
 
@@ -38,7 +38,7 @@ public class fragment_anagrafica extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_anagrafica, container, false);
+        View v = inflater.inflate(R.layout.fragment_points, container, false);
 
         return v;
     }

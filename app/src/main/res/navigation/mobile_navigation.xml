@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_anagrafica">
+    app:startDestination="@+id/nav_summary_by_age">
 
     <fragment
-        android:id="@+id/nav_anagrafica"
-        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_anagrafica"
-        android:label="@string/Anagrafica_Vaccini"
-        tools:layout="@layout/fragment_anagrafica" />
+        android:id="@+id/nav_summary_by_age"
+        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_summary_by_age"
+        android:label="@string/Summary_By_Age"
+        tools:layout="@layout/fragment_summary_by_age" />
 
     <fragment
-        android:id="@+id/nav_group_consegne"
-        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_group_consegne"
-        android:label="@string/Group_Consegne"
-        tools:layout="@layout/fragment_group_consegne" />
+        android:id="@+id/nav_group_deliveries"
+        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_delivery_group"
+        android:label="@string/Group_Deliveries"
+        tools:layout="@layout/fragment_delivery_group" />
 
     <fragment
-        android:id="@+id/nav_punti_somministrazione"
-        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_punti"
-        android:label="@string/Punti"
-        tools:layout="@layout/fragment_punti" />
+        android:id="@+id/nav_points"
+        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_points"
+        android:label="@string/Points"
+        tools:layout="@layout/fragment_points" />
 </navigation>

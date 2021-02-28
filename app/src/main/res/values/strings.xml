@@ -1,24 +1,13 @@
 <resources>
     <string name="app_name">Vaccini Stats</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-
+    <string name="fragment_detail_consegne">fragment_detail_consegne</string>
     <string name="Menu_Title">Don\'t forget:</string>
     <string name="Wear_The_Mask">Wear the mask</string>
     <string name="Wash_Your_Hand">Wash your hands</string>
 
-    <string name="Anagrafica_Vaccini">Anagrafica Vaccini</string>
-    <string name="Group_Consegne">Raggruppamento Consegne</string>
-    <string name="Punti">Punti Somministrazione</string>
-    <string name="Somministrazione">Somministrazione</string>
+    <string name="Summary_By_Age">Summary By Age</string>
+    <string name="Group_Deliveries">Deliveries Situation</string>
+    <string name="Points">Punti Somministrazione</string>
 
     <string name="Internet_Missing">No internet connection - A connection is needed</string>
     <string name="API_Error" translatable="false">API Error - %1$s</string>
@@ -28,5 +17,9 @@
     <string name="Last_delivery">Last delivery</string>
 
     <string name="Last_Update">Last Update..</string>
-    <string name="Dosi_Consegnate">Dosi Consegnate</string>
+    <string name="Doses_Delivered">Doses Delivered</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

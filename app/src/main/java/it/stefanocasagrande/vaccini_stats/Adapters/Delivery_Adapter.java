@@ -17,12 +17,12 @@ import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne
 
 import static it.stefanocasagrande.vaccini_stats.Common.Common.AddDotToInteger;
 
-public class Consegne_Adapter extends ArrayAdapter<consegne_vaccini_data> {
+public class Delivery_Adapter extends ArrayAdapter<consegne_vaccini_data> {
 
     private List<consegne_vaccini_data> list;
     private Context context;
 
-    public Consegne_Adapter(Context v_context, int resource, List<consegne_vaccini_data> objects) {
+    public Delivery_Adapter(Context v_context, int resource, List<consegne_vaccini_data> objects) {
         super(v_context, resource, objects);
 
         context = v_context;
@@ -33,7 +33,7 @@ public class Consegne_Adapter extends ArrayAdapter<consegne_vaccini_data> {
 
         TextView mainText;
         TextView secondText;
-        TextView tv_dosi;
+        TextView tv_doses;
     }
 
     public consegne_vaccini_data getItemList(int position) {
@@ -52,11 +52,11 @@ public class Consegne_Adapter extends ArrayAdapter<consegne_vaccini_data> {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             if (inflater!=null) {
-                convertView = inflater.inflate(R.layout.single_item_consegne, parent, false);
+                convertView = inflater.inflate(R.layout.single_item_delivery, parent, false);
                 convertView.setTag(mViewHolder);
                 mViewHolder.mainText = convertView.findViewById(R.id.tv_main_text);
                 mViewHolder.secondText = convertView.findViewById(R.id.tv_subtext);
-                mViewHolder.tv_dosi = convertView.findViewById(R.id.tv_dosi);
+                mViewHolder.tv_doses = convertView.findViewById(R.id.tv_doses);
             }
         }
         else
@@ -66,7 +66,7 @@ public class Consegne_Adapter extends ArrayAdapter<consegne_vaccini_data> {
 
         mViewHolder.mainText.setText(list.get(position).nome_area);
         mViewHolder.secondText.setText(String.format("%s: %s", context.getString(R.string.Last_delivery), Common.get_dd_MM_yyyy(list.get(position).data_consegna)));
-        mViewHolder.tv_dosi.setText(AddDotToInteger(list.get(position).numero_dosi));
+        mViewHolder.tv_doses.setText(AddDotToInteger(list.get(position).numero_dosi));
 
         return convertView;
     }

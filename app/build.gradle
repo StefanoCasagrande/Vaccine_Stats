@@ -38,4 +38,5 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.3'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

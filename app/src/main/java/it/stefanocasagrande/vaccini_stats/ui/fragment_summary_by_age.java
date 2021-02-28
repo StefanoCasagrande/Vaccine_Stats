@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import it.stefanocasagrande.vaccini_stats.R;
 
-public class fragment_punti extends Fragment {
+public class fragment_summary_by_age extends Fragment {
 
-    public fragment_punti() {
+    public fragment_summary_by_age() {
         // Required empty public constructor
     }
 
@@ -38,7 +38,7 @@ public class fragment_punti extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_punti, container, false);
+        View v = inflater.inflate(R.layout.fragment_summary_by_age, container, false);
 
         return v;
     }
