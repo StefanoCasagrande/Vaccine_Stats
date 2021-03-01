@@ -12,6 +12,9 @@
     <string name="Group_Deliveries">Deliveries Situation</string>
     <string name="Points">Punti Somministrazione</string>
 
+    <string name="Splash_Title">Report Vaccini</string>
+    <string name="Splash_Subtitle">The italian campaign against COVID</string>
+
     <string name="Internet_Missing">No internet connection - A connection is needed</string>
     <string name="API_Error" translatable="false">API Error - %1$s</string>
 
@@ -36,4 +39,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
