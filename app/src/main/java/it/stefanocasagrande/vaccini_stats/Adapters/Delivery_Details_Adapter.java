@@ -59,7 +59,7 @@ public class Delivery_Details_Adapter extends ArrayAdapter<consegne_vaccini_data
             mViewHolder = (Delivery_Details_Adapter.ViewHolder) convertView.getTag();
         }
 
-        mViewHolder.mainText.setText(String.format("%s: %s", context.getString(R.string.provider), list.get(position).fornitore));
+        mViewHolder.mainText.setText(list.get(position).fornitore);
         mViewHolder.secondText.setText(String.format("%s: %s", context.getString(R.string.Date_Delivery), Common.get_dd_MM_yyyy(list.get(position).data_consegna)));
         mViewHolder.tv_doses.setText(AddDotToInteger(list.get(position).numero_dosi));
 

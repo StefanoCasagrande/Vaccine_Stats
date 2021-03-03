@@ -76,7 +76,7 @@ public class fragment_delivery_details extends Fragment {
         list = v.findViewById(R.id.listView);
 
         TextView tv_last_update = v.findViewById(R.id.tv_last_update);
-        tv_last_update.setText(Common.get_dd_MM_yyyy(Common.Database.Get_Configurazione("ultimo_aggiornamento")));
+        tv_last_update.setText(String.format("%s: %s", getString(R.string.Last_Update), Common.get_dd_MM_yyyy(Common.Database.Get_Configurazione("ultimo_aggiornamento"))));
 
         Load_Data(area_name);
 

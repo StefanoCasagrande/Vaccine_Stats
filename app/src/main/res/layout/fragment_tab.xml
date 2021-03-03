@@ -302,6 +302,63 @@
                     android:layout_marginBottom="15dp"
                     android:background="@color/Dividing_Bar"/>
 
+                <!--Altro-->
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:fontFamily="@font/free_solid_900"
+                            android:textSize="40sp"
+                            android:textColor="@color/Icons"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="22sp"
+                            android:textColor="@color/Text_Big"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_others"
+                            android:text="@string/Big_Title_Placeholder"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="18sp"
+                            android:textColor="@color/Text_Small"
+                            android:text="@string/Others"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/Dividing_Bar" />
+
                 <!--Forze ordine-->
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -415,65 +472,6 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:background="@color/Dividing_Bar"/>
-
-                <!--Altro-->
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/ll_over80">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:fontFamily="@font/free_solid_900"
-                            android:textSize="40sp"
-                            android:textColor="@color/Icons"
-                            android:gravity="center"
-                            android:text="" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="22sp"
-                            android:textColor="@color/Text_Big"
-                            android:textStyle="bold"
-                            android:id="@+id/tv_others"
-                            android:text="@string/Big_Title_Placeholder"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:textSize="18sp"
-                            android:textColor="@color/Text_Small"
-                            android:text="@string/Others"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@color/Dividing_Bar"
-                    android:id="@+id/vw_over80"/>
 
             </LinearLayout>
 
