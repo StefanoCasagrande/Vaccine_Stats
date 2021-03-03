@@ -1,0 +1,52 @@
+<resources>
+
+    <!--translatable-->
+    <string name="app_name">Vaccini Stats</string>
+
+    <string name="Menu_Title">Ricorda:</string>
+    <string name="Wear_The_Mask">Indossa la mascherina</string>
+    <string name="Wash_Your_Hand">Lavati le mani</string>
+
+    <string name="Summary_By_Age">Somministrazione per fasce d\'età</string>
+    <string name="Group_Deliveries">Situazione Consegne</string>
+    <string name="Points">Punti Somministrazione</string>
+
+    <string name="Splash_Title">Report Vaccini</string>
+    <string name="Splash_Subtitle">La campagna italiana contro il virus</string>
+
+    <string name="Internet_Missing">Nessuna connessione internet - Connessione necessaria</string>
+
+    <string name="look_for_hint">Cerca..</string>
+    <string name="empty_text">Nessun oggetto da mostrare..</string>
+    <string name="Last_delivery">Ultima consegna</string>
+    <string name="Date_Delivery">Consegnato il</string>
+    <string name="provider">Provider</string>
+
+    <string name="Last_Update">Ultimo aggiornamento.</string>
+    <string name="Doses_Delivered">Dosi consegnate</string>
+
+    <string name="List_of_deliveries">Lista consegne</string>
+
+    <string name="Other_Vaccines">Altre consegne</string>
+
+    <string name="General_Data">Situazione generale</string>
+    <string name="Age_Group">Fascia d\'età</string>
+
+    <string name="tab_text_1">Totale</string>
+    <string name="tab_text_2">16-19</string>
+    <string name="tab_text_3">20-29</string>
+    <string name="tab_text_4">30-39</string>
+    <string name="tab_text_5">40-49</string>
+    <string name="tab_text_6">50-59</string>
+    <string name="tab_text_7">60-69</string>
+    <string name="tab_text_8">70-79</string>
+    <string name="tab_text_9">80-89</string>
+    <string name="tab_text_10">90+</string>
+
+    <string name="Health_Workers">Operatori sanitari</string>
+    <string name="RSA_Guests">Ospiti RSA</string>
+    <string name="Others">Altro ( es. over 80 )</string>
+    <string name="law_enforcement">Forze dell\'ordine</string>
+    <string name="School_Staff">Personale scolastico</string>
+    <string name="non_health_care_professional">Personale non sanitario</string>
+</resources>
