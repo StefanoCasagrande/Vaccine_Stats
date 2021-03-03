@@ -50,6 +50,9 @@ public class PlaceholderFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_tab, container, false);
         final TextView tv_age = root.findViewById(R.id.tv_age);
         final TextView tv_female = root.findViewById(R.id.tv_female);
+
+        final TextView tv_second_dose = root.findViewById(R.id.tv_second_dose);
+
         final TextView tv_male = root.findViewById(R.id.tv_male);
         final TextView tv_operatori_sanitari = root.findViewById(R.id.tv_operatori_sanitari);
         final TextView tv_ospiti_rsa = root.findViewById(R.id.tv_ospiti_rsa);
@@ -74,6 +77,8 @@ public class PlaceholderFragment extends Fragment {
                     int categoria_forze_armate=0;
                     int categoria_personale_scolastico=0;
                     int categoria_personale_non_sanitario=0;
+                    int first_dose=0;
+                    int second_dose=0;
 
                     for(anagrafica_vaccini_summary_data var : lista) {
                         male+=var.sesso_maschile;
@@ -84,10 +89,14 @@ public class PlaceholderFragment extends Fragment {
                         categoria_forze_armate+=var.categoria_forze_armate;
                         categoria_personale_scolastico+=var.categoria_personale_scolastico;
                         categoria_personale_non_sanitario+=var.categoria_personale_non_sanitario;
+                        first_dose+=var.prima_dose;
+                        second_dose+=var.seconda_dose;
                     }
 
                     tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(female)));
                     tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(male)));
+
+                    tv_second_dose.setText(Common.AddDotToInteger(second_dose));
 
                     tv_operatori_sanitari.setText(Common.AddDotToInteger(categoria_operatori_sanitari_sociosanitari));
                     tv_ospiti_rsa.setText(Common.AddDotToInteger(categoria_ospiti_rsa));
@@ -105,6 +114,8 @@ public class PlaceholderFragment extends Fragment {
                             tv_age.setText(String.format("%s: %s",getString(R.string.Age_Group), s));
                             tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(var.sesso_femminile)));
                             tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(var.sesso_maschile)));
+
+                            tv_second_dose.setText(Common.AddDotToInteger(var.seconda_dose));
 
                             tv_operatori_sanitari.setText(Common.AddDotToInteger(var.categoria_operatori_sanitari_sociosanitari));
                             tv_ospiti_rsa.setText(Common.AddDotToInteger(var.categoria_ospiti_rsa));

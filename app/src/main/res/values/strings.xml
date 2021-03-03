@@ -62,4 +62,9 @@
     <string name="law_enforcement">Law enforcement</string>
     <string name="School_Staff">School Staff</string>
     <string name="non_health_care_professional">Non health care professional</string>
+
+    <string name="First_Dose">First Dose</string>
+    <string name="Second_Dose">Second Dose</string>
+
+    <string name="Summary_Explanation">* I dati si riferiscono al numero di vaccini somministrati, NON al numero di persone vaccinate. Allo stato attuale infatti i vaccini disponibili necessitano di due dosi, per avere il dato delle persone vaccinate la voce da considerare è quella sotto \'seconda dose\'"</string>
 </resources>

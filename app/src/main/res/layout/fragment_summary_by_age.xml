@@ -4,26 +4,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:orientation="vertical"
     android:background="@color/Background_1">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            app:tabMode="scrollable"
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/Background_1"
-            app:tabSelectedTextColor="@color/OnPrimary"
-            android:background="?attr/colorPrimary" />
-    </com.google.android.material.appbar.AppBarLayout>
+            android:paddingTop="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/Background_1"
+            android:textSize="12sp"
+            android:text="@string/Summary_Explanation"
+            android:background="@color/Dividing_Bar"/>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    app:tabMode="scrollable"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    app:tabTextColor="@color/Background_1"
+                    app:tabSelectedTextColor="@color/OnPrimary"
+                    android:background="@color/Dividing_Bar" />
+            </com.google.android.material.appbar.AppBarLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+
+
+
 
 </FrameLayout>
