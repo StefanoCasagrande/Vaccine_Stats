@@ -15,6 +15,10 @@ public class anagrafica_vaccini_summary_data implements Serializable {
     @Expose
     public String fascia_anagrafica;
 
+    @SerializedName("ultimo_aggiornamento")
+    @Expose
+    public String ultimo_aggiornamento;
+
     @SerializedName("totale")
     @Expose
     public Integer totale;

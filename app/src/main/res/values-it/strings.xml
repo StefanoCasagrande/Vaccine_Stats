@@ -1,6 +1,7 @@
 <resources>
 
     <!--translatable-->
+    <string name="Italian_Situation">Situazione italiana</string>
     <string name="app_name">Vaccini Stats</string>
 
     <string name="Menu_Title">Ricorda:</string>
@@ -27,7 +28,7 @@
 
     <string name="List_of_deliveries">Lista consegne</string>
 
-    <string name="Other_Vaccines">Altre consegne</string>
+    <string name="Other_Vaccines">Altri vaccini</string>
 
     <string name="General_Data">Situazione generale</string>
     <string name="Age_Group">Fascia d\'età</string>

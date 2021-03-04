@@ -60,6 +60,14 @@
                             android:text="@string/Big_Title_Placeholder"
                             android:id="@+id/tv_age"/>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="18sp"
+                            android:textColor="@color/Text_Small"
+                            android:id="@+id/tv_last_update"
+                            android:text="@string/Small_Text_Placeholder"/>
+
                     </LinearLayout>
 
                 </LinearLayout>

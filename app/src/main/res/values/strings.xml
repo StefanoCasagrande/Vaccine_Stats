@@ -12,8 +12,10 @@
     <string name="Pfizer_BioNTech" translatable="false">Pfizer/BioNTech</string>
     <string name="AstraZeneca" translatable="false">AstraZeneca</string>
     <string name="Moderna" translatable="false">Moderna</string>
+    <string name="Data" translatable="false">Data</string>
 
     <!--translatable-->
+    <string name="Italian_Situation">Italian Situation</string>
     <string name="app_name">Vaccini Stats</string>
 
     <string name="Menu_Title">Don\'t forget:</string>

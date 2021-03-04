@@ -49,6 +49,7 @@ public class PlaceholderFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_tab, container, false);
         final TextView tv_age = root.findViewById(R.id.tv_age);
+        final TextView tv_last_update = root.findViewById(R.id.tv_last_update);
         final TextView tv_female = root.findViewById(R.id.tv_female);
 
         final TextView tv_second_dose = root.findViewById(R.id.tv_second_dose);
@@ -79,6 +80,9 @@ public class PlaceholderFragment extends Fragment {
                     int categoria_personale_non_sanitario=0;
                     int first_dose=0;
                     int second_dose=0;
+
+                    if (lista.size()>0)
+                        tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(lista.get(0).ultimo_aggiornamento)));
 
                     for(anagrafica_vaccini_summary_data var : lista) {
                         male+=var.sesso_maschile;
@@ -111,6 +115,8 @@ public class PlaceholderFragment extends Fragment {
                     {
                         if (var.fascia_anagrafica.equals(s))
                         {
+                            tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(var.ultimo_aggiornamento)));
+
                             tv_age.setText(String.format("%s: %s",getString(R.string.Age_Group), s));
                             tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(var.sesso_femminile)));
                             tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(var.sesso_maschile)));
