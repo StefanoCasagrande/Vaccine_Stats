@@ -14,6 +14,7 @@ import java.util.List;
 
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
+import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_data;
 
 public class DB extends SQLiteOpenHelper {
 
@@ -35,7 +36,7 @@ public class DB extends SQLiteOpenHelper {
         sql_query="CREATE TABLE SUMMARY_BY_AGE (id INTEGER PRIMARY KEY, fascia_anagrafica nvarchar(150), ultimo_aggiornamento nvarchar(150), totale INTEGER, sesso_maschile INTEGER, sesso_femminile INTEGER, categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, prima_dose INTEGER, seconda_dose INTEGER)";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE SUMMARY_BY_LOCATION (id INTEGER PRIMARY KEY, a nvarchar(150), area nvarchar(150), dosi_somministrate INTEGER, dosi_consegnate INTEGER, ultimo_aggiornamento NVARCHAR(50), nome_area nvarchar(50))";
+        sql_query="CREATE TABLE SUMMARY_BY_LOCATION (id INTEGER PRIMARY KEY, area nvarchar(150), dosi_somministrate INTEGER, dosi_consegnate INTEGER, ultimo_aggiornamento NVARCHAR(50), nome_area nvarchar(50))";
         sqLiteDatabase.execSQL(sql_query);
     }
 
@@ -291,6 +292,61 @@ public class DB extends SQLiteOpenHelper {
                 var.prima_dose = c.getInt(10);
                 var.seconda_dose = c.getInt(11);
                 var.ultimo_aggiornamento = c.getString(12);
+                lista.add(var);
+
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return lista;
+    }
+
+    //endregion
+
+    //region Summary_By_Location
+
+    public boolean Insert_vaccini_summary(List<vaccini_summary_data> lista)
+    {
+        if (lista.size() == 0)
+            return false;
+
+        if (Delete("SUMMARY_BY_LOCATION", "")) {
+
+            List<String> sql_insert_values = new ArrayList<>();
+
+            for (vaccini_summary_data var : lista)
+                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s)",
+                        Validate_String(var.area),
+                        var.dosi_somministrate,
+                        var.dosi_consegnate,
+                        Validate_String(var.ultimo_aggiornamento),
+                        Validate_String(var.nome_area)
+                ));
+
+            Insert_Multi("INSERT INTO SUMMARY_BY_LOCATION ( area, dosi_somministrate, dosi_consegnate, ultimo_aggiornamento, nome_area ) VALUES ", sql_insert_values);
+        }
+
+        return true;
+    }
+
+    public List<vaccini_summary_data> Get_vaccini_summary(String area_name)
+    {
+        String sql_query = "SELECT area, dosi_somministrate, dosi_consegnate, ultimo_aggiornamento, nome_area from SUMMARY_BY_LOCATION where nome_area=" + Validate_String(area_name);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<vaccini_summary_data> lista = new ArrayList<>();
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()){
+            do {
+                vaccini_summary_data var = new vaccini_summary_data();
+
+                var.area = c.getString(0);
+                var.dosi_somministrate = c.getInt(1);
+                var.dosi_consegnate = c.getInt(2);
+                var.ultimo_aggiornamento = c.getString(3);
+                var.nome_area = c.getString(4);
                 lista.add(var);
 
             } while(c.moveToNext());

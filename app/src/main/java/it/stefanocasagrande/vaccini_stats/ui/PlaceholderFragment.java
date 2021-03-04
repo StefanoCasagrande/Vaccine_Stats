@@ -1,5 +1,6 @@
 package it.stefanocasagrande.vaccini_stats.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.List;
 
 import it.stefanocasagrande.vaccini_stats.Common.Common;
+import it.stefanocasagrande.vaccini_stats.MainActivity;
 import it.stefanocasagrande.vaccini_stats.R;
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_data;
 
@@ -66,6 +68,9 @@ public class PlaceholderFragment extends Fragment {
         pageViewModel.getText().observe(getActivity(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
+
+                final ProgressDialog waiting_bar = ((MainActivity)getActivity()).getprogressDialog();
+                waiting_bar.show();
 
                 if (s.equals("Totale"))
                 {
@@ -132,6 +137,8 @@ public class PlaceholderFragment extends Fragment {
                         }
                     }
                 }
+
+                waiting_bar.dismiss();
             }
         });
         return root;

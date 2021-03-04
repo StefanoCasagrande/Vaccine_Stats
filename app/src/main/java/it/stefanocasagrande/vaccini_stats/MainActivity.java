@@ -1,5 +1,6 @@
 package it.stefanocasagrande.vaccini_stats;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -27,9 +28,9 @@ import it.stefanocasagrande.vaccini_stats.Network.NetworkClient;
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.last_update_dataset;
+import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_dataset;
 import it.stefanocasagrande.vaccini_stats.ui.fragment_delivery_details;
 import it.stefanocasagrande.vaccini_stats.ui.fragment_delivery_group;
-import it.stefanocasagrande.vaccini_stats.ui.fragment_points;
 import it.stefanocasagrande.vaccini_stats.ui.fragment_summary_by_age;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_summary_by_age, R.id.nav_group_deliveries, R.id.nav_points)
+                R.id.nav_summary_by_age, R.id.nav_group_deliveries)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -92,10 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 Common.Back_Action=Common.Back_To_Summary;
                 goToDelivery_Group();
                 break;
-            case Common.Back_To_Points:
-                Common.Back_Action=Common.Back_To_Summary;
-                goToPoints();
-                break;
         }
     }
 
@@ -122,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void getSummary_by_Age(fragment_summary_by_age var)
     {
+        final ProgressDialog waiting_bar = getprogressDialog();
+        waiting_bar.show();
+
         Retrofit retrofit= NetworkClient.getRetrofitClient();
 
         API VacciniAPIs = retrofit.create(API.class);
@@ -141,12 +141,14 @@ public class MainActivity extends AppCompatActivity {
                     if (var.isVisible())
                         var.newDataAvailable();
 
+                    waiting_bar.dismiss();
                     getdeliveries();
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                waiting_bar.dismiss();
                 Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
@@ -169,6 +171,35 @@ public class MainActivity extends AppCompatActivity {
                 if (response.body()!=null) {
                     consegne_vaccini_dataset wResponse = (consegne_vaccini_dataset) response.body();
                     Common.Database.Insert_Deliveries(wResponse.getData());
+
+                    getSummaryVaccini();
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void getSummaryVaccini()
+    {
+        Retrofit retrofit= NetworkClient.getRetrofitClient();
+
+        API VacciniAPIs = retrofit.create(API.class);
+
+        Call call = VacciniAPIs.getSummary_by_Location();
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+              /*This is the success callback. Though the response type is JSON, with Retrofit we get
+              the response in the form of WResponse POJO class
+              */
+                if (response.body()!=null) {
+                    vaccini_summary_dataset wResponse = (vaccini_summary_dataset) response.body();
+                    Common.Database.Insert_vaccini_summary(wResponse.getData());
                 }
             }
 
@@ -224,13 +255,6 @@ public class MainActivity extends AppCompatActivity {
         Show_Fragment(fragment, tag);
     }
 
-    public void goToPoints()
-    {
-        Fragment fragment = fragment_points.newInstance();
-        String tag=getString(R.string.fragment_points);
-        Show_Fragment(fragment, tag);
-    }
-
     public void goToDelivery_Details(String area_name)
     {
         Fragment fragment = fragment_delivery_details.newInstance(area_name);
@@ -245,6 +269,21 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.nav_host_fragment, fragment, tag)
                 .addToBackStack(null)
                 .commitAllowingStateLoss();
+    }
+
+    //endregion
+
+    //region Wait Dialog
+
+    public ProgressDialog getprogressDialog()
+    {
+        ProgressDialog var = new ProgressDialog(MainActivity.this);
+        var.setMessage(getString(R.string.Progress_Text));
+        var.setTitle(getString(R.string.Progress_Title));
+        var.setIndeterminate(true);
+        var.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        return var;
     }
 
     //endregion

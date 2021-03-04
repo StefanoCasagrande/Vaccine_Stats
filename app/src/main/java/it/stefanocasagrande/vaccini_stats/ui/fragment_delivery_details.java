@@ -1,5 +1,6 @@
 package it.stefanocasagrande.vaccini_stats.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,8 +15,10 @@ import java.util.List;
 
 import it.stefanocasagrande.vaccini_stats.Adapters.Delivery_Details_Adapter;
 import it.stefanocasagrande.vaccini_stats.Common.Common;
+import it.stefanocasagrande.vaccini_stats.MainActivity;
 import it.stefanocasagrande.vaccini_stats.R;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
+import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_data;
 
 public class fragment_delivery_details extends Fragment {
 
@@ -33,6 +36,8 @@ public class fragment_delivery_details extends Fragment {
 
     TextView tv_vaccine_type4;
     TextView tv_vaccine_type4_doses;
+
+    TextView tv_doses_administered;
 
     ListView list;
 
@@ -73,21 +78,29 @@ public class fragment_delivery_details extends Fragment {
         tv_vaccine_type4 = v.findViewById(R.id.tv_vaccine_type4);
         tv_vaccine_type4_doses = v.findViewById(R.id.tv_vaccine_type4_doses);
 
+        tv_doses_administered = v.findViewById(R.id.tv_doses_administered);
+
         list = v.findViewById(R.id.listView);
 
         TextView tv_last_update = v.findViewById(R.id.tv_last_update);
         tv_last_update.setText(String.format("%s: %s", getString(R.string.Last_Update), Common.get_dd_MM_yyyy(Common.Database.Get_Configurazione("ultimo_aggiornamento"))));
 
-        Load_Data(area_name);
+        final ProgressDialog waiting_bar = ((MainActivity)getActivity()).getprogressDialog();
+        waiting_bar.show();
+
+        if (Load_Data(area_name))
+            waiting_bar.dismiss();
 
         return v;
     }
 
-    public void Load_Data(String area_name)
+    public boolean Load_Data(String area_name)
     {
         List<consegne_vaccini_data> list_to_load = Common.Database.Get_Deliveries(area_name);
+        List<vaccini_summary_data> list_administered = Common.Database.Get_vaccini_summary(area_name);
 
         tv_location.setText(list_to_load.get(0).nome_area);
+        tv_doses_administered.setText(Common.AddDotToInteger(list_administered.get(0).dosi_somministrate));
 
         tv_vaccine_type1.setText(getString(R.string.Pfizer_BioNTech));
         tv_vaccine_type2.setText(getString(R.string.AstraZeneca));
@@ -118,5 +131,7 @@ public class fragment_delivery_details extends Fragment {
 
         Delivery_Details_Adapter adapter = new Delivery_Details_Adapter(getActivity(), R.layout.single_item_delivery,list_to_load);
         list.setAdapter(adapter);
+
+        return true;
     }
 }

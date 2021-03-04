@@ -74,11 +74,11 @@ public class fragment_summary_by_age extends Fragment implements Interface  {
         View v = inflater.inflate(R.layout.fragment_summary_by_age, container, false);
 
         if (!Common.Data_Already_Loaded) {
-            Common.Data_Already_Loaded = true;
 
             if (GlobalVariables.isNetworkConnected)
                 ((MainActivity) getActivity()).getLastUpdate(this);
             else {
+
                 if (!Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(""))
                     Load_Data();
                 else
@@ -100,6 +100,8 @@ public class fragment_summary_by_age extends Fragment implements Interface  {
 
     public void Load_Data()
     {
+        Common.Data_Already_Loaded = true;
+
         if (getFragmentManager() != null) {
 
             getFragmentManager()

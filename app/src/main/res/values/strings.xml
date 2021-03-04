@@ -16,6 +16,7 @@
 
     <!--translatable-->
     <string name="Italian_Situation">Italian Situation</string>
+    <string name="doses_administered">doses administered</string>
     <string name="app_name">Vaccini Stats</string>
 
     <string name="Menu_Title">Don\'t forget:</string>
@@ -69,4 +70,7 @@
     <string name="Second_Dose">Second Dose</string>
 
     <string name="Summary_Explanation">* I dati si riferiscono al numero di vaccini somministrati, NON al numero di persone vaccinate. Allo stato attuale infatti i vaccini disponibili necessitano di due dosi, per avere il dato delle persone vaccinate la voce da considerare è quella sotto \'seconda dose\'"</string>
+
+    <string name="Progress_Text">Loading.. Please wait..</string>
+    <string name="Progress_Title">Loading..</string>
 </resources>

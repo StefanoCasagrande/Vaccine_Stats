@@ -14,7 +14,6 @@ public class Common {
     public static final int Back_To_Nowhere=-1;
     public static final int Back_To_Summary=0;
     public static final int Back_To_Delivery_Group=1;
-    public static final int Back_To_Points=2;
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager inputManager = (InputMethodManager) activity
