@@ -127,6 +127,14 @@
                             android:id="@+id/tv_male"
                             android:text="@string/Big_Title_Placeholder"/>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="18sp"
+                            android:textColor="@color/Text_Small"
+                            android:id="@+id/tv_total"
+                            android:text="@string/Small_Text_Placeholder"/>
+
                     </LinearLayout>
 
                 </LinearLayout>

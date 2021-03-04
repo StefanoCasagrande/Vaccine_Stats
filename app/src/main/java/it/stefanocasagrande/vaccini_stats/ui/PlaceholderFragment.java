@@ -53,6 +53,7 @@ public class PlaceholderFragment extends Fragment {
         final TextView tv_age = root.findViewById(R.id.tv_age);
         final TextView tv_last_update = root.findViewById(R.id.tv_last_update);
         final TextView tv_female = root.findViewById(R.id.tv_female);
+        final TextView tv_total = root.findViewById(R.id.tv_total);
 
         final TextView tv_second_dose = root.findViewById(R.id.tv_second_dose);
 
@@ -113,6 +114,8 @@ public class PlaceholderFragment extends Fragment {
                     tv_law_enforcement.setText(Common.AddDotToInteger(categoria_forze_armate));
                     tv_school_staff.setText(Common.AddDotToInteger(categoria_personale_scolastico));
                     tv_non_healtcare.setText(Common.AddDotToInteger(categoria_personale_non_sanitario));
+
+                    tv_total.setText(String.format("%s: %s",getString(R.string.tab_text_1),  Common.AddDotToInteger(male+female)));
                 }
                 else
                 {
@@ -134,6 +137,8 @@ public class PlaceholderFragment extends Fragment {
                             tv_law_enforcement.setText(Common.AddDotToInteger(var.categoria_forze_armate));
                             tv_school_staff.setText(Common.AddDotToInteger(var.categoria_personale_scolastico));
                             tv_non_healtcare.setText(Common.AddDotToInteger(var.categoria_personale_non_sanitario));
+
+                            tv_total.setText(String.format("%s: %s",getString(R.string.tab_text_1),  Common.AddDotToInteger(var.sesso_maschile+var.sesso_femminile)));
                         }
                     }
                 }
