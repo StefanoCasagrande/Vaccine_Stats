@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -65,6 +66,21 @@ public class fragment_delivery_group extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_delivery_group, container, false);
 
+        TextView tv_location = v.findViewById(R.id.tv_location);
+        TextView tv_total = v.findViewById(R.id.tv_total);
+
+        TextView tv_vaccine_type1 = v.findViewById(R.id.tv_vaccine_type1);
+        TextView tv_vaccine_type1_doses = v.findViewById(R.id.tv_vaccine_type1_doses);
+
+        TextView tv_vaccine_type2 = v.findViewById(R.id.tv_vaccine_type2);
+        TextView tv_vaccine_type2_doses = v.findViewById(R.id.tv_vaccine_type2_doses);
+
+        TextView tv_vaccine_type3 = v.findViewById(R.id.tv_vaccine_type3);
+        TextView tv_vaccine_type3_doses = v.findViewById(R.id.tv_vaccine_type3_doses);
+
+        TextView tv_vaccine_type4 = v.findViewById(R.id.tv_vaccine_type4);
+        TextView tv_vaccine_type4_doses = v.findViewById(R.id.tv_vaccine_type4_doses);
+
         list = v.findViewById(R.id.listView);
         list.setEmptyView(v.findViewById(R.id.empty));
         textFilter = v.findViewById(R.id.SearchEditText);
@@ -86,6 +102,36 @@ public class fragment_delivery_group extends Fragment {
                 Load_Data(filter);
             }
         });
+
+        tv_location.setText(getString(R.string.Italian_Situation));
+
+        tv_vaccine_type1.setText(getString(R.string.Pfizer_BioNTech));
+        tv_vaccine_type2.setText(getString(R.string.AstraZeneca));
+        tv_vaccine_type3.setText(getString(R.string.Moderna));
+        tv_vaccine_type4.setText(getString(R.string.Other_Vaccines));
+
+        int doses_type1=0;
+        int doses_type2=0;
+        int doses_type3=0;
+        int doses_type4=0;
+
+        for (consegne_vaccini_data var : Common.Database.Get_Deliveries(""))
+        {
+            if (var.fornitore.toUpperCase().equals(getString(R.string.Pfizer_BioNTech).toUpperCase()))
+                doses_type1 += var.numero_dosi;
+            else if (var.fornitore.toUpperCase().equals(getString(R.string.AstraZeneca).toUpperCase()))
+                doses_type2 += var.numero_dosi;
+            else if (var.fornitore.toUpperCase().equals(getString(R.string.Moderna).toUpperCase()))
+                doses_type3 += var.numero_dosi;
+            else
+                doses_type4 += var.numero_dosi;
+        }
+
+        tv_vaccine_type1_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type1)));
+        tv_vaccine_type2_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type2)));
+        tv_vaccine_type3_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type3)));
+        tv_vaccine_type4_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type4)));
+        tv_total.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type1+doses_type2+doses_type3+doses_type4)));
 
         full_list = Common.Database.Get_Deliveries_GroupBy_Area();
 

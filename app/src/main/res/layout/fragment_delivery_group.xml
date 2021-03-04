@@ -11,14 +11,252 @@
         android:orientation="vertical"
         android:layout_margin="10dp">
 
-        <EditText
-            android:id="@+id/SearchEditText"
-            android:layout_width="match_parent"
-            android:lines="1"
-            android:hint="@string/look_for_hint"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_marginBottom="0dp"/>
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/free_solid_900"
+                android:textSize="30sp"
+                android:text=""/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_location"
+                    android:text="@string/Big_Title_Placeholder"/>
+
+                <TextView
+                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:id="@+id/tv_total"
+                    android:text="@string/Small_Text_Placeholder"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:background="@color/Dividing_Bar"
+            android:layout_height="0.5dp"
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/free_solid_900"
+                android:textSize="30sp"
+                android:textColor="@color/teal_700"
+                android:text=""/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_vaccine_type1"
+                    android:text="@string/Big_Title_Placeholder"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:id="@+id/tv_vaccine_type1_doses"
+                    android:text="@string/Small_Text_Placeholder"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/free_solid_900"
+                android:textSize="30sp"
+                android:text=""/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_vaccine_type2"
+                    android:text="@string/Big_Title_Placeholder"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:id="@+id/tv_vaccine_type2_doses"
+                    android:text="@string/Small_Text_Placeholder"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/free_solid_900"
+                android:textSize="30sp"
+                android:text=""/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_vaccine_type3"
+                    android:text="@string/Big_Title_Placeholder"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:id="@+id/tv_vaccine_type3_doses"
+                    android:text="@string/Small_Text_Placeholder"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/free_solid_900"
+                android:textSize="30sp"
+                android:text=""/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_vaccine_type4"
+                    android:text="@string/Big_Title_Placeholder"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:id="@+id/tv_vaccine_type4_doses"
+                    android:text="@string/Small_Text_Placeholder"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:background="@color/Dividing_Bar"
+            android:layout_height="0.5dp"
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/free_solid_900"
+                android:gravity="center_vertical"
+                android:text=""
+                android:layout_height="match_parent"/>
+
+            <EditText
+                android:layout_marginStart="5dp"
+                android:id="@+id/SearchEditText"
+                android:layout_width="match_parent"
+                android:lines="1"
+                android:padding="5dp"
+                android:hint="@string/look_for_hint"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:background="@drawable/edit_text_border"
+                android:layout_marginBottom="0dp"/>
+
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:background="@color/Dividing_Bar"
+            android:layout_height="0.5dp"
+            />
 
         <ListView
             android:layout_width="fill_parent"
