@@ -45,6 +45,17 @@ public class Common {
             return dotfiedNum.toString();
     }
 
+    public static int get_int_from_Date(String value)
+    {
+        String Year=value.substring(0,4);
+        String Month=value.substring(5,7);
+        String Day=value.substring(8,10);
+
+        String total=Year+Month+Day;
+
+        return Integer.parseInt(total);
+    }
+
     public static String get_dd_MM_yyyy(String value)
     {
         String Year=value.substring(0,4);

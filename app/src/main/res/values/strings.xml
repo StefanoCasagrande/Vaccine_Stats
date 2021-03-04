@@ -16,7 +16,7 @@
 
     <!--translatable-->
     <string name="Italian_Situation">Italian Situation</string>
-    <string name="doses_administered">doses administered</string>
+    <string name="doses_administered">Doses Administered</string>
     <string name="app_name">Vaccini Stats</string>
 
     <string name="Menu_Title">Don\'t forget:</string>
