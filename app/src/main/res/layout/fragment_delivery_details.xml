@@ -21,18 +21,21 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:fontFamily="@font/free_solid_900"
-                android:textSize="30sp"
-                android:text=""/>
+                android:textSize="35sp"
+                android:textColor="@color/Icons"
+                android:layout_gravity="center_vertical"
+                android:text=""/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="30sp"
@@ -67,10 +70,12 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:fontFamily="@font/free_solid_900"
-                android:textSize="30sp"
-                android:textColor="@color/teal_700"
+                android:textSize="35sp"
+                android:textColor="@color/Icons"
+                android:layout_gravity="center_vertical"
                 android:text=""/>
 
             <LinearLayout
@@ -88,6 +93,7 @@
                     android:text="@string/Big_Title_Placeholder"/>
 
                 <TextView
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
@@ -107,9 +113,12 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:fontFamily="@font/free_solid_900"
-                android:textSize="30sp"
+                android:textSize="35sp"
+                android:textColor="@color/Icons"
+                android:layout_gravity="center_vertical"
                 android:text=""/>
 
             <LinearLayout
@@ -127,6 +136,7 @@
                     android:text="@string/Big_Title_Placeholder"/>
 
                 <TextView
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
@@ -146,9 +156,12 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:fontFamily="@font/free_solid_900"
-                android:textSize="30sp"
+                android:textSize="35sp"
+                android:textColor="@color/Icons"
+                android:layout_gravity="center_vertical"
                 android:text=""/>
 
             <LinearLayout
@@ -166,6 +179,7 @@
                     android:text="@string/Big_Title_Placeholder"/>
 
                 <TextView
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
@@ -185,9 +199,12 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:fontFamily="@font/free_solid_900"
-                android:textSize="30sp"
+                android:textSize="35sp"
+                android:textColor="@color/Icons"
+                android:layout_gravity="center_vertical"
                 android:text=""/>
 
             <LinearLayout
@@ -205,6 +222,7 @@
                     android:text="@string/Big_Title_Placeholder"/>
 
                 <TextView
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
