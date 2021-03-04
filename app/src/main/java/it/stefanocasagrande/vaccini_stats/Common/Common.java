@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 public class Common {
 
     public static DB Database;
+    public static boolean Data_Already_Loaded=false;
 
     public static int Back_Action=-1;
     public static final int Back_To_Nowhere=-1;

@@ -73,16 +73,17 @@ public class fragment_summary_by_age extends Fragment implements Interface  {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_summary_by_age, container, false);
 
-        if (GlobalVariables.isNetworkConnected)
-            ((MainActivity) getActivity()).getLastUpdate(this);
-        else
-        {
-            if (!Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(""))
-            {
-                Load_Data();
+        if (!Common.Data_Already_Loaded) {
+            Common.Data_Already_Loaded = true;
+
+            if (GlobalVariables.isNetworkConnected)
+                ((MainActivity) getActivity()).getLastUpdate(this);
+            else {
+                if (!Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(""))
+                    Load_Data();
+                else
+                    Toast.makeText(getContext(), getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
             }
-            else
-                Toast.makeText(getContext(),getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
         }
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(), getChildFragmentManager());
@@ -99,7 +100,14 @@ public class fragment_summary_by_age extends Fragment implements Interface  {
 
     public void Load_Data()
     {
-        List<anagrafica_vaccini_summary_data> lista = Common.Database.Get_anagrafica_vaccini_summary();
+        if (getFragmentManager() != null) {
+
+            getFragmentManager()
+                    .beginTransaction()
+                    .detach(this)
+                    .attach(this)
+                    .commit();
+        }
     }
 
     @Override
