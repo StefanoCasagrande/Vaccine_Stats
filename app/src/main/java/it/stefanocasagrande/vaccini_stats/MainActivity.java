@@ -1,9 +1,11 @@
 package it.stefanocasagrande.vaccini_stats;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -287,4 +289,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //endregion
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_info:
+
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.action_info))
+                        .setMessage(String.format(getString(R.string.Info_About), "covid19-opendata-vaccini", "Developers Italia", "Github", "stefano.casagrande@gmail.com"))
+                        .setPositiveButton("Ok", null)
+                        .show();
+
+                return true;
+            case R.id.action_help:
+                Show_Help();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void Show_Help()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.Instruction_Title))
+                .setMessage(getString(R.string.Instruction_Text))
+                .setPositiveButton("Ok", null)
+                .show();
+    }
 }

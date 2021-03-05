@@ -61,4 +61,11 @@
 
     <string name="Progress_Text">In caricamento, attendere..</string>
     <string name="Progress_Title">Loading..</string>
+
+    <string name="help">Guida..</string>
+    <string name="Info_About">Tutte le informazioni vengono dal database pubblico della %1$s, organizzato %2$s e ospitato su %3$s\n\nApp sviluppata da %4$s</string>
+
+    <string name="Instruction_Title">Istruzioni</string>
+    <string name="Instruction_Text">In lavorazione...</string>
+
 </resources>

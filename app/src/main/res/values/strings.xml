@@ -76,4 +76,12 @@
 
     <string name="Progress_Text">Loading.. Please wait..</string>
     <string name="Progress_Title">Loading..</string>
+
+    <string name="action_info" translatable="false">Info..</string>
+    <string name="help">Help..</string>
+    <string name="Info_About">All the info comes from public data by %1$s, collected by %2$s and hosted on %3$s\n\nApp developed by %4$s</string>
+
+    <string name="Instruction_Title">Instruction</string>
+    <string name="Instruction_Text">Still working on it..</string>
+
 </resources>
