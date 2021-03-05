@@ -10,6 +10,7 @@
     <string name="Small_Text_Placeholder" translatable="false">Small Text Placeholder</string>
     <string name="Number_Placeholder" translatable="false">2.000.000</string>
     <string name="Pfizer_BioNTech" translatable="false">Pfizer/BioNTech</string>
+    <string name="Pfizer_BioNTech_Short" translatable="false">Pfizer</string>
     <string name="AstraZeneca" translatable="false">AstraZeneca</string>
     <string name="Moderna" translatable="false">Moderna</string>
     <string name="Data" translatable="false">Data</string>
@@ -18,6 +19,8 @@
     <string name="Italian_Situation">Italian Situation</string>
     <string name="doses_administered">Doses Administered</string>
     <string name="app_name">Vaccini Stats</string>
+    <string name="Vaccine_Detail">Deliveries Details</string>
+    <string name="Vaccine_Detail_Small">Click on the graph for more info..</string>
 
     <string name="Menu_Title">Don\'t forget:</string>
     <string name="Wear_The_Mask">Wear the mask</string>

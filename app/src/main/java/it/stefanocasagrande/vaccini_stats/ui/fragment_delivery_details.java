@@ -1,6 +1,8 @@
 package it.stefanocasagrande.vaccini_stats.ui;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,12 +10,23 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.view.Window;
 import android.widget.TextView;
 
-import java.util.List;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import it.stefanocasagrande.vaccini_stats.Adapters.Delivery_Details_Adapter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import it.stefanocasagrande.vaccini_stats.Common.Common;
 import it.stefanocasagrande.vaccini_stats.MainActivity;
 import it.stefanocasagrande.vaccini_stats.R;
@@ -24,26 +37,14 @@ import static it.stefanocasagrande.vaccini_stats.Common.Common.get_int_from_Date
 
 public class fragment_delivery_details extends Fragment {
 
+    PieChart pieChart;
+
     static String area_name;
     TextView tv_location;
-
-    TextView tv_vaccine_type1;
-    TextView tv_vaccine_type1_doses;
-
-    TextView tv_vaccine_type2;
-    TextView tv_vaccine_type2_doses;
-
-    TextView tv_vaccine_type3;
-    TextView tv_vaccine_type3_doses;
-
-    TextView tv_vaccine_type4;
-    TextView tv_vaccine_type4_doses;
 
     TextView tv_doses_administered;
     TextView tv_total_delivered;
     TextView tv_total_delivered_desc;
-
-    ListView list;
 
     public fragment_delivery_details() {
         // Required empty public constructor
@@ -70,23 +71,14 @@ public class fragment_delivery_details extends Fragment {
 
         tv_location = v.findViewById(R.id.tv_location);
 
-        tv_vaccine_type1 = v.findViewById(R.id.tv_vaccine_type1);
-        tv_vaccine_type1_doses = v.findViewById(R.id.tv_vaccine_type1_doses);
-
-        tv_vaccine_type2 = v.findViewById(R.id.tv_vaccine_type2);
-        tv_vaccine_type2_doses = v.findViewById(R.id.tv_vaccine_type2_doses);
-
-        tv_vaccine_type3 = v.findViewById(R.id.tv_vaccine_type3);
-        tv_vaccine_type3_doses = v.findViewById(R.id.tv_vaccine_type3_doses);
-
-        tv_vaccine_type4 = v.findViewById(R.id.tv_vaccine_type4);
-        tv_vaccine_type4_doses = v.findViewById(R.id.tv_vaccine_type4_doses);
-
         tv_doses_administered = v.findViewById(R.id.tv_doses_administered);
         tv_total_delivered = v.findViewById(R.id.tv_total_delivered);
         tv_total_delivered_desc = v.findViewById(R.id.tv_total_delivered_desc);
 
-        list = v.findViewById(R.id.listView);
+        pieChart = v.findViewById(R.id.pieChart_view);
+        initPieChart();
+
+        pieChart.setOnChartValueSelectedListener(new pieChartOnChartValueSelectedListener());
 
         TextView tv_last_update = v.findViewById(R.id.tv_last_update);
         tv_last_update.setText(String.format("%s: %s", getString(R.string.Last_Update), Common.get_dd_MM_yyyy(Common.Database.Get_Configurazione("ultimo_aggiornamento"))));
@@ -108,11 +100,6 @@ public class fragment_delivery_details extends Fragment {
         tv_location.setText(list_to_load.get(0).nome_area);
         tv_doses_administered.setText(Common.AddDotToInteger(list_administered.get(0).dosi_somministrate));
         tv_total_delivered.setText(Common.AddDotToInteger(list_administered.get(0).dosi_consegnate));
-
-        tv_vaccine_type1.setText(getString(R.string.Pfizer_BioNTech));
-        tv_vaccine_type2.setText(getString(R.string.AstraZeneca));
-        tv_vaccine_type3.setText(getString(R.string.Moderna));
-        tv_vaccine_type4.setText(getString(R.string.Other_Vaccines));
 
         int doses_type1=0;
         int doses_type2=0;
@@ -136,16 +123,96 @@ public class fragment_delivery_details extends Fragment {
                 doses_type4 += var.numero_dosi;
         }
 
-        tv_vaccine_type1_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type1)));
-        tv_vaccine_type2_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type2)));
-        tv_vaccine_type3_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type3)));
-        tv_vaccine_type4_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type4)));
-
         tv_total_delivered_desc.setText(String.format("%s%s%s - %s", getString(R.string.Doses_Delivered), System.lineSeparator(), getString(R.string.Last_delivery), Common.get_dd_MM_yyyy(last_consegna)));
 
-        Delivery_Details_Adapter adapter = new Delivery_Details_Adapter(getActivity(), R.layout.single_item_delivery,list_to_load);
-        list.setAdapter(adapter);
+        showPieChart(doses_type1, doses_type2, doses_type3, doses_type4);
 
         return true;
+    }
+
+    private class pieChartOnChartValueSelectedListener implements OnChartValueSelectedListener {
+
+        @Override
+        public void onValueSelected(Entry e, Highlight h) {
+
+
+            final Dialog custom_dialog = new Dialog(getActivity());
+            custom_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            custom_dialog.setContentView(R.layout.alertdialog_detail);
+            custom_dialog.setCancelable(true);
+
+            TextView txt_title= custom_dialog.findViewById(R.id.textView1);
+            txt_title.setText(((PieEntry) e).getLabel());
+
+            TextView txt_detail = custom_dialog.findViewById(R.id.textView2);
+            txt_detail.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger((int)e.getY())));
+            custom_dialog.show();
+        }
+
+        @Override
+        public void onNothingSelected() {
+
+        }
+    }
+
+    private void initPieChart(){
+
+
+        //remove the description label on the lower left corner, default true if not set
+        pieChart.getDescription().setEnabled(false);
+
+        //enabling the user to rotate the chart, default true
+        pieChart.setRotationEnabled(true);
+        //adding friction when rotating the pie chart
+        pieChart.setDragDecelerationFrictionCoef(0.9f);
+        //setting the first entry start from right hand side, default starting from top
+        pieChart.setRotationAngle(0);
+
+        //highlight the entry when it is tapped, default true if not set
+        pieChart.setHighlightPerTapEnabled(true);
+        //adding animation so the entries pop up from 0 degree
+        pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+
+    }
+
+    private void showPieChart(int doses_type1, int doses_type2, int doses_type3, int doses_type4){
+
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
+
+        //initializing data
+        Map<String, Integer> typeAmountMap = new HashMap<>();
+        typeAmountMap.put(getString(R.string.Pfizer_BioNTech_Short),doses_type1);
+        typeAmountMap.put(getString(R.string.AstraZeneca),doses_type2);
+        typeAmountMap.put(getString(R.string.Moderna),doses_type3);
+
+        //initializing colors for the entries
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(Color.parseColor("#fb8500"));
+        colors.add(Color.parseColor("#219ebc"));
+        colors.add(Color.parseColor("#d62828"));
+
+        if (doses_type4>0) {
+            colors.add(Color.parseColor("#7400b8"));
+            typeAmountMap.put(getString(R.string.Other_Vaccines), doses_type4);
+        }
+
+        //input data and fit data into pie chart entry
+        for(String type: typeAmountMap.keySet()){
+            pieEntries.add(new PieEntry(typeAmountMap.get(type).floatValue(), type));
+        }
+
+        //collecting the entries with label name
+        PieDataSet pieDataSet = new PieDataSet(pieEntries,"");
+        //setting text size of the value
+        pieDataSet.setValueTextSize(15f);
+        //providing color list for coloring different entries
+        pieDataSet.setColors(colors);
+        //grouping the data set from entry to chart
+        PieData pieData = new PieData(pieDataSet);
+        //showing the value of the entries, default true if not set
+        pieData.setDrawValues(true);
+
+        pieChart.setData(pieData);
+        pieChart.invalidate();
     }
 }
