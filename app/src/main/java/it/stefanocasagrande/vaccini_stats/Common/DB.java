@@ -332,7 +332,10 @@ public class DB extends SQLiteOpenHelper {
 
     public List<vaccini_summary_data> Get_vaccini_summary(String area_name)
     {
-        String sql_query = "SELECT area, dosi_somministrate, dosi_consegnate, ultimo_aggiornamento, nome_area from SUMMARY_BY_LOCATION where nome_area=" + Validate_String(area_name);
+        String sql_query = "SELECT area, dosi_somministrate, dosi_consegnate, ultimo_aggiornamento, nome_area from SUMMARY_BY_LOCATION ";
+
+        if (!area_name.equals(""))
+            sql_query+=" where nome_area=" + Validate_String(area_name);
 
         SQLiteDatabase db = this.getWritableDatabase();
         List<vaccini_summary_data> lista = new ArrayList<>();

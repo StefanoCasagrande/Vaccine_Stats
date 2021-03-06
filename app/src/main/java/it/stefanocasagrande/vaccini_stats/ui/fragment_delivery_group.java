@@ -22,6 +22,7 @@ import it.stefanocasagrande.vaccini_stats.Common.Common;
 import it.stefanocasagrande.vaccini_stats.MainActivity;
 import it.stefanocasagrande.vaccini_stats.R;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
+import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_data;
 
 import static it.stefanocasagrande.vaccini_stats.Common.Common.hideKeyboard;
 
@@ -67,19 +68,12 @@ public class fragment_delivery_group extends Fragment {
         View v = inflater.inflate(R.layout.fragment_delivery_group, container, false);
 
         TextView tv_location = v.findViewById(R.id.tv_location);
+
+        TextView tv_doses_administered = v.findViewById(R.id.tv_doses_administered);
+        TextView tv_total_delivered = v.findViewById(R.id.tv_total_delivered);
         TextView tv_total = v.findViewById(R.id.tv_total);
 
-        TextView tv_vaccine_type1 = v.findViewById(R.id.tv_vaccine_type1);
-        TextView tv_vaccine_type1_doses = v.findViewById(R.id.tv_vaccine_type1_doses);
-
-        TextView tv_vaccine_type2 = v.findViewById(R.id.tv_vaccine_type2);
-        TextView tv_vaccine_type2_doses = v.findViewById(R.id.tv_vaccine_type2_doses);
-
-        TextView tv_vaccine_type3 = v.findViewById(R.id.tv_vaccine_type3);
-        TextView tv_vaccine_type3_doses = v.findViewById(R.id.tv_vaccine_type3_doses);
-
-        TextView tv_vaccine_type4 = v.findViewById(R.id.tv_vaccine_type4);
-        TextView tv_vaccine_type4_doses = v.findViewById(R.id.tv_vaccine_type4_doses);
+        tv_total.setText(String.format("%s: %s", getString(R.string.Last_Update), Common.get_dd_MM_yyyy(Common.Database.Get_Configurazione("ultimo_aggiornamento"))));
 
         list = v.findViewById(R.id.listView);
         list.setEmptyView(v.findViewById(R.id.empty));
@@ -105,11 +99,6 @@ public class fragment_delivery_group extends Fragment {
 
         tv_location.setText(getString(R.string.Italian_Situation));
 
-        tv_vaccine_type1.setText(getString(R.string.Pfizer_BioNTech));
-        tv_vaccine_type2.setText(getString(R.string.AstraZeneca));
-        tv_vaccine_type3.setText(getString(R.string.Moderna));
-        tv_vaccine_type4.setText(getString(R.string.Other_Vaccines));
-
         int doses_type1=0;
         int doses_type2=0;
         int doses_type3=0;
@@ -127,11 +116,17 @@ public class fragment_delivery_group extends Fragment {
                 doses_type4 += var.numero_dosi;
         }
 
-        tv_vaccine_type1_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type1)));
-        tv_vaccine_type2_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type2)));
-        tv_vaccine_type3_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type3)));
-        tv_vaccine_type4_doses.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type4)));
-        tv_total.setText(String.format("%s: %s", getString(R.string.Doses_Delivered), Common.AddDotToInteger(doses_type1+doses_type2+doses_type3+doses_type4)));
+        tv_total_delivered.setText(Common.AddDotToInteger(doses_type1+doses_type2+doses_type3+doses_type4));
+
+        List<vaccini_summary_data> list_administered = Common.Database.Get_vaccini_summary("");
+        int administered=0;
+
+        for (vaccini_summary_data var : list_administered)
+        {
+            administered+=var.dosi_somministrate;
+        }
+
+        tv_doses_administered.setText(Common.AddDotToInteger(administered));
 
         full_list = Common.Database.Get_Deliveries_GroupBy_Area();
 
