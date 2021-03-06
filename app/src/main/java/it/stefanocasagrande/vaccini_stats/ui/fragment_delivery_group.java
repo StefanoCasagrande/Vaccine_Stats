@@ -3,11 +3,13 @@ package it.stefanocasagrande.vaccini_stats.ui;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ import it.stefanocasagrande.vaccini_stats.R;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_data;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
 import static it.stefanocasagrande.vaccini_stats.Common.Common.hideKeyboard;
 
 public class fragment_delivery_group extends Fragment {
@@ -78,6 +81,15 @@ public class fragment_delivery_group extends Fragment {
         list = v.findViewById(R.id.listView);
         list.setEmptyView(v.findViewById(R.id.empty));
         textFilter = v.findViewById(R.id.SearchEditText);
+        textFilter.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == 66) {
+                    hideKeyboard_OnReturn(v);
+                    return true; //this is required to stop sending key event to parent
+                }
+                return false;
+            }
+        });
 
         textFilter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -162,5 +174,12 @@ public class fragment_delivery_group extends Fragment {
             Common.Back_Action = Common.Back_To_Delivery_Group;
             ((MainActivity)getActivity()).goToDelivery_Details(adapter.getItemList(position).nome_area);
         });
+    }
+
+    private void hideKeyboard_OnReturn(View view) {
+        InputMethodManager manager = (InputMethodManager) view.getContext()
+                .getSystemService(INPUT_METHOD_SERVICE);
+        if (manager != null)
+            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

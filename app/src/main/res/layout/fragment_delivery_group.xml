@@ -171,7 +171,7 @@
                 android:layout_marginStart="5dp"
                 android:id="@+id/SearchEditText"
                 android:layout_width="match_parent"
-                android:lines="1"
+                android:maxLines="1"
                 android:padding="5dp"
                 android:hint="@string/look_for_hint"
                 android:layout_height="wrap_content"
