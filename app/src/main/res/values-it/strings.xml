@@ -3,7 +3,7 @@
     <!--translatable-->
     <string name="Italian_Situation">Situazione italiana</string>
     <string name="doses_administered">Dosi somministrate</string>
-    <string name="app_name">Vaccini Stats</string>
+    <string name="app_name">Report Vaccini</string>
     <string name="Vaccine_Detail">Dettaglio consegne</string>
     <string name="Vaccine_Detail_Small">Clicca sul grafico per maggiori info..</string>
 
@@ -37,15 +37,6 @@
     <string name="Age_Group">Fascia d\'età</string>
 
     <string name="tab_text_1">Totale</string>
-    <string name="tab_text_2">16-19</string>
-    <string name="tab_text_3">20-29</string>
-    <string name="tab_text_4">30-39</string>
-    <string name="tab_text_5">40-49</string>
-    <string name="tab_text_6">50-59</string>
-    <string name="tab_text_7">60-69</string>
-    <string name="tab_text_8">70-79</string>
-    <string name="tab_text_9">80-89</string>
-    <string name="tab_text_10">90+</string>
 
     <string name="Health_Workers">Operatori sanitari</string>
     <string name="RSA_Guests">Ospiti RSA</string>
@@ -62,10 +53,11 @@
     <string name="Progress_Text">In caricamento, attendere..</string>
     <string name="Progress_Title">Loading..</string>
 
+    <string name="Dont_Show_Anymore">Non mostrare più l\'avviso</string>
     <string name="help">Guida..</string>
     <string name="Info_About">Tutte le informazioni vengono dal database pubblico della %1$s, organizzato %2$s e ospitato su %3$s\n\nApp sviluppata da %4$s</string>
 
     <string name="Instruction_Title">Istruzioni</string>
-    <string name="Instruction_Text">In lavorazione...</string>
+    <string name="Instruction_Text">Tramite il menù ( le tre righe orizzontali in alto a sinistra ) puoi verificare anche la situazione regione per regione.\n\nIn questa pagina invece visualizzi la situazione per fascie d\'età.</string>
 
 </resources>

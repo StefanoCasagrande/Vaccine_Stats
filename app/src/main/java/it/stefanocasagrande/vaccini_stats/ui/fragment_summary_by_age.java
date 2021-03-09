@@ -29,6 +29,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
+import java.util.Objects;
 
 import it.stefanocasagrande.vaccini_stats.Common.Common;
 import it.stefanocasagrande.vaccini_stats.GlobalVariables;
@@ -94,6 +95,8 @@ public class fragment_summary_by_age extends Fragment implements Interface  {
         tabs.setHorizontalScrollBarEnabled(true);
         tabs.setupWithViewPager(viewPager);
 
+        if (!Common.Database.Get_Configurazione("HIDE_INSTRUCTION").equals("1"))
+            ((MainActivity) requireActivity()).Show_Help();
 
         return v;
     }

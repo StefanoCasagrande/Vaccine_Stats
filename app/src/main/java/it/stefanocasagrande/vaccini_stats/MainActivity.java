@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.Instruction_Title))
                 .setMessage(getString(R.string.Instruction_Text))
-                .setPositiveButton("Ok", null)
+                .setPositiveButton(getString(R.string.Dont_Show_Anymore), (dialog2, which) -> Common.Database.Set_Configurazione("HIDE_INSTRUCTION","1"))
                 .show();
     }
 }

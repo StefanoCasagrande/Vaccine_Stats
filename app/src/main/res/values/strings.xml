@@ -18,7 +18,7 @@
     <!--translatable-->
     <string name="Italian_Situation">Italian Situation</string>
     <string name="doses_administered">Doses Administered</string>
-    <string name="app_name">Vaccini Stats</string>
+    <string name="app_name">Vaccine Report</string>
     <string name="Vaccine_Detail">Deliveries Details</string>
     <string name="Vaccine_Detail_Small">Click on the graph for more info..</string>
 
@@ -52,15 +52,15 @@
     <string name="Age_Group">Age group</string>
 
     <string name="tab_text_1">Totale</string>
-    <string name="tab_text_2">16-19</string>
-    <string name="tab_text_3">20-29</string>
-    <string name="tab_text_4">30-39</string>
-    <string name="tab_text_5">40-49</string>
-    <string name="tab_text_6">50-59</string>
-    <string name="tab_text_7">60-69</string>
-    <string name="tab_text_8">70-79</string>
-    <string name="tab_text_9">80-89</string>
-    <string name="tab_text_10">90+</string>
+    <string name="tab_text_2" translatable="false">16-19</string>
+    <string name="tab_text_3" translatable="false">20-29</string>
+    <string name="tab_text_4" translatable="false">30-39</string>
+    <string name="tab_text_5" translatable="false">40-49</string>
+    <string name="tab_text_6" translatable="false">50-59</string>
+    <string name="tab_text_7" translatable="false">60-69</string>
+    <string name="tab_text_8" translatable="false">70-79</string>
+    <string name="tab_text_9" translatable="false">80-89</string>
+    <string name="tab_text_10" translatable="false">90+</string>
 
     <string name="Health_Workers">Health workers</string>
     <string name="RSA_Guests">RSA Guests</string>
@@ -77,6 +77,7 @@
     <string name="Progress_Text">Loading.. Please wait..</string>
     <string name="Progress_Title">Loading..</string>
 
+    <string name="Dont_Show_Anymore">Don\'t show it anymore</string>
     <string name="action_info" translatable="false">Info..</string>
     <string name="help">Help..</string>
     <string name="Info_About">All the info comes from public data by %1$s, collected by %2$s and hosted on %3$s\n\nApp developed by %4$s</string>
