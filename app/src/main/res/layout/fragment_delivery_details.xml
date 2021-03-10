@@ -45,6 +45,7 @@
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:id="@+id/tv_location"
+                        android:textColor="@color/Text_Big"
                         android:text="@string/Big_Title_Placeholder"/>
 
                     <TextView
@@ -53,6 +54,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
                         android:id="@+id/tv_last_update"
+                        android:textColor="@color/Text_Small"
                         android:text="@string/Small_Text_Placeholder"/>
 
                 </LinearLayout>
@@ -94,6 +96,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:id="@+id/tv_doses_administered"
+                        android:textColor="@color/Text_Big"
                         android:text="@string/Big_Title_Placeholder"/>
 
                     <TextView
@@ -101,6 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
+                        android:textColor="@color/Text_Small"
                         android:text="@string/doses_administered"/>
 
                 </LinearLayout>
@@ -136,6 +140,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:id="@+id/tv_total_delivered"
+                        android:textColor="@color/Text_Big"
                         android:text="@string/Big_Title_Placeholder"/>
 
                     <TextView
@@ -144,6 +149,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
                         android:id="@+id/tv_total_delivered_desc"
+                        android:textColor="@color/Text_Small"
                         android:text="@string/Small_Text_Placeholder"/>
 
                 </LinearLayout>
@@ -185,6 +191,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:textStyle="bold"
+                        android:textColor="@color/Text_Big"
                         android:text="@string/Vaccine_Detail"/>
 
                     <TextView
@@ -192,6 +199,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
+                        android:textColor="@color/Text_Small"
                         android:text="@string/Vaccine_Detail_Small"/>
 
                 </LinearLayout>

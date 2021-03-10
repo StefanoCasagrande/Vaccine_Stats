@@ -41,6 +41,7 @@
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:id="@+id/tv_location"
+                    android:textColor="@color/Text_Big"
                     android:text="@string/Big_Title_Placeholder"/>
 
                 <TextView
@@ -49,6 +50,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:id="@+id/tv_total"
+                    android:textColor="@color/Text_Small"
                     android:text="@string/Small_Text_Placeholder"/>
 
             </LinearLayout>
@@ -90,6 +92,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:id="@+id/tv_doses_administered"
+                    android:textColor="@color/Text_Big"
                     android:text="@string/Big_Title_Placeholder"/>
 
                 <TextView
@@ -97,6 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
+                    android:textColor="@color/Text_Small"
                     android:text="@string/doses_administered"/>
 
             </LinearLayout>
@@ -132,6 +136,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:id="@+id/tv_total_delivered"
+                    android:textColor="@color/Text_Big"
                     android:text="@string/Big_Title_Placeholder"/>
 
                 <TextView
@@ -139,6 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
+                    android:textColor="@color/Text_Small"
                     android:text="@string/Doses_Delivered"/>
 
             </LinearLayout>
@@ -174,6 +180,8 @@
                 android:maxLines="1"
                 android:padding="5dp"
                 android:hint="@string/look_for_hint"
+                android:textColorHint="@color/Text_Small"
+                android:textColor="@color/Text_Small"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:background="@drawable/edit_text_border"

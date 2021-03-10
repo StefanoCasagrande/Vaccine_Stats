@@ -63,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_doses"
+                android:textColor="@color/Text_Big"
                 android:text="@string/Number_Placeholder"
                 android:textSize="25sp"/>
 
@@ -74,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:textSize="12sp"
+                android:textColor="@color/Text_Small"
                 android:text="@string/Doses_Delivered"/>
         </LinearLayout>
 
