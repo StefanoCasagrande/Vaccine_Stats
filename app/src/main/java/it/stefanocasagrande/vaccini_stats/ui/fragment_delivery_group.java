@@ -76,7 +76,8 @@ public class fragment_delivery_group extends Fragment {
         TextView tv_total_delivered = v.findViewById(R.id.tv_total_delivered);
         TextView tv_total = v.findViewById(R.id.tv_total);
 
-        tv_total.setText(String.format("%s: %s", getString(R.string.Last_Update), Common.get_dd_MM_yyyy(Common.Database.Get_Configurazione("ultimo_aggiornamento"))));
+        if (!Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(""))
+            tv_total.setText(String.format("%s: %s", getString(R.string.Last_Update), Common.get_dd_MM_yyyy(Common.Database.Get_Configurazione("ultimo_aggiornamento"))));
 
         list = v.findViewById(R.id.listView);
         list.setEmptyView(v.findViewById(R.id.empty));
