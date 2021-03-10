@@ -34,6 +34,7 @@ import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne
 import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_data;
 
 import static it.stefanocasagrande.vaccini_stats.Common.Common.get_int_from_Date;
+import static it.stefanocasagrande.vaccini_stats.Common.Common.hideKeyboard;
 
 public class fragment_delivery_details extends Fragment {
 
@@ -88,6 +89,8 @@ public class fragment_delivery_details extends Fragment {
 
         if (Load_Data(area_name))
             waiting_bar.dismiss();
+
+        hideKeyboard(getActivity());
 
         return v;
     }
