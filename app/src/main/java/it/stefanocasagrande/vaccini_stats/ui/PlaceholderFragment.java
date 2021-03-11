@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,6 +69,23 @@ public class PlaceholderFragment extends Fragment {
         final TextView tv_law_enforcement = root.findViewById(R.id.tv_law_enforcement);
         final TextView tv_non_healtcare = root.findViewById(R.id.tv_non_healtcare);
         final TextView tv_school_staff = root.findViewById(R.id.tv_school_staff);
+
+        final LinearLayout ll_administered_doses_graph = root.findViewById(R.id.ll_administered_doses_graph);
+        ll_administered_doses_graph.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ((MainActivity)getActivity()).Show_Graph(
+                        Integer.parseInt(tv_operatori_sanitari.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_non_healtcare.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_ospiti_rsa.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_law_enforcement.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_school_staff.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_others.getText().toString().replace(".",""))
+                        );
+            }
+        });
 
         List<anagrafica_vaccini_summary_data> lista = Common.Database.Get_anagrafica_vaccini_summary();
         pageViewModel.getText().observe(getActivity(), new Observer<String>() {

@@ -86,4 +86,7 @@
     <string name="Instruction_Text">You can click on the menù upper left ( 3 horizontal stripes ) to navigate to region details..</string>
     <string name="Last_Back_Alert">If you click back one more time the app will close.</string>
 
+    <string name="Distribituion_Category">Doses on category</string>
+    <string name="Click_For_Graph">Click For Graph</string>
+
 </resources>

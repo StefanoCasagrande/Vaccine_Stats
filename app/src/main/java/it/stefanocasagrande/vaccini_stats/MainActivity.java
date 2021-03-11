@@ -1,13 +1,23 @@
 package it.stefanocasagrande.vaccini_stats;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +31,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import it.stefanocasagrande.vaccini_stats.Common.Common;
 import it.stefanocasagrande.vaccini_stats.Common.DB;
@@ -42,6 +56,7 @@ import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    PieChart pieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,16 +124,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void Check_Update(String last_update, fragment_summary_by_age var)
     {
-        boolean debug=true;
-
-        if ((debug) || (Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("") || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)))
+        if ((Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("") || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)))
         {
             Common.Database.Set_Configurazione("ultimo_aggiornamento", last_update);
             getSummary_by_Age(var);
-        }
-        else
-        {
-            /* ToDo Load data already in the db */
         }
     }
 
@@ -315,6 +324,130 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    //region Graph Category
+
+    public void Show_Graph(int operatori_sanitari_sociosanitari, int personale_non_sanitario, int ospiti_rsa, int forze_armate, int personale_scolastico, int over_80)
+    {
+        final Dialog custom_dialog = new Dialog(this);
+        custom_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        custom_dialog.setContentView(R.layout.alertdialog_category_graph);
+        custom_dialog.setCancelable(true);
+
+        pieChart = custom_dialog.findViewById(R.id.pieChart_view);
+        initPieChart();
+
+        Button btn_ok = custom_dialog.findViewById(R.id.btn_ok);
+        btn_ok.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                custom_dialog.cancel();
+            }
+        });
+
+        int totale = operatori_sanitari_sociosanitari+ personale_non_sanitario+ ospiti_rsa+ forze_armate+ personale_scolastico+ over_80;
+
+        showPieChart((double)(operatori_sanitari_sociosanitari*100)/totale, (double)(personale_non_sanitario*100)/totale, (double)(ospiti_rsa*100)/totale, (double)(forze_armate*100)/totale, (double)(personale_scolastico*100)/totale, (double)(over_80*100)/totale);
+
+        custom_dialog.show();
+    }
+
+    private void initPieChart(){
+
+        //remove the description label on the lower left corner, default true if not set
+        pieChart.getDescription().setEnabled(false);
+
+        //enabling the user to rotate the chart, default true
+        pieChart.setRotationEnabled(true);
+        //adding friction when rotating the pie chart
+        pieChart.setDragDecelerationFrictionCoef(0.9f);
+        //setting the first entry start from right hand side, default starting from top
+        pieChart.setRotationAngle(0);
+
+        //highlight the entry when it is tapped, default true if not set
+        pieChart.setHighlightPerTapEnabled(true);
+        //adding animation so the entries pop up from 0 degree
+        pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+
+    }
+
+    private void showPieChart(double operatori_sanitari_sociosanitari, double personale_non_sanitario, double ospiti_rsa, double forze_armate, double personale_scolastico, double over_80)
+    {
+
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
+
+        //initializing data
+        Map<String, Double> typeAmountMap = new HashMap<>();
+        //initializing colors for the entries
+        ArrayList<Integer> colors = new ArrayList<>();
+
+
+        if (forze_armate>0)
+        {
+            typeAmountMap.put(getString(R.string.law_enforcement),forze_armate);
+            colors.add(Color.parseColor("#ffb703"));
+        }
+
+        if (operatori_sanitari_sociosanitari>0)
+        {
+            typeAmountMap.put(getString(R.string.Health_Workers),operatori_sanitari_sociosanitari);
+            colors.add(Color.parseColor("#8ecae6"));
+        }
+
+        if (over_80>0)
+        {
+            typeAmountMap.put(getString(R.string.Others),over_80);
+            colors.add(Color.parseColor("#e07a5f"));
+        }
+
+        if (personale_non_sanitario>0)
+        {
+            typeAmountMap.put(getString(R.string.non_health_care_professional),personale_non_sanitario);
+            colors.add(Color.parseColor("#219ebc"));
+        }
+
+
+        if (ospiti_rsa>0)
+        {
+            typeAmountMap.put(getString(R.string.RSA_Guests),ospiti_rsa);
+            colors.add(Color.parseColor("#687175"));
+        }
+
+        if (personale_scolastico>0)
+        {
+            typeAmountMap.put(getString(R.string.School_Staff),personale_scolastico);
+            colors.add(Color.parseColor("#fb8500"));
+        }
+
+
+
+        //input data and fit data into pie chart entry
+        for(String type: typeAmountMap.keySet()){
+            pieEntries.add(new PieEntry(typeAmountMap.get(type).floatValue(), type));
+        }
+
+        //collecting the entries with label name
+        PieDataSet pieDataSet = new PieDataSet(pieEntries,"");
+        //setting text size of the value
+        pieDataSet.setValueTextSize(15f);
+        //providing color list for coloring different entries
+        pieDataSet.setColors(colors);
+        //grouping the data set from entry to chart
+        PieData pieData = new PieData(pieDataSet);
+        //showing the value of the entries, default true if not set
+        pieData.setDrawValues(true);
+
+        pieData.setValueFormatter(new PercentFormatter());
+
+        pieChart.getLegend().setEnabled(false);
+
+        pieChart.setData(pieData);
+        pieChart.invalidate();
+    }
+
+    //endregion
 
     public void Show_Help()
     {
