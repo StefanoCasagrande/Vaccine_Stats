@@ -21,7 +21,9 @@
             android:textColor="@color/Background_1"
             android:textSize="12sp"
             android:text="@string/Summary_Explanation"
-            android:background="@color/Dividing_Bar"/>
+            android:background="@color/Dividing_Bar"
+            android:paddingBottom="5dp"
+            />
 
         <FrameLayout
             android:layout_width="fill_parent"
@@ -42,8 +44,10 @@
                     app:tabMode="scrollable"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    app:tabIndicatorColor="@color/total_white"
                     app:tabTextColor="@color/Background_1"
-                    app:tabSelectedTextColor="@color/OnPrimary"
+                    app:tabSelectedTextColor="@color/total_white"
+                    app:tabBackground="@drawable/tab_color_selector"
                     android:background="@color/Dividing_Bar" />
             </com.google.android.material.appbar.AppBarLayout>
 
