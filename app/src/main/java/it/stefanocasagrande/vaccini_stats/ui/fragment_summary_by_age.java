@@ -98,6 +98,8 @@ public class fragment_summary_by_age extends Fragment implements Interface  {
         if (!Common.Database.Get_Configurazione("HIDE_INSTRUCTION").equals("1"))
             ((MainActivity) requireActivity()).Show_Help();
 
+        Common.Back_Action = Common.Back_To_Nowhere;
+
         return v;
     }
 

@@ -83,6 +83,7 @@
     <string name="Info_About">All the info comes from public data by %1$s, collected by %2$s and hosted on %3$s\n\nApp developed by %4$s</string>
 
     <string name="Instruction_Title">Instruction</string>
-    <string name="Instruction_Text">Still working on it..</string>
+    <string name="Instruction_Text">You can click on the menù upper left ( 3 horizontal stripes ) to navigate to region details..</string>
+    <string name="Last_Back_Alert">If you click back one more time the app will close.</string>
 
 </resources>

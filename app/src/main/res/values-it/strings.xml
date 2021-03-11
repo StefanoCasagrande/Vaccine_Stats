@@ -59,5 +59,6 @@
 
     <string name="Instruction_Title">Istruzioni</string>
     <string name="Instruction_Text">Tramite il menù ( le tre righe orizzontali in alto a sinistra ) puoi verificare anche la situazione regione per regione.\n\nIn questa pagina invece visualizzi la situazione per fascie d\'età.</string>
+    <string name="Last_Back_Alert">Un ulteriore pressione del tasto \'Indietro\' causerà la chiusura dell\'applicazione.</string>
 
 </resources>

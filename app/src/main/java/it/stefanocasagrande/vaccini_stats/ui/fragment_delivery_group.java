@@ -148,6 +148,8 @@ public class fragment_delivery_group extends Fragment {
         list.requestFocus();
         hideKeyboard(getActivity());
 
+        Common.Back_Action = Common.Back_To_Summary;
+
         return v;
     }
 

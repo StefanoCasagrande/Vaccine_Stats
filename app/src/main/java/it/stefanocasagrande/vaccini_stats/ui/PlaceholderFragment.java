@@ -50,6 +50,9 @@ public class PlaceholderFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_tab, container, false);
+
+        Common.Back_Action = Common.Back_To_Nowhere;
+
         final TextView tv_age = root.findViewById(R.id.tv_age);
         final TextView tv_last_update = root.findViewById(R.id.tv_last_update);
         final TextView tv_female = root.findViewById(R.id.tv_female);

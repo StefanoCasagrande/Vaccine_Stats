@@ -95,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
                 Common.Back_Action=Common.Back_To_Summary;
                 goToDelivery_Group();
                 break;
+            case Common.Back_To_CloseApp:
+                finishAndRemoveTask();
+                break;
+            default:
+                Common.Back_Action=Common.Back_To_CloseApp;
+                Toast.makeText(this,getString(R.string.Last_Back_Alert), Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
