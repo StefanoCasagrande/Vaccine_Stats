@@ -7,12 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.List;
@@ -71,105 +68,97 @@ public class PlaceholderFragment extends Fragment {
         final TextView tv_school_staff = root.findViewById(R.id.tv_school_staff);
 
         final LinearLayout ll_administered_doses_graph = root.findViewById(R.id.ll_administered_doses_graph);
-        ll_administered_doses_graph.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+        ll_administered_doses_graph.setOnClickListener(v -> {
+            if (!tv_operatori_sanitari.getText().toString().toUpperCase().equals(getString(R.string.Number_Placeholder).toUpperCase()))
             {
-                if (!tv_operatori_sanitari.getText().toString().toUpperCase().equals(getString(R.string.Number_Placeholder).toUpperCase()))
-                {
-                    ((MainActivity)getActivity()).Show_Graph(
-                            Integer.parseInt(tv_operatori_sanitari.getText().toString().replace(".","")),
-                            Integer.parseInt(tv_non_healtcare.getText().toString().replace(".","")),
-                            Integer.parseInt(tv_ospiti_rsa.getText().toString().replace(".","")),
-                            Integer.parseInt(tv_law_enforcement.getText().toString().replace(".","")),
-                            Integer.parseInt(tv_school_staff.getText().toString().replace(".","")),
-                            Integer.parseInt(tv_others.getText().toString().replace(".",""))
-                    );
-                }
+                ((MainActivity)getActivity()).Show_Graph(
+                        Integer.parseInt(tv_operatori_sanitari.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_non_healtcare.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_ospiti_rsa.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_law_enforcement.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_school_staff.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_others.getText().toString().replace(".",""))
+                );
             }
         });
 
         List<anagrafica_vaccini_summary_data> lista = Common.Database.Get_anagrafica_vaccini_summary();
-        pageViewModel.getText().observe(getActivity(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
+        pageViewModel.getText().observe(getActivity(), s -> {
 
-                final ProgressDialog waiting_bar = ((MainActivity)getActivity()).getprogressDialog();
-                waiting_bar.show();
+            final ProgressDialog waiting_bar = ((MainActivity)getActivity()).getprogressDialog();
+            waiting_bar.show();
 
-                if (s.equals("Totale"))
-                {
-                    tv_age.setText(getString(R.string.General_Data));
-                    int male=0;
-                    int female=0;
-                    int categoria_operatori_sanitari_sociosanitari=0;
-                    int categoria_ospiti_rsa=0;
-                    int categoria_over80=0;
-                    int categoria_forze_armate=0;
-                    int categoria_personale_scolastico=0;
-                    int categoria_personale_non_sanitario=0;
-                    int first_dose=0;
-                    int second_dose=0;
+            if (s.equals("Totale"))
+            {
+                tv_age.setText(getString(R.string.General_Data));
+                int male=0;
+                int female=0;
+                int categoria_operatori_sanitari_sociosanitari=0;
+                int categoria_ospiti_rsa=0;
+                int categoria_over80=0;
+                int categoria_forze_armate=0;
+                int categoria_personale_scolastico=0;
+                int categoria_personale_non_sanitario=0;
+                int first_dose=0;
+                int second_dose=0;
 
-                    if (lista.size()>0)
-                        tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(lista.get(0).ultimo_aggiornamento)));
+                if (lista.size()>0)
+                    tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(lista.get(0).ultimo_aggiornamento)));
 
-                    for(anagrafica_vaccini_summary_data var : lista) {
-                        male+=var.sesso_maschile;
-                        female+=var.sesso_femminile;
-                        categoria_operatori_sanitari_sociosanitari+=var.categoria_operatori_sanitari_sociosanitari;
-                        categoria_ospiti_rsa+=var.categoria_ospiti_rsa;
-                        categoria_over80+=var.categoria_over80;
-                        categoria_forze_armate+=var.categoria_forze_armate;
-                        categoria_personale_scolastico+=var.categoria_personale_scolastico;
-                        categoria_personale_non_sanitario+=var.categoria_personale_non_sanitario;
-                        first_dose+=var.prima_dose;
-                        second_dose+=var.seconda_dose;
-                    }
-
-                    tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(female)));
-                    tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(male)));
-
-                    tv_second_dose.setText(Common.AddDotToInteger(second_dose));
-
-                    tv_operatori_sanitari.setText(Common.AddDotToInteger(categoria_operatori_sanitari_sociosanitari));
-                    tv_ospiti_rsa.setText(Common.AddDotToInteger(categoria_ospiti_rsa));
-                    tv_others.setText(Common.AddDotToInteger(categoria_over80));
-                    tv_law_enforcement.setText(Common.AddDotToInteger(categoria_forze_armate));
-                    tv_school_staff.setText(Common.AddDotToInteger(categoria_personale_scolastico));
-                    tv_non_healtcare.setText(Common.AddDotToInteger(categoria_personale_non_sanitario));
-
-                    tv_total.setText(String.format("%s: %s",getString(R.string.tab_text_1),  Common.AddDotToInteger(male+female)));
-                }
-                else
-                {
-                    for(anagrafica_vaccini_summary_data var : lista)
-                    {
-                        if (var.fascia_anagrafica.equals(s))
-                        {
-                            tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(var.ultimo_aggiornamento)));
-
-                            tv_age.setText(String.format("%s: %s",getString(R.string.Age_Group), s));
-                            tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(var.sesso_femminile)));
-                            tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(var.sesso_maschile)));
-
-                            tv_second_dose.setText(Common.AddDotToInteger(var.seconda_dose));
-
-                            tv_operatori_sanitari.setText(Common.AddDotToInteger(var.categoria_operatori_sanitari_sociosanitari));
-                            tv_ospiti_rsa.setText(Common.AddDotToInteger(var.categoria_ospiti_rsa));
-                            tv_others.setText(Common.AddDotToInteger(var.categoria_over80));
-                            tv_law_enforcement.setText(Common.AddDotToInteger(var.categoria_forze_armate));
-                            tv_school_staff.setText(Common.AddDotToInteger(var.categoria_personale_scolastico));
-                            tv_non_healtcare.setText(Common.AddDotToInteger(var.categoria_personale_non_sanitario));
-
-                            tv_total.setText(String.format("%s: %s",getString(R.string.tab_text_1),  Common.AddDotToInteger(var.sesso_maschile+var.sesso_femminile)));
-                        }
-                    }
+                for(anagrafica_vaccini_summary_data var : lista) {
+                    male+=var.sesso_maschile;
+                    female+=var.sesso_femminile;
+                    categoria_operatori_sanitari_sociosanitari+=var.categoria_operatori_sanitari_sociosanitari;
+                    categoria_ospiti_rsa+=var.categoria_ospiti_rsa;
+                    categoria_over80+=var.categoria_over80;
+                    categoria_forze_armate+=var.categoria_forze_armate;
+                    categoria_personale_scolastico+=var.categoria_personale_scolastico;
+                    categoria_personale_non_sanitario+=var.categoria_personale_non_sanitario;
+                    first_dose+=var.prima_dose;
+                    second_dose+=var.seconda_dose;
                 }
 
-                waiting_bar.dismiss();
+                tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(female)));
+                tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(male)));
+
+                tv_second_dose.setText(Common.AddDotToInteger(second_dose));
+
+                tv_operatori_sanitari.setText(Common.AddDotToInteger(categoria_operatori_sanitari_sociosanitari));
+                tv_ospiti_rsa.setText(Common.AddDotToInteger(categoria_ospiti_rsa));
+                tv_others.setText(Common.AddDotToInteger(categoria_over80));
+                tv_law_enforcement.setText(Common.AddDotToInteger(categoria_forze_armate));
+                tv_school_staff.setText(Common.AddDotToInteger(categoria_personale_scolastico));
+                tv_non_healtcare.setText(Common.AddDotToInteger(categoria_personale_non_sanitario));
+
+                tv_total.setText(String.format("%s: %s",getString(R.string.tab_text_1),  Common.AddDotToInteger(male+female)));
             }
+            else
+            {
+                for(anagrafica_vaccini_summary_data var : lista)
+                {
+                    if (var.fascia_anagrafica.equals(s))
+                    {
+                        tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(var.ultimo_aggiornamento)));
+
+                        tv_age.setText(String.format("%s: %s",getString(R.string.Age_Group), s));
+                        tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(var.sesso_femminile)));
+                        tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(var.sesso_maschile)));
+
+                        tv_second_dose.setText(Common.AddDotToInteger(var.seconda_dose));
+
+                        tv_operatori_sanitari.setText(Common.AddDotToInteger(var.categoria_operatori_sanitari_sociosanitari));
+                        tv_ospiti_rsa.setText(Common.AddDotToInteger(var.categoria_ospiti_rsa));
+                        tv_others.setText(Common.AddDotToInteger(var.categoria_over80));
+                        tv_law_enforcement.setText(Common.AddDotToInteger(var.categoria_forze_armate));
+                        tv_school_staff.setText(Common.AddDotToInteger(var.categoria_personale_scolastico));
+                        tv_non_healtcare.setText(Common.AddDotToInteger(var.categoria_personale_non_sanitario));
+
+                        tv_total.setText(String.format("%s: %s",getString(R.string.tab_text_1),  Common.AddDotToInteger(var.sesso_maschile+var.sesso_femminile)));
+                    }
+                }
+            }
+
+            waiting_bar.dismiss();
         });
         return root;
     }

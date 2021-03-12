@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
@@ -343,14 +342,7 @@ public class MainActivity extends AppCompatActivity {
         initPieChart();
 
         Button btn_ok = custom_dialog.findViewById(R.id.btn_ok);
-        btn_ok.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                custom_dialog.cancel();
-            }
-        });
+        btn_ok.setOnClickListener(v -> custom_dialog.cancel());
 
         int totale = operatori_sanitari_sociosanitari+ personale_non_sanitario+ ospiti_rsa+ forze_armate+ personale_scolastico+ over_80;
 

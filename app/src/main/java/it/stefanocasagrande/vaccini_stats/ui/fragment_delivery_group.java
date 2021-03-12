@@ -3,7 +3,6 @@ package it.stefanocasagrande.vaccini_stats.ui;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -82,14 +81,12 @@ public class fragment_delivery_group extends Fragment {
         list = v.findViewById(R.id.listView);
         list.setEmptyView(v.findViewById(R.id.empty));
         textFilter = v.findViewById(R.id.SearchEditText);
-        textFilter.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == 66) {
-                    hideKeyboard_OnReturn(v);
-                    return true; //this is required to stop sending key event to parent
-                }
-                return false;
+        textFilter.setOnKeyListener((v1, keyCode, event) -> {
+            if (keyCode == 66) {
+                hideKeyboard_OnReturn(v1);
+                return true; //this is required to stop sending key event to parent
             }
+            return false;
         });
 
         textFilter.addTextChangedListener(new TextWatcher() {
