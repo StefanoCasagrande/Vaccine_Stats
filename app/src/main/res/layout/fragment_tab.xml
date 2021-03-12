@@ -116,7 +116,7 @@
                             android:textColor="@color/Text_Big"
                             android:textStyle="bold"
                             android:id="@+id/tv_female"
-                            android:text="@string/Big_Title_Placeholder"/>
+                            android:text="@string/Number_Placeholder"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                             android:textColor="@color/Text_Big"
                             android:textStyle="bold"
                             android:id="@+id/tv_male"
-                            android:text="@string/Big_Title_Placeholder"/>
+                            android:text="@string/Number_Placeholder"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -183,7 +183,7 @@
                             android:textColor="@color/Text_Big"
                             android:textStyle="bold"
                             android:id="@+id/tv_second_dose"
-                            android:text="@string/Big_Title_Placeholder"/>
+                            android:text="@string/Number_Placeholder"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -294,7 +294,7 @@
                             android:textColor="@color/Text_Big"
                             android:textStyle="bold"
                             android:id="@+id/tv_operatori_sanitari"
-                            android:text="@string/Big_Title_Placeholder"/>
+                            android:text="@string/Number_Placeholder"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -351,7 +351,7 @@
                             android:textColor="@color/Text_Big"
                             android:textStyle="bold"
                             android:id="@+id/tv_ospiti_rsa"
-                            android:text="@string/Big_Title_Placeholder"/>
+                            android:text="@string/Number_Placeholder"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -408,7 +408,7 @@
                             android:textColor="@color/Text_Big"
                             android:textStyle="bold"
                             android:id="@+id/tv_non_healtcare"
-                            android:text="@string/Big_Title_Placeholder"/>
+                            android:text="@string/Number_Placeholder"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -465,7 +465,7 @@
                             android:textColor="@color/Text_Big"
                             android:textStyle="bold"
                             android:id="@+id/tv_others"
-                            android:text="@string/Big_Title_Placeholder"/>
+                            android:text="@string/Number_Placeholder"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -522,7 +522,7 @@
                             android:textColor="@color/Text_Big"
                             android:textStyle="bold"
                             android:id="@+id/tv_law_enforcement"
-                            android:text="@string/Big_Title_Placeholder"/>
+                            android:text="@string/Number_Placeholder"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -579,7 +579,7 @@
                             android:textColor="@color/Text_Big"
                             android:textStyle="bold"
                             android:id="@+id/tv_school_staff"
-                            android:text="@string/Big_Title_Placeholder"/>
+                            android:text="@string/Number_Placeholder"/>
 
                         <TextView
                             android:layout_width="wrap_content"
