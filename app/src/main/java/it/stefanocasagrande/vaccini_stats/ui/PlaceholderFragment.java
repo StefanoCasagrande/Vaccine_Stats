@@ -76,14 +76,17 @@ public class PlaceholderFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                ((MainActivity)getActivity()).Show_Graph(
-                        Integer.parseInt(tv_operatori_sanitari.getText().toString().replace(".","")),
-                        Integer.parseInt(tv_non_healtcare.getText().toString().replace(".","")),
-                        Integer.parseInt(tv_ospiti_rsa.getText().toString().replace(".","")),
-                        Integer.parseInt(tv_law_enforcement.getText().toString().replace(".","")),
-                        Integer.parseInt(tv_school_staff.getText().toString().replace(".","")),
-                        Integer.parseInt(tv_others.getText().toString().replace(".",""))
-                        );
+                if (!tv_operatori_sanitari.getText().toString().toUpperCase().equals(getString(R.string.Number_Placeholder).toUpperCase()))
+                {
+                    ((MainActivity)getActivity()).Show_Graph(
+                            Integer.parseInt(tv_operatori_sanitari.getText().toString().replace(".","")),
+                            Integer.parseInt(tv_non_healtcare.getText().toString().replace(".","")),
+                            Integer.parseInt(tv_ospiti_rsa.getText().toString().replace(".","")),
+                            Integer.parseInt(tv_law_enforcement.getText().toString().replace(".","")),
+                            Integer.parseInt(tv_school_staff.getText().toString().replace(".","")),
+                            Integer.parseInt(tv_others.getText().toString().replace(".",""))
+                    );
+                }
             }
         });
 
