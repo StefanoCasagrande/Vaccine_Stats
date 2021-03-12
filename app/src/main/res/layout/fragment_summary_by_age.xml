@@ -21,7 +21,7 @@
             android:textColor="@color/Background_1"
             android:textSize="12sp"
             android:text="@string/Summary_Explanation"
-            android:background="@color/Dividing_Bar"
+            android:background="@color/Text_Big"
             android:paddingBottom="5dp"
             />
 
