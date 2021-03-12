@@ -2,14 +2,21 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="350dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/total_white"
     android:layout_margin="5dp">
 
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Doses_For_Age_Graph_Explanation"/>
+
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart1"
-        android:layout_width="400dp"
+        android:layout_width="300dp"
         android:layout_height="300dp" />
 
     <Button

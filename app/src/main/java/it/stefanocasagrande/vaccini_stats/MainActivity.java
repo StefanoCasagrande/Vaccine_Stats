@@ -405,7 +405,7 @@ public class MainActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         chart.getAxisRight().setEnabled(false);
-        chart.getAxisLeft().setDrawGridLines(false);
+        chart.getAxisLeft().setDrawGridLines(true);
         chart.animateY(1500);
         chart.getLegend().setEnabled(false);
     }
@@ -437,6 +437,7 @@ public class MainActivity extends AppCompatActivity {
 
         set1 = (BarDataSet) chart.getData().getDataSetByIndex(0);
         set1.setValues(values);
+        set1.setBarBorderWidth(set1.getBarBorderWidth() == 1.f ? 0.f : 1.f);
 
         String[] xAxisLables = new String[]{
                 getString(R.string.tab_text_2),

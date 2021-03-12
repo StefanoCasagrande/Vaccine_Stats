@@ -58,10 +58,12 @@
     <string name="Info_About">Tutte le informazioni vengono dal database pubblico della %1$s, organizzato %2$s e ospitato su %3$s\n\nApp sviluppata da %4$s</string>
 
     <string name="Instruction_Title">Istruzioni</string>
-    <string name="Instruction_Text">Tramite il menù ( le tre righe orizzontali in alto a sinistra ) puoi verificare anche la situazione regione per regione.\n\nIn questa pagina invece visualizzi la situazione per fascie d\'età.</string>
+    <string name="Instruction_Text">Tramite il menù ( le tre righe orizzontali in alto a sinistra ) puoi verificare anche la situazione regione per regione.\n\nIn questa pagina invece visualizzi la situazione per fasce d\'età.</string>
     <string name="Last_Back_Alert">Un ulteriore pressione del tasto \'Indietro\' causerà la chiusura dell\'applicazione.</string>
 
     <string name="Distribituion_Category">Dosi per categoria</string>
     <string name="Click_For_Graph">Clicca per il grafico</string>
+
+    <string name="Doses_For_Age_Graph_Explanation">Vaccini somministrati per gruppo d\'età</string>
 
 </resources>

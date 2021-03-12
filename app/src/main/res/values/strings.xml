@@ -89,4 +89,6 @@
     <string name="Distribituion_Category">Doses on category</string>
     <string name="Click_For_Graph">Click For Graph</string>
 
+    <string name="Doses_For_Age_Graph_Explanation">Doses Administered for age group</string>
+
 </resources>
