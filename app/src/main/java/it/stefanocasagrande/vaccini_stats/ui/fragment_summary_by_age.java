@@ -85,6 +85,9 @@ public class fragment_summary_by_age extends Fragment implements Interface  {
                 else
                     Toast.makeText(getContext(), getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
             }
+
+            if (!Common.Database.Get_Configurazione("HIDE_INSTRUCTION").equals("1"))
+                ((MainActivity) requireActivity()).Show_Help();
         }
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(), getChildFragmentManager());
@@ -95,8 +98,6 @@ public class fragment_summary_by_age extends Fragment implements Interface  {
         tabs.setHorizontalScrollBarEnabled(true);
         tabs.setupWithViewPager(viewPager);
 
-        if (!Common.Database.Get_Configurazione("HIDE_INSTRUCTION").equals("1"))
-            ((MainActivity) requireActivity()).Show_Help();
 
         Common.Back_Action = Common.Back_To_Nowhere;
 
