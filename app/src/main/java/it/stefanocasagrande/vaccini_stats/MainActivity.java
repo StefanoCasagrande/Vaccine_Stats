@@ -12,11 +12,19 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.Fragment;
@@ -33,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.stefanocasagrande.vaccini_stats.Common.Common;
@@ -40,6 +49,7 @@ import it.stefanocasagrande.vaccini_stats.Common.DB;
 import it.stefanocasagrande.vaccini_stats.Network.API;
 import it.stefanocasagrande.vaccini_stats.Network.CheckNetwork;
 import it.stefanocasagrande.vaccini_stats.Network.NetworkClient;
+import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.last_update_dataset;
@@ -56,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     PieChart pieChart;
+    BarChart chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -328,6 +339,126 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    //region Graph Age
+
+    public void Show_Age_Graph()
+    {
+        final Dialog custom_dialog = new Dialog(this);
+        custom_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        custom_dialog.setContentView(R.layout.alertdialog_age_graph);
+        custom_dialog.setCancelable(true);
+
+        chart = custom_dialog.findViewById(R.id.chart1);
+
+        Button btn_ok = custom_dialog.findViewById(R.id.btn_ok);
+        btn_ok.setOnClickListener(v -> custom_dialog.cancel());
+
+        InitBarGraph();
+
+        List<anagrafica_vaccini_summary_data> lista = Common.Database.Get_anagrafica_vaccini_summary();
+
+        int fascia_0=0;
+        int fascia_1=0;
+        int fascia_2=0;
+        int fascia_3=0;
+        int fascia_4=0;
+        int fascia_5=0;
+        int fascia_6=0;
+        int fascia_7=0;
+        int fascia_8=0;
+
+        for(anagrafica_vaccini_summary_data var : lista)
+        {
+            if (var.fascia_anagrafica.equals(getString(R.string.tab_text_2)))
+                fascia_0=var.totale;
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_3)))
+                fascia_1=var.totale;
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_4)))
+                fascia_2=var.totale;
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_5)))
+                fascia_3=var.totale;
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_6)))
+                fascia_4=var.totale;
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_7)))
+                fascia_5=var.totale;
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_8)))
+                fascia_6=var.totale;
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_9)))
+                fascia_7=var.totale;
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_10)))
+                fascia_8=var.totale;
+        }
+
+        ShowBarGraph(fascia_0, fascia_1, fascia_2, fascia_3, fascia_4, fascia_5, fascia_6, fascia_7, fascia_8);
+
+        custom_dialog.show();
+    }
+
+    private void InitBarGraph()
+    {
+        chart.getDescription().setEnabled(false);
+        chart.setPinchZoom(false);
+        chart.setDrawBarShadow(false);
+        chart.setDrawGridBackground(false);
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        chart.getAxisRight().setEnabled(false);
+        chart.getAxisLeft().setDrawGridLines(false);
+        chart.animateY(1500);
+        chart.getLegend().setEnabled(false);
+    }
+
+    private void ShowBarGraph(int val0, int val1, int val2, int val3, int val4, int val5, int val6, int val7, int val8)
+    {
+        ArrayList<BarEntry> values = new ArrayList<>();
+
+        values.add((new BarEntry(0, val0)));
+        values.add((new BarEntry(1, val1)));
+        values.add((new BarEntry(2, val2)));
+        values.add((new BarEntry(3, val3)));
+        values.add((new BarEntry(4, val4)));
+        values.add((new BarEntry(5, val5)));
+        values.add((new BarEntry(6, val6)));
+        values.add((new BarEntry(7, val7)));
+        values.add((new BarEntry(8, val8)));
+
+        BarDataSet set1 = new BarDataSet(values, "Data Set");
+        set1.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        set1.setDrawValues(false);
+
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        BarData data = new BarData(dataSets);
+        chart.setData(data);
+        chart.setFitBars(true);
+
+        set1 = (BarDataSet) chart.getData().getDataSetByIndex(0);
+        set1.setValues(values);
+
+        String[] xAxisLables = new String[]{
+                getString(R.string.tab_text_2),
+                getString(R.string.tab_text_3),
+                getString(R.string.tab_text_4),
+                getString(R.string.tab_text_5),
+                getString(R.string.tab_text_6),
+                getString(R.string.tab_text_7),
+                getString(R.string.tab_text_8),
+                getString(R.string.tab_text_9),
+                getString(R.string.tab_text_10)
+        };
+
+        chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLables));
+
+        chart.getData().notifyDataChanged();
+        chart.notifyDataSetChanged();
+
+        chart.invalidate();
+    }
+
+    //endregion
 
     //region Graph Category
 

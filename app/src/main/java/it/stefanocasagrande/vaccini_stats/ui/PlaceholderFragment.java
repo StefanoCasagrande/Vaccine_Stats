@@ -67,6 +67,8 @@ public class PlaceholderFragment extends Fragment {
         final TextView tv_non_healtcare = root.findViewById(R.id.tv_non_healtcare);
         final TextView tv_school_staff = root.findViewById(R.id.tv_school_staff);
 
+        final TextView tv_age_click_for_graph = root.findViewById(R.id.tv_age_click_for_graph);
+
         final LinearLayout ll_administered_doses_graph = root.findViewById(R.id.ll_administered_doses_graph);
         ll_administered_doses_graph.setOnClickListener(v -> {
             if (!tv_operatori_sanitari.getText().toString().toUpperCase().equals(getString(R.string.Number_Placeholder).toUpperCase()))
@@ -79,6 +81,14 @@ public class PlaceholderFragment extends Fragment {
                         Integer.parseInt(tv_school_staff.getText().toString().replace(".","")),
                         Integer.parseInt(tv_others.getText().toString().replace(".",""))
                 );
+            }
+        });
+
+        final LinearLayout ll_age = root.findViewById(R.id.ll_age);
+        ll_age.setOnClickListener(v -> {
+            if (tv_age.getText().toString().toUpperCase().equals(getString(R.string.General_Data).toUpperCase()))
+            {
+                ((MainActivity)getActivity()).Show_Age_Graph();
             }
         });
 
@@ -101,6 +111,9 @@ public class PlaceholderFragment extends Fragment {
                 int categoria_personale_non_sanitario=0;
                 int first_dose=0;
                 int second_dose=0;
+
+                tv_age_click_for_graph.setVisibility(View.VISIBLE);
+
 
                 if (lista.size()>0)
                     tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(lista.get(0).ultimo_aggiornamento)));
