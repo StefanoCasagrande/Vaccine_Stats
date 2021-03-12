@@ -320,6 +320,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_help:
                 Show_Help();
+            case R.id.reload:
+
+                Common.Data_Already_Loaded=false;
+                goToSummary();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
