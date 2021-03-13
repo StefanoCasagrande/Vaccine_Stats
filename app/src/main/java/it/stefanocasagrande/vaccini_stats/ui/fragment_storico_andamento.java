@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -129,7 +130,7 @@ public class fragment_storico_andamento extends Fragment {
         //region Grafico
         chart = v.findViewById(R.id.chart1);
         chart.setViewPortOffsets(0, 0, 0, 0);
-        chart.setBackgroundColor(Color.rgb(0, 255, 255));
+        chart.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.my_gradient_drawable));
 
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener()
         {
@@ -183,7 +184,7 @@ public class fragment_storico_andamento extends Fragment {
         x.setEnabled(false);
 
         YAxis y = chart.getAxisLeft();
-        y.setTextColor(Color.BLACK);
+        y.setTextColor(Color.WHITE);
         y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
         y.setDrawGridLines(true);
         y.setAxisLineColor(Color.WHITE);
@@ -233,7 +234,9 @@ public class fragment_storico_andamento extends Fragment {
         setData();
 
         for (IDataSet set : chart.getData().getDataSets())
-            set.setDrawValues((chart.getData().getDataSets().get(0).getEntryCount()<15));
+            set.setDrawValues(chart.getData().getDataSets().get(0).getEntryCount()<=15);
+
+        chart.getAxisLeft().setDrawLabels(chart.getData().getDataSets().get(0).getEntryCount()>15);
 
         // redraw
         chart.invalidate();
@@ -268,8 +271,8 @@ public class fragment_storico_andamento extends Fragment {
             set1.setCircleRadius(4f);
             set1.setCircleColor(Color.WHITE);
             set1.setHighLightColor(Color.rgb(244, 117, 117));
-            set1.setValueTextColor(Color.DKGRAY);
-            set1.setColor(Color.WHITE);
+            set1.setValueTextColor(Color.WHITE);
+            set1.setColor(Color.BLACK);
             set1.setFillColor(Color.WHITE);
             set1.setFillAlpha(100);
             set1.setDrawHorizontalHighlightIndicator(false);
