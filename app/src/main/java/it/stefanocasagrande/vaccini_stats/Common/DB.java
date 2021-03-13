@@ -14,6 +14,7 @@ import java.util.List;
 
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
+import it.stefanocasagrande.vaccini_stats.json_classes.somministrazioni_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_data;
 
 public class DB extends SQLiteOpenHelper {
@@ -38,6 +39,9 @@ public class DB extends SQLiteOpenHelper {
 
         sql_query="CREATE TABLE SUMMARY_BY_LOCATION (id INTEGER PRIMARY KEY, area nvarchar(150), dosi_somministrate INTEGER, dosi_consegnate INTEGER, ultimo_aggiornamento NVARCHAR(50), nome_area nvarchar(50))";
         sqLiteDatabase.execSQL(sql_query);
+
+        sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150))";
+        sqLiteDatabase.execSQL(sql_query);
     }
 
     @Override
@@ -45,7 +49,32 @@ public class DB extends SQLiteOpenHelper {
 
     }
 
+    public void Check_Table()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        if (!doTableExists("SOMMINISTRAZIONI", db))
+        {
+            String sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150))";
+            db.execSQL(sql_query);
+        }
+
+    }
+
     //region Utility
+
+    public boolean doTableExists(String tableName, SQLiteDatabase db) {
+
+        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = "+ Validate_String(tableName), null);
+        if(cursor!=null) {
+            if(cursor.getCount()>0) {
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+        }
+        return false;
+    }
 
     public boolean Insert_Multi(String header, List<String> list_insert)
     {
@@ -350,6 +379,56 @@ public class DB extends SQLiteOpenHelper {
                 var.dosi_consegnate = c.getInt(2);
                 var.ultimo_aggiornamento = c.getString(3);
                 var.nome_area = c.getString(4);
+                lista.add(var);
+
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return lista;
+    }
+
+    //endregion
+
+    //region SOMMINISTRAZIONI
+
+    public boolean Insert_Somministrazioni(List<List<String>> lista) {
+        if (lista.size() == 0)
+            return false;
+
+        if (Delete("SOMMINISTRAZIONI", "")) {
+
+            List<String> sql_insert_values = new ArrayList<>();
+
+            for (List<String> var : lista)
+                sql_insert_values.add(String.format("(%s, %s, %s, %s)",
+                        Common.get_int_from_Date(var.get(0)),
+                        Validate_String(var.get(1)),
+                        var.get(2),
+                        Validate_String(var.get(16))
+                ));
+
+            Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area ) VALUES ", sql_insert_values);
+        }
+
+        return true;
+    }
+
+    public List<somministrazioni_data> get_Somministrazioni(int start_date, int end_date)
+    {
+        String sql_query = String.format("SELECT data_somministrazione,sum(totale) from SOMMINISTRAZIONI where data_somministrazione between %s and %s group by data_somministrazione order by data_somministrazione ", start_date, end_date);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<somministrazioni_data> lista = new ArrayList<>();
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()){
+            do {
+                somministrazioni_data var = new somministrazioni_data();
+
+                var.data_somministrazione = c.getInt(0);
+                var.totale = c.getInt(1);
                 lista.add(var);
 
             } while(c.moveToNext());

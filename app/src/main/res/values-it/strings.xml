@@ -14,6 +14,7 @@
     <string name="Summary_By_Age">Somministrazione per età</string>
     <string name="Group_Deliveries">Situazione per Regione</string>
     <string name="Points">Punti Somministrazione</string>
+    <string name="History_Vaccines">Andamento vaccinazioni</string>
 
     <string name="Splash_Title">Report Vaccini</string>
     <string name="Splash_Subtitle">La campagna italiana contro il COVID</string>
@@ -49,6 +50,7 @@
     <string name="Second_Dose">Seconda dose</string>
 
     <string name="Summary_Explanation">* I dati si riferiscono al numero di vaccini somministrati, NON al numero di persone vaccinate. Allo stato attuale infatti i vaccini disponibili necessitano di due dosi, per avere il dato delle persone vaccinate la voce da considerare è quella sotto \'seconda dose\'"</string>
+    <string name="History_Explanation">* Il grafico riporta il numero di vaccini somministrati giorno per giorno nell\'intervallo di tempo che potete personalizzare in fondo. La rappresentazione permette di aver un\'idea di come la velocità di somministrazione si stia evolvendo.</string>
 
     <string name="Progress_Text">In caricamento, attendere..</string>
     <string name="Progress_Title">Loading..</string>
@@ -65,5 +67,9 @@
     <string name="Click_For_Graph">Clicca per il grafico</string>
 
     <string name="Doses_For_Age_Graph_Explanation">Vaccini somministrati per gruppo d\'età</string>
+    <string name="Invalid_Date">Data non valida ( ricorda che la data di fine dev\'essere più grande di inizio )</string>
+
+    <string name="Start_Date">Data iniziale</string>
+    <string name="End_Date">Data finale</string>
 
 </resources>

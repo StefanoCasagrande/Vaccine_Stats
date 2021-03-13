@@ -4,7 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -39,6 +42,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_summary_by_age, R.id.nav_group_deliveries)
+                R.id.nav_summary_by_age, R.id.nav_group_deliveries, R.id.nav_andamento_storico)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -91,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         network.registerNetworkCallback();
 
         Common.Database = new DB(this);
+        Common.Database.Check_Table();
     }
 
     @Override
@@ -134,7 +150,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void Check_Update(String last_update, fragment_summary_by_age var)
     {
-        if ((Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("") || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)))
+        Boolean debug=true;
+
+        if (debug || (Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("") || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)))
         {
             Common.Database.Set_Configurazione("ultimo_aggiornamento", last_update);
             getSummary_by_Age(var);
@@ -144,6 +162,13 @@ public class MainActivity extends AppCompatActivity {
     //endregion
 
     //region API
+
+    // Order
+    // 1. getLastUpdate ( if same value as already download stop everything )
+    // 2. getSummary_by_Age
+    // 3. getdeliveries
+    // 4. getSummaryVaccini
+    // 5. getCSVsomministrazione
 
     public void getSummary_by_Age(fragment_summary_by_age var)
     {
@@ -228,6 +253,12 @@ public class MainActivity extends AppCompatActivity {
                 if (response.body()!=null) {
                     vaccini_summary_dataset wResponse = (vaccini_summary_dataset) response.body();
                     Common.Database.Insert_vaccini_summary(wResponse.getData());
+
+                    try {
+                        getCSVsomministrazione();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -263,6 +294,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void getCSVsomministrazione() throws IOException {
+        new DownloadFileFromURL().execute("");
+
     }
 
     //endregion
@@ -586,4 +622,140 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.Dont_Show_Anymore), (dialog2, which) -> Common.Database.Set_Configurazione("HIDE_INSTRUCTION","1"))
                 .show();
     }
+
+    //region Download
+
+    private List<List<String>> Read_CSV(String FilePath, int numero_campi)
+    {
+        List<List<String>> list = new ArrayList<>();
+
+        try {
+            InputStream inputStream = new FileInputStream(FilePath);
+            InputStreamReader inputreader = new InputStreamReader(inputStream);
+            BufferedReader buffreader = new BufferedReader(inputreader);
+
+            String myLine;
+            int i=0;
+
+            while((myLine=buffreader.readLine())!=null)
+            {
+                i++;
+
+                if(i==1) {
+                    continue; //La prima riga contiene l'intestazione
+                }
+
+                if (myLine.substring(myLine.length()-1).equals(","))
+                {
+                    myLine=myLine+" ";
+                }
+
+                String[] values = myLine.split(",");
+
+                List<String> valori = new ArrayList<>();
+                if(values.length != numero_campi )
+                {
+                    continue;
+                }
+                else
+                {
+                    for (int i2 = 0 ; i2 < numero_campi; i2++) {
+                        valori.add(values[i2]);
+                    }
+                }
+
+                list.add(valori);
+            }
+
+        }
+        catch (IOException e)
+        {
+            Log.d("Main", e.toString());
+        }
+
+        return list;
+    }
+
+    class DownloadFileFromURL extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            System.out.println("Starting download");
+
+        }
+
+        /**
+         * Downloading file in background thread
+         * */
+        @Override
+        protected String doInBackground(String... f_url) {
+            int count;
+            try {
+
+                File var = getBaseContext().getExternalFilesDir(null);
+                File FilesPath = new File(var.getAbsolutePath());
+                String dir = FilesPath.toString() + "/";
+
+                System.out.println("Downloading");
+                URL url = new URL("https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-summary-latest.csv");
+
+                URLConnection conection = url.openConnection();
+                conection.connect();
+                // getting file length
+                int lenghtOfFile = conection.getContentLength();
+
+                // input stream to read file - with 8k buffer
+                InputStream input = new BufferedInputStream(url.openStream(), 8192);
+
+                // Output stream to write file
+
+                OutputStream output = new FileOutputStream(dir+"somministrazioni_vaccini_summary_latest.csv");
+                byte data[] = new byte[1024];
+
+                long total = 0;
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+
+                    // writing data to file
+                    output.write(data, 0, count);
+
+                }
+
+                // flushing output
+                output.flush();
+
+                // closing streams
+                output.close();
+                input.close();
+
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
+            }
+
+            return null;
+        }
+
+
+
+        /**
+         * After completing background task
+         * **/
+        @Override
+        protected void onPostExecute(String file_url) {
+            System.out.println("Downloaded");
+
+            File var = getBaseContext().getExternalFilesDir(null);
+            File FilesPath = new File(var.getAbsolutePath());
+            String dir = FilesPath.toString() + "/";
+
+            Common.Database.Insert_Somministrazioni(Read_CSV(dir+"somministrazioni_vaccini_summary_latest.csv", 17));
+        }
+
+    }
+
+    //endregion
 }

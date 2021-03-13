@@ -17,4 +17,11 @@
         android:label="@string/Group_Deliveries"
         tools:layout="@layout/fragment_delivery_group" />
 
+    <fragment
+        android:id="@+id/nav_andamento_storico"
+        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_storico_andamento"
+        android:label="@string/History_Vaccines"
+        tools:layout="@layout/fragment_storico_andamento"/>
+
+
 </navigation>

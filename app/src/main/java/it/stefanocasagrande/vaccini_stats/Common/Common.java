@@ -4,6 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import it.stefanocasagrande.vaccini_stats.R;
 
 public class Common {
 
@@ -51,6 +60,32 @@ public class Common {
         String Year=value.substring(0,4);
         String Month=value.substring(5,7);
         String Day=value.substring(8,10);
+
+        String total=Year+Month+Day;
+
+        return Integer.parseInt(total);
+    }
+
+    public static Date get_Date_from_DDMMYYYY(String value)
+    {
+        try {
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+            Date date = format.parse(value);
+
+            return date;
+        }
+        catch (ParseException ex)
+        {
+            return new Date();
+        }
+
+    }
+
+    public static int get_int_from_DDMMYYYY(String value)
+    {
+        String Year=value.substring(6,10);
+        String Month=value.substring(3,5);
+        String Day=value.substring(0,2);
 
         String total=Year+Month+Day;
 
