@@ -40,7 +40,7 @@ public class DB extends SQLiteOpenHelper {
         sql_query="CREATE TABLE SUMMARY_BY_LOCATION (id INTEGER PRIMARY KEY, area nvarchar(150), dosi_somministrate INTEGER, dosi_consegnate INTEGER, ultimo_aggiornamento NVARCHAR(50), nome_area nvarchar(50))";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150))";
+        sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150), categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER)";
         sqLiteDatabase.execSQL(sql_query);
     }
 
@@ -53,26 +53,35 @@ public class DB extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        if (!doTableExists("SOMMINISTRAZIONI", db))
+        if (!doColumnExists("SOMMINISTRAZIONI", "categoria_operatori_sanitari_sociosanitari",db))
         {
-            String sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150))";
+            String sql_query="DROP TABLE SOMMINISTRAZIONI";
             db.execSQL(sql_query);
+
+            Set_Configurazione("ultimo_aggiornamento","20200314");
         }
+
+        String sql_query="CREATE TABLE if not exists  SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150), categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER)";
+        db.execSQL(sql_query);
 
     }
 
     //region Utility
 
-    public boolean doTableExists(String tableName, SQLiteDatabase db) {
-
-        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = "+ Validate_String(tableName), null);
-        if(cursor!=null) {
-            if(cursor.getCount()>0) {
-                cursor.close();
-                return true;
+    public static boolean doColumnExists (String table, String column, SQLiteDatabase db) {
+        Cursor cursor = db.rawQuery("PRAGMA table_info("+ table +")", null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                if (column.equalsIgnoreCase(name)) {
+                    cursor.close();
+                    return true;
+                }
             }
-            cursor.close();
         }
+
+        if (cursor!=null)
+            cursor.close();
         return false;
     }
 
@@ -402,22 +411,34 @@ public class DB extends SQLiteOpenHelper {
             List<String> sql_insert_values = new ArrayList<>();
 
             for (List<String> var : lista)
-                sql_insert_values.add(String.format("(%s, %s, %s, %s)",
+                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         Common.get_int_from_Date(var.get(0)),
                         Validate_String(var.get(1)),
                         var.get(2),
-                        Validate_String(var.get(16))
-                ));
+                        Validate_String(var.get(16)),
+                        var.get(5),
+                        var.get(6),
+                        var.get(7),
+                        var.get(8),
+                        var.get(9),
+                        var.get(10)));
 
-            Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area ) VALUES ", sql_insert_values);
+            Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_ospiti_rsa, categoria_over80, categoria_forze_armate, categoria_personale_scolastico ) VALUES ", sql_insert_values);
         }
 
         return true;
     }
 
-    public List<somministrazioni_data> get_Somministrazioni(int start_date, int end_date)
+    public List<somministrazioni_data> get_Somministrazioni(int start_date, int end_date, String area_name)
     {
-        String sql_query = String.format("SELECT data_somministrazione,sum(totale) from SOMMINISTRAZIONI where data_somministrazione between %s and %s group by data_somministrazione order by data_somministrazione ", start_date, end_date);
+        String sql_query = "SELECT data_somministrazione,sum(totale), sum(categoria_operatori_sanitari_sociosanitari), sum(categoria_personale_non_sanitario), sum(categoria_ospiti_rsa), sum(categoria_over80), sum(categoria_forze_armate), sum(categoria_personale_scolastico) from SOMMINISTRAZIONI  ";
+
+        sql_query +=String.format(" where data_somministrazione between %s and %s group by data_somministrazione ", start_date, end_date);
+
+        if (!area_name.equals(""))
+            sql_query+= String.format(" and nome_area=%s ", Validate_String(area_name));
+
+        sql_query+=" order by data_somministrazione";
 
         SQLiteDatabase db = this.getWritableDatabase();
         List<somministrazioni_data> lista = new ArrayList<>();
@@ -429,6 +450,12 @@ public class DB extends SQLiteOpenHelper {
 
                 var.data_somministrazione = c.getInt(0);
                 var.totale = c.getInt(1);
+                var.categoria_operatori_sanitari_sociosanitari = c.getInt(2);
+                var.categoria_personale_non_sanitario = c.getInt(3);
+                var.categoria_ospiti_rsa = c.getInt(4);
+                var.categoria_over80 = c.getInt(5);
+                var.categoria_forze_armate = c.getInt(6);
+                var.categoria_personale_scolastico = c.getInt(7);
                 lista.add(var);
 
             } while(c.moveToNext());

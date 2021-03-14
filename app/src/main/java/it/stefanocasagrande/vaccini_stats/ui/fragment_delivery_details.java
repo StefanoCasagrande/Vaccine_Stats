@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -31,6 +32,7 @@ import it.stefanocasagrande.vaccini_stats.Common.Common;
 import it.stefanocasagrande.vaccini_stats.MainActivity;
 import it.stefanocasagrande.vaccini_stats.R;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
+import it.stefanocasagrande.vaccini_stats.json_classes.somministrazioni_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_data;
 
 import static it.stefanocasagrande.vaccini_stats.Common.Common.get_int_from_Date;
@@ -91,6 +93,21 @@ public class fragment_delivery_details extends Fragment {
             waiting_bar.dismiss();
 
         hideKeyboard(getActivity());
+
+        Button btn_category_graph = v.findViewById(R.id.btn_category_graph);
+        btn_category_graph.setOnClickListener(v2 -> {
+
+            List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(0,99990101, area_name);
+
+                ((MainActivity)getActivity()).Show_Graph(
+                        lista.get(0).categoria_operatori_sanitari_sociosanitari,
+                        lista.get(0).categoria_personale_non_sanitario,
+                        lista.get(0).categoria_ospiti_rsa,
+                        lista.get(0).categoria_forze_armate,
+                        lista.get(0).categoria_personale_scolastico,
+                        lista.get(0).categoria_over80
+                );
+        });
 
         return v;
     }

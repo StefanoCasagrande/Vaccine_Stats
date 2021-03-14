@@ -103,4 +103,6 @@
     <string name="End_Date">End Date</string>
     <string name="Media_Desc">In the last 7 days a media of %1$s vaccines a day have been administered</string>
 
+    <string name="Graph_Categories_Detail">Graph for category distribution</string>
+
 </resources>

@@ -77,4 +77,6 @@
     <string name="End_Date">Data finale</string>
     <string name="Media_Desc">Negli ultimi 7 giorni sono stati somministrati in media %1$s vaccini al giorno</string>
 
+    <string name="Graph_Categories_Detail">Somministrazioni per categoria</string>
+
 </resources>

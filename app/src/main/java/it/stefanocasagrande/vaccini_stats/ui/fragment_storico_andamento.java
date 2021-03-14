@@ -232,7 +232,7 @@ public class fragment_storico_andamento extends Fragment {
 
     private void setData(Boolean update_media) {
 
-        List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(get_int_from_DDMMYYYY(et_data_1.getText().toString()),get_int_from_DDMMYYYY(et_data_2.getText().toString()));
+        List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(get_int_from_DDMMYYYY(et_data_1.getText().toString()),get_int_from_DDMMYYYY(et_data_2.getText().toString()), "");
 
         if (update_media)
         {
