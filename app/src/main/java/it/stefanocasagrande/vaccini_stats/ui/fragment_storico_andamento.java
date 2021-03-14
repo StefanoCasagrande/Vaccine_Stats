@@ -1,6 +1,5 @@
 package it.stefanocasagrande.vaccini_stats.ui;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -25,8 +23,16 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+
+import androidx.core.util.Pair;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,6 +53,8 @@ public class fragment_storico_andamento extends Fragment {
     EditText et_data_2;
     int id_editext;
     TextView tv_media;
+
+    MaterialDatePicker.Builder builder;
 
     public fragment_storico_andamento() {
         // Required empty public constructor
@@ -87,33 +95,10 @@ public class fragment_storico_andamento extends Fragment {
         et_data_1.setText(sdf.format(c.getTime()));
         et_data_2.setText(sdf.format(new Date()));
 
-        DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+        builder = MaterialDatePicker.Builder.dateRangePicker();
 
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-            if (id_editext==R.id.et_data_1)
-                updateText(0);
-            else
-                updateText(1);
-        };
-
-        et_data_1.setOnClickListener((View v2)-> {
-            id_editext = et_data_1.getId();
-
-            new DatePickerDialog(getContext(), date, myCalendar
-                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-        });
-
-        et_data_2.setOnClickListener((View v2)-> {
-                    id_editext = et_data_2.getId();
-
-                    new DatePickerDialog(getContext(), date, myCalendar
-                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                            myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-        });
+        et_data_1.setOnClickListener((View v2)-> { Select_Data_Range();});
+        et_data_2.setOnClickListener((View v2)-> { Select_Data_Range();});
 
         //region Grafico
         chart = v.findViewById(R.id.chart1);
@@ -192,30 +177,24 @@ public class fragment_storico_andamento extends Fragment {
         return v;
     }
 
-    Calendar myCalendar = Calendar.getInstance();
+    public void Select_Data_Range()
+    {
+        MaterialDatePicker picker = builder.build();
+        picker.show(getParentFragmentManager(), picker.toString());
 
-    private void updateText(int i) {
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+        picker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
+            @Override public void onPositiveButtonClick(Pair<Long,Long> selection) {
 
-        if (i==0) {
-                if (myCalendar.getTime().compareTo(get_Date_from_DDMMYYYY(et_data_2.getText().toString()))<0 && myCalendar.getTime().compareTo(new Date())<0)
-                {
-                    et_data_1.setText(sdf.format(myCalendar.getTime()));
-                    Load_Data(false);
-                } else
-                    Toast.makeText(getActivity(),getString(R.string.Invalid_Date), Toast.LENGTH_SHORT).show();
-        }
-        else {
-                if (myCalendar.getTime().compareTo(get_Date_from_DDMMYYYY(et_data_1.getText().toString()))>0 && myCalendar.getTime().compareTo(new Date())<0)
-                {
-                    et_data_2.setText(sdf.format(myCalendar.getTime()));
-                    Load_Data(false);
-                } else
-                    Toast.makeText(getActivity(),getString(R.string.Invalid_Date), Toast.LENGTH_SHORT).show();
-        }
+                String myFormat = "dd/MM/yyyy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+
+                et_data_1.setText(sdf.format(selection.first));
+                et_data_2.setText(sdf.format(selection.second));
+
+                Load_Data(false);
+            }
+        });
     }
-
 
     public void Load_Data(Boolean update_media)
     {
