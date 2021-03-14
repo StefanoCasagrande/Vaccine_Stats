@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +34,12 @@ import androidx.core.util.Pair;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.Year;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -179,10 +183,13 @@ public class fragment_storico_andamento extends Fragment {
 
     public void Select_Data_Range()
     {
-        MaterialDatePicker picker = builder.build();
-        picker.show(getParentFragmentManager(), picker.toString());
 
-        picker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
+        builder.setCalendarConstraints(limitRange().build());
+        builder.setTitleText("Select Date Range");
+        MaterialDatePicker<Pair<Long, Long>> pickerRange = builder.build();
+        pickerRange.show(getChildFragmentManager(), pickerRange.toString());
+
+        pickerRange.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
             @Override public void onPositiveButtonClick(Pair<Long,Long> selection) {
 
                 String myFormat = "dd/MM/yyyy"; //In which you need put here
@@ -194,6 +201,30 @@ public class fragment_storico_andamento extends Fragment {
                 Load_Data(false);
             }
         });
+    }
+
+    public CalendarConstraints.Builder limitRange()
+    {
+        CalendarConstraints.Builder constraintsBuilderRange = new CalendarConstraints.Builder();
+
+        Calendar calendarStart = Calendar.getInstance();
+        Calendar calendarEnd = Calendar.getInstance();
+        calendarEnd.setTime(new Date());
+
+        int startYear = 2020;
+        int startMonth = 12;
+        int startDate = 16;
+
+        calendarStart.set(startYear, startMonth - 1, startDate - 1);
+
+        long minDate = calendarStart.getTimeInMillis();
+        long maxDate = calendarEnd.getTimeInMillis();
+
+        constraintsBuilderRange.setStart(minDate);
+        constraintsBuilderRange.setEnd(maxDate);
+        constraintsBuilderRange.setValidator(new RangeValidator(minDate, maxDate));
+
+        return constraintsBuilderRange;
     }
 
     public void Load_Data(Boolean update_media)
@@ -264,6 +295,50 @@ public class fragment_storico_andamento extends Fragment {
             chart.setData(data);
         }
     }
+
+}
+
+class RangeValidator implements CalendarConstraints.DateValidator {
+
+    long minDate, maxDate;
+
+    RangeValidator(long minDate, long maxDate) {
+        this.minDate = minDate;
+        this.maxDate = maxDate;
+    }
+
+    RangeValidator(Parcel parcel) {
+        minDate = parcel.readLong();
+        maxDate = parcel.readLong();
+    }
+
+    @Override
+    public boolean isValid(long date) {
+        return !(minDate > date || maxDate < date);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+    }
+
+    public static final Parcelable.Creator<RangeValidator> CREATOR = new Parcelable.Creator<RangeValidator>() {
+
+        @Override
+        public RangeValidator createFromParcel(Parcel parcel) {
+            return new RangeValidator(parcel);
+        }
+
+        @Override
+        public RangeValidator[] newArray(int size) {
+            return new RangeValidator[size];
+        }
+    };
 
 }
 
