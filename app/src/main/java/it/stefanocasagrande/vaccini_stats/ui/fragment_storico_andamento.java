@@ -26,20 +26,14 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
 import androidx.core.util.Pair;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.Year;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -55,10 +49,7 @@ public class fragment_storico_andamento extends Fragment {
     LineChart chart;
     EditText et_data_1;
     EditText et_data_2;
-    int id_editext;
     TextView tv_media;
-
-    MaterialDatePicker.Builder builder;
 
     public fragment_storico_andamento() {
         // Required empty public constructor
@@ -94,15 +85,13 @@ public class fragment_storico_andamento extends Fragment {
 
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
-        c.add(Calendar.DATE, -7);  // number of days to add
+        c.add(Calendar.DATE, -6);  // number of days to add
 
         et_data_1.setText(sdf.format(c.getTime()));
         et_data_2.setText(sdf.format(new Date()));
 
-        builder = MaterialDatePicker.Builder.dateRangePicker();
-
-        et_data_1.setOnClickListener((View v2)-> { Select_Data_Range();});
-        et_data_2.setOnClickListener((View v2)-> { Select_Data_Range();});
+        et_data_1.setOnClickListener((View v2)-> Select_Data_Range());
+        et_data_2.setOnClickListener((View v2)-> Select_Data_Range());
 
         //region Grafico
         chart = v.findViewById(R.id.chart1);
@@ -172,7 +161,7 @@ public class fragment_storico_andamento extends Fragment {
 
         chart.animateXY(2000, 2000);
 
-        Load_Data(true);
+        Load_Data();
 
         // don't forget to refresh the drawing
         chart.invalidate();
@@ -183,23 +172,22 @@ public class fragment_storico_andamento extends Fragment {
 
     public void Select_Data_Range()
     {
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.dateRangePicker();
 
         builder.setCalendarConstraints(limitRange().build());
         builder.setTitleText("Select Date Range");
         MaterialDatePicker<Pair<Long, Long>> pickerRange = builder.build();
         pickerRange.show(getChildFragmentManager(), pickerRange.toString());
 
-        pickerRange.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
-            @Override public void onPositiveButtonClick(Pair<Long,Long> selection) {
+        pickerRange.addOnPositiveButtonClickListener(selection -> {
 
-                String myFormat = "dd/MM/yyyy"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+            String myFormat = "dd/MM/yyyy"; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
-                et_data_1.setText(sdf.format(selection.first));
-                et_data_2.setText(sdf.format(selection.second));
+            et_data_1.setText(sdf.format(selection.first));
+            et_data_2.setText(sdf.format(selection.second));
 
-                Load_Data(false);
-            }
+            Load_Data();
         });
     }
 
@@ -227,9 +215,9 @@ public class fragment_storico_andamento extends Fragment {
         return constraintsBuilderRange;
     }
 
-    public void Load_Data(Boolean update_media)
+    public void Load_Data()
     {
-        setData(update_media);
+        setData();
 
         for (IDataSet set : chart.getData().getDataSets())
             set.setDrawValues(chart.getData().getDataSets().get(0).getEntryCount()<=15);
@@ -240,20 +228,17 @@ public class fragment_storico_andamento extends Fragment {
         chart.invalidate();
     }
 
-    private void setData(Boolean update_media) {
+    private void setData() {
 
         List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(get_int_from_DDMMYYYY(et_data_1.getText().toString()),get_int_from_DDMMYYYY(et_data_2.getText().toString()), "");
 
-        if (update_media)
-        {
-            int totale = 0;
+        int totale = 0;
 
-            for(somministrazioni_data var : lista)
+        for(somministrazioni_data var : lista)
                 totale += var.totale;
 
-            tv_media.setText(String.format(getString(R.string.Media_Desc), Common.AddDotToInteger(totale/7)));
-        }
-        
+        tv_media.setText(String.format(getString(R.string.Media_Desc), String.valueOf(lista.size()), Common.AddDotToInteger(totale/7)));
+
         ArrayList<Entry> values = new ArrayList<>();
 
         for (int i = 0; i < lista.size(); i++) {
