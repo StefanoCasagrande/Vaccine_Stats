@@ -17,6 +17,17 @@ The app includes search by province and visualization for age-group.
 <img src="https://raw.githubusercontent.com/StefanoCasagrande/Vaccine_Stats/master/screenshot_3.jpg" width="250">
 </td>
 </tr>
+<tr>
+<td>
+<img src="https://raw.githubusercontent.com/StefanoCasagrande/Vaccine_Stats/master/screenshot_4.jpg" width="250">
+</td>
+<td>
+<img src="https://raw.githubusercontent.com/StefanoCasagrande/Vaccine_Stats/master/screenshot_5.jpg" width="250">
+</td>
+<td>
+<img src="https://raw.githubusercontent.com/StefanoCasagrande/Vaccine_Stats/master/screenshot_6.jpg" width="250">
+</td>
+</tr>
 </table>
 
 ## Getting Started
