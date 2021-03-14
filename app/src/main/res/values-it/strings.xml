@@ -59,6 +59,10 @@
     <string name="help">Guida..</string>
     <string name="Info_About">Tutte le informazioni vengono dal database pubblico della %1$s, organizzato %2$s e ospitato su %3$s\n\nApp sviluppata da %4$s</string>
 
+    <string name="News_Title">Novità</string>
+    <string name="News_Text">In questa nuova versione abbiamo aggiunto una nuova voce nel menù per verificare il numero di vaccini somministrati per giorno e abbiamo aggiunto nella pagina generale due nuovi grafici ( per età e per categoria ) sulla distribuzione dei vaccini</string>
+
+
     <string name="Instruction_Title">Istruzioni</string>
     <string name="Instruction_Text">Tramite il menù ( le tre righe orizzontali in alto a sinistra ) puoi verificare anche la situazione regione per regione.\n\nIn questa pagina invece visualizzi la situazione per fasce d\'età.</string>
     <string name="Last_Back_Alert">Un ulteriore pressione del tasto \'Indietro\' causerà la chiusura dell\'applicazione.</string>
@@ -71,5 +75,6 @@
 
     <string name="Start_Date">Data iniziale</string>
     <string name="End_Date">Data finale</string>
+    <string name="Media_Desc">Negli ultimi 7 giorni sono stati somministrati in media %1$s vaccini al giorno</string>
 
 </resources>

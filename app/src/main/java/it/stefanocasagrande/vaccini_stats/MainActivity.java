@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,10 +50,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -150,9 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Check_Update(String last_update, fragment_summary_by_age var)
     {
-        Boolean debug=true;
-
-        if (debug || (Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("") || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)))
+        if ((Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("") || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)))
         {
             Common.Database.Set_Configurazione("ultimo_aggiornamento", last_update);
             getSummary_by_Age(var);
@@ -614,12 +611,25 @@ public class MainActivity extends AppCompatActivity {
 
     //endregion
 
+    public void Show_News()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.News_Title))
+                .setMessage(getString(R.string.News_Text))
+                .setPositiveButton(getString(R.string.Dont_Show_Anymore), (dialog2, which) -> Common.Database.Set_Configurazione("HIDE_NEWS_2021_03","1"))
+                .show();
+    }
+
     public void Show_Help()
     {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.Instruction_Title))
                 .setMessage(getString(R.string.Instruction_Text))
-                .setPositiveButton(getString(R.string.Dont_Show_Anymore), (dialog2, which) -> Common.Database.Set_Configurazione("HIDE_INSTRUCTION","1"))
+                .setPositiveButton(getString(R.string.Dont_Show_Anymore), (dialog2, which) ->
+                        {
+                            Common.Database.Set_Configurazione("HIDE_INSTRUCTION","1");
+                            Common.Database.Set_Configurazione("HIDE_NEWS_2021_03","1");
+                        })
                 .show();
     }
 
@@ -641,28 +651,19 @@ public class MainActivity extends AppCompatActivity {
             {
                 i++;
 
-                if(i==1) {
+                if(i==1)
                     continue; //La prima riga contiene l'intestazione
-                }
 
-                if (myLine.substring(myLine.length()-1).equals(","))
-                {
+                if (myLine.endsWith(","))
                     myLine=myLine+" ";
-                }
 
                 String[] values = myLine.split(",");
 
                 List<String> valori = new ArrayList<>();
                 if(values.length != numero_campi )
-                {
                     continue;
-                }
                 else
-                {
-                    for (int i2 = 0 ; i2 < numero_campi; i2++) {
-                        valori.add(values[i2]);
-                    }
-                }
+                    valori.addAll(Arrays.asList(values).subList(0, numero_campi));
 
                 list.add(valori);
             }
@@ -705,8 +706,6 @@ public class MainActivity extends AppCompatActivity {
 
                 URLConnection conection = url.openConnection();
                 conection.connect();
-                // getting file length
-                int lenghtOfFile = conection.getContentLength();
 
                 // input stream to read file - with 8k buffer
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
@@ -716,14 +715,8 @@ public class MainActivity extends AppCompatActivity {
                 OutputStream output = new FileOutputStream(dir+"somministrazioni_vaccini_summary_latest.csv");
                 byte data[] = new byte[1024];
 
-                long total = 0;
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-
-                    // writing data to file
+                while ((count = input.read(data)) != -1)
                     output.write(data, 0, count);
-
-                }
 
                 // flushing output
                 output.flush();

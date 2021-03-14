@@ -12,32 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IFillFormatter;
-import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,7 +39,6 @@ import it.stefanocasagrande.vaccini_stats.json_classes.somministrazioni_data;
 
 import static it.stefanocasagrande.vaccini_stats.Common.Common.get_Date_from_DDMMYYYY;
 import static it.stefanocasagrande.vaccini_stats.Common.Common.get_int_from_DDMMYYYY;
-import static it.stefanocasagrande.vaccini_stats.Common.Common.get_int_from_Date;
 
 public class fragment_storico_andamento extends Fragment {
 
@@ -59,6 +46,7 @@ public class fragment_storico_andamento extends Fragment {
     EditText et_data_1;
     EditText et_data_2;
     int id_editext;
+    TextView tv_media;
 
     public fragment_storico_andamento() {
         // Required empty public constructor
@@ -87,6 +75,8 @@ public class fragment_storico_andamento extends Fragment {
         et_data_1 = v.findViewById(R.id.et_data_1);
         et_data_2 = v.findViewById(R.id.et_data_2);
 
+        tv_media = v.findViewById(R.id.tv_media);
+
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
@@ -98,8 +88,6 @@ public class fragment_storico_andamento extends Fragment {
         et_data_2.setText(sdf.format(new Date()));
 
         DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
-
-            final View vv = view;
 
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
@@ -195,7 +183,7 @@ public class fragment_storico_andamento extends Fragment {
 
         chart.animateXY(2000, 2000);
 
-        Load_Data();
+        Load_Data(true);
 
         // don't forget to refresh the drawing
         chart.invalidate();
@@ -214,7 +202,7 @@ public class fragment_storico_andamento extends Fragment {
                 if (myCalendar.getTime().compareTo(get_Date_from_DDMMYYYY(et_data_2.getText().toString()))<0 && myCalendar.getTime().compareTo(new Date())<0)
                 {
                     et_data_1.setText(sdf.format(myCalendar.getTime()));
-                    Load_Data();
+                    Load_Data(false);
                 } else
                     Toast.makeText(getActivity(),getString(R.string.Invalid_Date), Toast.LENGTH_SHORT).show();
         }
@@ -222,16 +210,16 @@ public class fragment_storico_andamento extends Fragment {
                 if (myCalendar.getTime().compareTo(get_Date_from_DDMMYYYY(et_data_1.getText().toString()))>0 && myCalendar.getTime().compareTo(new Date())<0)
                 {
                     et_data_2.setText(sdf.format(myCalendar.getTime()));
-                    Load_Data();
+                    Load_Data(false);
                 } else
                     Toast.makeText(getActivity(),getString(R.string.Invalid_Date), Toast.LENGTH_SHORT).show();
         }
     }
 
 
-    public void Load_Data()
+    public void Load_Data(Boolean update_media)
     {
-        setData();
+        setData(update_media);
 
         for (IDataSet set : chart.getData().getDataSets())
             set.setDrawValues(chart.getData().getDataSets().get(0).getEntryCount()<=15);
@@ -242,10 +230,20 @@ public class fragment_storico_andamento extends Fragment {
         chart.invalidate();
     }
 
-    private void setData() {
+    private void setData(Boolean update_media) {
 
         List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(get_int_from_DDMMYYYY(et_data_1.getText().toString()),get_int_from_DDMMYYYY(et_data_2.getText().toString()));
 
+        if (update_media)
+        {
+            int totale = 0;
+
+            for(somministrazioni_data var : lista)
+                totale += var.totale;
+
+            tv_media.setText(String.format(getString(R.string.Media_Desc), Common.AddDotToInteger(totale/7)));
+        }
+        
         ArrayList<Entry> values = new ArrayList<>();
 
         for (int i = 0; i < lista.size(); i++) {
@@ -276,12 +274,7 @@ public class fragment_storico_andamento extends Fragment {
             set1.setFillColor(Color.WHITE);
             set1.setFillAlpha(100);
             set1.setDrawHorizontalHighlightIndicator(false);
-            set1.setFillFormatter(new IFillFormatter() {
-                @Override
-                public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-                    return chart.getAxisLeft().getAxisMinimum();
-                }
-            });
+            set1.setFillFormatter((dataSet, dataProvider) -> chart.getAxisLeft().getAxisMinimum());
 
             // create a data object with the data sets
             LineData data = new LineData(set1);

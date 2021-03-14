@@ -69,6 +69,8 @@ public class fragment_summary_by_age extends Fragment implements Interface  {
 
             if (!Common.Database.Get_Configurazione("HIDE_INSTRUCTION").equals("1"))
                 ((MainActivity) requireActivity()).Show_Help();
+            else if (!Common.Database.Get_Configurazione("HIDE_NEWS_2021_03").equals("1"))
+                ((MainActivity) requireActivity()).Show_News();
         }
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(), getChildFragmentManager());
