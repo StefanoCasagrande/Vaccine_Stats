@@ -30,6 +30,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 
 import androidx.core.util.Pair;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -116,7 +117,8 @@ public class fragment_storico_andamento extends Fragment {
                 c.setTime(start_date);
                 c.add(Calendar.DATE, (int) e.getX());
 
-                txt_title.setText(sdf.format(c.getTime()));
+                String[] weekdays = new DateFormatSymbols(Locale.ITALIAN).getWeekdays();
+                txt_title.setText(String.format("%s %s", weekdays[c.get(Calendar.DAY_OF_WEEK)], sdf.format(c.getTime())));
 
                 TextView txt_detail = custom_dialog.findViewById(R.id.textView2);
                 txt_detail.setText(String.format("%s: %s", getString(R.string.doses_administered), Common.AddDotToInteger((int)e.getY())));
@@ -236,6 +238,18 @@ public class fragment_storico_andamento extends Fragment {
 
         for(somministrazioni_data var : lista)
                 totale += var.totale;
+
+        String data_selezionata = String.valueOf(lista.get(0).data_somministrazione);
+        String Year=data_selezionata.substring(0,4);
+        String Month=data_selezionata.substring(4,6);
+        String Day=data_selezionata.substring(6,8);
+        et_data_1.setText(String.format("%s/%s/%s", Day, Month, Year));
+
+        data_selezionata = String.valueOf(lista.get(lista.size()-1).data_somministrazione);
+        Year=data_selezionata.substring(0,4);
+        Month=data_selezionata.substring(4,6);
+        Day=data_selezionata.substring(6,8);
+        et_data_2.setText(String.format("%s/%s/%s", Day, Month, Year));
 
         tv_media.setText(String.format(getString(R.string.Media_Desc), String.valueOf(lista.size()), Common.AddDotToInteger(totale/lista.size())));
 
