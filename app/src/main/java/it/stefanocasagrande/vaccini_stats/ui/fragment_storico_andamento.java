@@ -237,7 +237,7 @@ public class fragment_storico_andamento extends Fragment {
         for(somministrazioni_data var : lista)
                 totale += var.totale;
 
-        tv_media.setText(String.format(getString(R.string.Media_Desc), String.valueOf(lista.size()), Common.AddDotToInteger(totale/7)));
+        tv_media.setText(String.format(getString(R.string.Media_Desc), String.valueOf(lista.size()), Common.AddDotToInteger(totale/lista.size())));
 
         ArrayList<Entry> values = new ArrayList<>();
 
