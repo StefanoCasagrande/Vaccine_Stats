@@ -55,7 +55,7 @@ public class DB extends SQLiteOpenHelper {
 
         if (!doColumnExists("SOMMINISTRAZIONI", "categoria_operatori_sanitari_sociosanitari",db))
         {
-            String sql_query="DROP TABLE SOMMINISTRAZIONI";
+            String sql_query="DROP TABLE if exists SOMMINISTRAZIONI";
             db.execSQL(sql_query);
 
             Set_Configurazione("ultimo_aggiornamento","20200314");
