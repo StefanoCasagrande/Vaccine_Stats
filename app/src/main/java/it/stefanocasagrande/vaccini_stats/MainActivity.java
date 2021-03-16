@@ -520,6 +520,7 @@ public class MainActivity extends AppCompatActivity {
 
         //remove the description label on the lower left corner, default true if not set
         pieChart.getDescription().setEnabled(false);
+        pieChart.setEntryLabelColor(R.color.Dividing_Bar);
 
         //enabling the user to rotate the chart, default true
         pieChart.setRotationEnabled(true);
