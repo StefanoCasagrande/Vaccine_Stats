@@ -2,6 +2,8 @@ package it.stefanocasagrande.vaccini_stats;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -25,6 +28,18 @@ public class SplashScreen extends AppCompatActivity {
 
         //This is additional feature, used to run a progress bar
         splashProgress = findViewById(R.id.splashProgress);
+        TextView tv_versione = findViewById(R.id.tv_versione);
+        String version="";
+
+        try {
+            PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0);
+            version = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        tv_versione.setText(String.format("Version: %s", version));
+
         playProgress();
 
         //Code to start timer and take action after the timer ends
