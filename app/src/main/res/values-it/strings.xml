@@ -65,7 +65,7 @@
 
 
     <string name="Instruction_Title">Istruzioni</string>
-    <string name="Instruction_Text">Tramite il menù ( le tre righe orizzontali in alto a sinistra ) puoi verificare anche la situazione regione per regione.\n\nIn questa pagina invece visualizzi la situazione per fasce d\'età.</string>
+    <string name="Instruction_Text">Tramite il menù ( le tre righe orizzontali in alto a sinistra ) puoi navigare tra le varie reportistiche presenti nell\'applicazione. Puoi verificare la situazione regione per regione, la situazione per fasce d\'età e categoria lavorativa, la media di somministrazioni al giorno e previsioni sulle tempistiche di vaccinazione.</string>
     <string name="Last_Back_Alert">Un ulteriore pressione del tasto \'Indietro\' causerà la chiusura dell\'applicazione.</string>
 
     <string name="Distribituion_Category">Dosi per categoria</string>
@@ -76,7 +76,7 @@
 
     <string name="Start_Date">Data iniziale</string>
     <string name="End_Date">Data finale</string>
-    <string name="Media_Desc">Nel periodo indicato ( %1$s giorni ) sono stati somministrati in media %2$s vaccini al giorno</string>
+    <string name="Media_Desc">Nel periodo indicato ( %1$s giorni ) sono stati somministrati in media %2$s vaccini al giorno. Clicca sulle date per imposare un diverso lasso temporale.</string>
 
     <string name="Graph_Categories_Detail">Somministrazioni per categoria</string>
 

@@ -89,7 +89,7 @@
     <string name="News_Text">In this new version we add a Vaccine progression history in the menù in the upper left and a new graphs in the summary by the age ( by age e by category )</string>
 
     <string name="Instruction_Title">Instruction</string>
-    <string name="Instruction_Text">You can click on the menù upper left ( 3 horizontal stripes ) to navigate to region details..</string>
+    <string name="Instruction_Text">You can click on the menù upper left ( 3 horizontal stripes ) to navigate to region details, prevision about date of herd immunity in Italy and so on..</string>
     <string name="Last_Back_Alert">If you click back one more time the app will close.</string>
 
     <string name="Distribituion_Category">Doses on category</string>
