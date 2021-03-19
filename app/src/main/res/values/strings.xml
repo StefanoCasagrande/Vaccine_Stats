@@ -30,6 +30,7 @@
     <string name="Group_Deliveries">Deliveries Situation</string>
     <string name="Points">Punti Somministrazione</string>
     <string name="History_Vaccines">Storico Somministrazioni</string>
+    <string name="Prevision">Prevision</string>
 
     <string name="Splash_Title">Report Vaccini</string>
     <string name="Splash_Subtitle">The italian campaign against COVID</string>
@@ -104,5 +105,15 @@
     <string name="Media_Desc">In the range selected ( %1$s days ) a media of %2$s vaccines a day have been administered</string>
 
     <string name="Graph_Categories_Detail">Graph for category distribution</string>
+
+    <string name="Previsioni_Explanation">Quanto segue è una stima basata sul numero di persone già vaccinate ad oggi e il numero di vaccini somministrato mediamente negli ultimi 7 giorni. All\'aumentare del numero di vaccini somministrati giornalmente le tempistiche potrebbero variare in maniera importante, l\'eventuale arrivo di un vaccino che necessita di una sola dose ( i vaccini attuali richiedono un secondo richiamo ) dimizzerebbe i tempi attuali.</string>
+
+    <string name="Herd_immunity">Herd immunity</string>
+    <string name="Herd_Immunity_Text" translatable="false">Per raggiungere l\'immunità di gregge è necessario coprire il 70%% della popolazione italiana, quindi circa 40 milioni di persone.&lt;br /&gt;&lt;br /&gt;Al ritmo attuale ( %1$s vaccinazioni al giorno ) questa quota si raggiungerà tra %2$s giorni, ovvero il %3$s\n( previsione del governo: agosto 2021 )</string>
+
+    <string name="Vaccinazione_Massa" translatable="false">Vaccinazione di massa</string>
+    <string name="Vaccinazione_Massa_Text" translatable="false">L\'Italia ha calcolato in 30 milioni circa le persone a rischio ( personale socio-sanitario, personale scolastico, forze armate, over 55, persone vulnerabili di qualsiasi età ) che hanno diritto alla precedenza nella somministrazione dei vaccini.&lt;br /&gt;&lt;br /&gt;Chi non rientra in una fascia protetta ( under 55 senza particolari patologie ) dovrebbe potersi vaccinare tra %1$s giorni quindi a partire dal %2$s </string>
+
+    <string name="Math_Formula" translatable="false">* Le formule matematiche utilizzate sono qui disponibili in chiaro per eventuale verifica o segnalazione errori. I valori sono moltiplicati per 2 perchè ogni persona deve ricevere 2 dosi.\n\nImmunità di gregge:\n70%% popolazione italiana: %1$s \nVaccini già somministrati: %2$s \nMedia vaccinazioni / giorno: %3$s \n\n( ( %1$s*2 ) - %2$s ) / %3$s\nRisultato: %4$s \n\nVaccinazione di massa:\nPopolazione a rischio: %5$s \nVaccini già somministrati: %2$s \nMedia vaccinazioni / giorno: %3$s \n\n( ( %5$s*2 ) - %2$s ) / %3$s\nRisultato: %6$s\n</string>
 
 </resources>

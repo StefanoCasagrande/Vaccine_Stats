@@ -18,5 +18,10 @@
             android:icon="@drawable/ic_timer"
             android:title="@string/History_Vaccines" />
 
+        <item
+            android:id="@+id/nav_previsioni"
+            android:icon="@drawable/ic_group_add"
+            android:title="@string/Prevision" />
+
     </group>
 </menu>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment_previsioni">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/Background_1"
+                android:textSize="12sp"
+                android:text="@string/Previsioni_Explanation"
+                android:background="@color/Text_Big"
+                android:paddingBottom="10dp"
+                />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/free_solid_900"
+                android:textSize="35sp"
+                android:textColor="@color/Icons"
+                android:layout_gravity="center_vertical"
+                android:text=""/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/Text_Big"
+                    android:text="@string/Herd_immunity"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:id="@+id/tv_herd_immunity_text"
+                    android:textColor="@color/Text_Small"
+                    android:text="@string/Small_Text_Placeholder"/>
+
+            </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/free_solid_900"
+                    android:textSize="35sp"
+                    android:textColor="@color/Icons"
+                    android:layout_gravity="center_vertical"
+                    android:text=""/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/Text_Big"
+                        android:text="@string/Vaccinazione_Massa"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:id="@+id/tv_vaccinazione_massa_text"
+                        android:textColor="@color/Text_Small"
+                        android:text="@string/Small_Text_Placeholder"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_margin="15dp"
+                android:background="@color/Dividing_Bar"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/Text_Small"
+                android:id="@+id/tv_formule" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</FrameLayout>

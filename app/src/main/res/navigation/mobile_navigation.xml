@@ -23,5 +23,11 @@
         android:label="@string/History_Vaccines"
         tools:layout="@layout/fragment_storico_andamento"/>
 
+    <fragment
+        android:id="@+id/nav_previsioni"
+        android:name="it.stefanocasagrande.vaccini_stats.ui.fragment_previsioni"
+        android:label="@string/Prevision"
+        tools:layout="@layout/fragment_previsioni"/>
+
 
 </navigation>

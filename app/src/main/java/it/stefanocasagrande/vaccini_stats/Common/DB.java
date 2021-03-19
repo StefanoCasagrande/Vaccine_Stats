@@ -305,6 +305,16 @@ public class DB extends SQLiteOpenHelper {
         return true;
     }
 
+    public int Get_Totale_Vaccini_Somministrazioni()
+    {
+        String sql_query = "SELECT Sum(totale) from SUMMARY_BY_AGE ";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(sql_query, null);
+
+        c.moveToFirst();
+        return c.getInt(0);
+    }
+
     public List<anagrafica_vaccini_summary_data> Get_anagrafica_vaccini_summary()
     {
         String sql_query = "SELECT fascia_anagrafica, totale, sesso_maschile, sesso_femminile, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_ospiti_rsa, categoria_over80, categoria_forze_armate, categoria_personale_scolastico, prima_dose, seconda_dose, ultimo_aggiornamento from SUMMARY_BY_AGE ";
