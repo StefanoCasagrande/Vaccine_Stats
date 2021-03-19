@@ -75,29 +75,32 @@ public class fragment_previsioni extends Fragment {
 
         List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(get_int_from_DDMMYYYY(data_1),get_int_from_DDMMYYYY(data_2), "");
 
-        for(somministrazioni_data var : lista)
-            totale += var.totale;
+        if (lista.size()!=0)
+        {
+            for(somministrazioni_data var : lista)
+                totale += var.totale;
 
-        media_vaccinazioni_7_giorni = totale/lista.size();
+            media_vaccinazioni_7_giorni = totale/lista.size();
 
-        float giorni = (float)((soglia_immunita*2)-vaccinati)/media_vaccinazioni_7_giorni;
+            float giorni = (float)((soglia_immunita*2)-vaccinati)/media_vaccinazioni_7_giorni;
 
-        c.setTime(new Date());
-        c.add(Calendar.DATE, (int)giorni);
+            c.setTime(new Date());
+            c.add(Calendar.DATE, (int)giorni);
 
-        tv_herd_immunity_text.setText(Html.fromHtml(String.format(getString(R.string.Herd_Immunity_Text), Common.AddDotToInteger(media_vaccinazioni_7_giorni), "<b>" + String.valueOf(((int) giorni)) +"</b>", "<b>" + sdf.format(c.getTime()) +"</b>")));
+            tv_herd_immunity_text.setText(Html.fromHtml(String.format(getString(R.string.Herd_Immunity_Text), Common.AddDotToInteger(media_vaccinazioni_7_giorni), "<b>" + String.valueOf(((int) giorni)) +"</b>", "<b>" + sdf.format(c.getTime()) +"</b>")));
 
-        float giorni_massa = (float)((fascia_rischio*2)-vaccinati)/media_vaccinazioni_7_giorni;
+            float giorni_massa = (float)((fascia_rischio*2)-vaccinati)/media_vaccinazioni_7_giorni;
 
-        c.setTime(new Date());
-        c.add(Calendar.DATE, (int)giorni_massa);
+            c.setTime(new Date());
+            c.add(Calendar.DATE, (int)giorni_massa);
 
-        tv_vaccinazione_massa_text.setText(Html.fromHtml(String.format(getString(R.string.Vaccinazione_Massa_Text), "<b>" + String.valueOf(((int) giorni_massa)) +"</b>", "<b>" + sdf.format(c.getTime()) +"</b>")));
+            tv_vaccinazione_massa_text.setText(Html.fromHtml(String.format(getString(R.string.Vaccinazione_Massa_Text), "<b>" + String.valueOf(((int) giorni_massa)) +"</b>", "<b>" + sdf.format(c.getTime()) +"</b>")));
 
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
+            DecimalFormat df = new DecimalFormat();
+            df.setMaximumFractionDigits(2);
 
-        tv_formule.setText(String.format(getString(R.string.Math_Formula), Common.AddDotToInteger(soglia_immunita), Common.AddDotToInteger(vaccinati), Common.AddDotToInteger(media_vaccinazioni_7_giorni), String.valueOf(df.format(giorni)), Common.AddDotToInteger(fascia_rischio), String.valueOf(df.format(giorni_massa))));
+            tv_formule.setText(String.format(getString(R.string.Math_Formula), Common.AddDotToInteger(soglia_immunita), Common.AddDotToInteger(vaccinati), Common.AddDotToInteger(media_vaccinazioni_7_giorni), String.valueOf(df.format(giorni)), Common.AddDotToInteger(fascia_rischio), String.valueOf(df.format(giorni_massa))));
+        }
 
         return v;
     }

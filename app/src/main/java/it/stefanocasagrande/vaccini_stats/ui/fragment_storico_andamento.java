@@ -219,18 +219,19 @@ public class fragment_storico_andamento extends Fragment {
 
     public void Load_Data()
     {
-        setData();
+        if (setData()) {
 
-        for (IDataSet set : chart.getData().getDataSets())
-            set.setDrawValues(chart.getData().getDataSets().get(0).getEntryCount()<=15);
+            for (IDataSet set : chart.getData().getDataSets())
+                set.setDrawValues(chart.getData().getDataSets().get(0).getEntryCount() <= 15);
 
-        chart.getAxisLeft().setDrawLabels(chart.getData().getDataSets().get(0).getEntryCount()>15);
+            chart.getAxisLeft().setDrawLabels(chart.getData().getDataSets().get(0).getEntryCount() > 15);
 
-        // redraw
-        chart.invalidate();
+            // redraw
+            chart.invalidate();
+        }
     }
 
-    private void setData() {
+    private boolean setData() {
 
         List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(get_int_from_DDMMYYYY(et_data_1.getText().toString()),get_int_from_DDMMYYYY(et_data_2.getText().toString()), "");
 
@@ -238,6 +239,9 @@ public class fragment_storico_andamento extends Fragment {
 
         for(somministrazioni_data var : lista)
                 totale += var.totale;
+
+        if (lista.size()==0)
+            return false;
 
         String data_selezionata = String.valueOf(lista.get(0).data_somministrazione);
         String Year=data_selezionata.substring(0,4);
@@ -293,6 +297,8 @@ public class fragment_storico_andamento extends Fragment {
             // set data
             chart.setData(data);
         }
+
+        return true;
     }
 
 }
