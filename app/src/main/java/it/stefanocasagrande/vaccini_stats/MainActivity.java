@@ -363,14 +363,17 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_help:
                 Show_Help();
+                break;
             case R.id.reload:
 
                 Common.Data_Already_Loaded=false;
                 goToSummary();
-
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+
+        return true;
     }
 
     //region Graph Age
