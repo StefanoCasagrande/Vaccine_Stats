@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -82,6 +83,8 @@ public class PlaceholderFragment extends Fragment {
                         Integer.parseInt(tv_others.getText().toString().replace(".",""))
                 );
             }
+            else
+                Toast.makeText(getContext(), getString(R.string.Internet_Missing), Toast.LENGTH_SHORT).show();
         });
 
         final LinearLayout ll_age = root.findViewById(R.id.ll_age);
@@ -147,13 +150,13 @@ public class PlaceholderFragment extends Fragment {
             }
             else
             {
+                tv_age.setText(String.format("%s: %s",getString(R.string.Age_Group), s));
+
                 for(anagrafica_vaccini_summary_data var : lista)
                 {
                     if (var.fascia_anagrafica.equals(s))
                     {
                         tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(var.ultimo_aggiornamento)));
-
-                        tv_age.setText(String.format("%s: %s",getString(R.string.Age_Group), s));
                         tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(var.sesso_femminile)));
                         tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(var.sesso_maschile)));
 

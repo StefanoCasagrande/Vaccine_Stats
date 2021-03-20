@@ -66,7 +66,7 @@
                     android:textSize="15sp"
                     android:id="@+id/tv_herd_immunity_text"
                     android:textColor="@color/Text_Small"
-                    android:text="@string/Small_Text_Placeholder"/>
+                    android:text="@string/No_Data"/>
 
             </LinearLayout>
 
@@ -111,7 +111,7 @@
                         android:textSize="15sp"
                         android:id="@+id/tv_vaccinazione_massa_text"
                         android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
+                        android:text="@string/No_Data"/>
 
                 </LinearLayout>
 

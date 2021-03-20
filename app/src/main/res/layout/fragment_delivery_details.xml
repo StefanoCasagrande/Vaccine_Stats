@@ -55,7 +55,7 @@
                         android:textSize="15sp"
                         android:id="@+id/tv_last_update"
                         android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
+                        android:text="@string/No_Data"/>
 
                 </LinearLayout>
 

@@ -42,7 +42,7 @@
 
     <string name="Health_Workers">Operatori sanitari</string>
     <string name="RSA_Guests">Ospiti RSA</string>
-    <string name="Others">Altro ( es. over 80 )</string>
+    <string name="Others">Altro ( nessuna particolare condizione )</string>
     <string name="law_enforcement">Forze dell\'ordine</string>
     <string name="School_Staff">Personale scolastico</string>
     <string name="non_health_care_professional">Personale non sanitario</string>

@@ -1,6 +1,7 @@
 <resources>
 
     <!--Non translatable-->
+    <string name="No_Data" translatable="false">[No Data]</string>
     <string name="fragment_detail_consegne" translatable="false">fragment_detail_consegne</string>
     <string name="fragment_summary_by_age" translatable="false">fragment_summary_by_age</string>
     <string name="fragment_delivery_group" translatable="false">fragment_delivery_group</string>
@@ -8,7 +9,7 @@
     <string name="API_Error" translatable="false">API Error - %1$s</string>
     <string name="Big_Title_Placeholder" translatable="false">Big Title Placeholder</string>
     <string name="Small_Text_Placeholder" translatable="false">Small Text Placeholder</string>
-    <string name="Number_Placeholder" translatable="false">2.000.000</string>
+    <string name="Number_Placeholder" translatable="false">0</string>
     <string name="Pfizer_BioNTech" translatable="false">Pfizer/BioNTech</string>
     <string name="Pfizer_BioNTech_Short" translatable="false">Pfizer</string>
     <string name="AstraZeneca" translatable="false">AstraZeneca</string>
@@ -66,7 +67,7 @@
 
     <string name="Health_Workers">Health workers</string>
     <string name="RSA_Guests">RSA Guests</string>
-    <string name="Others">Others ( es. over 80 )</string>
+    <string name="Others">Others ( no particular condition )</string>
     <string name="law_enforcement">Law enforcement</string>
     <string name="School_Staff">School Staff</string>
     <string name="non_health_care_professional">Non health care professional</string>
