@@ -10,6 +10,8 @@ public class somministrazioni_data {
     public Integer categoria_personale_non_sanitario;
     public Integer categoria_ospiti_rsa;
     public Integer categoria_over80;
+    public Integer categoria_over75;
+    public Integer categoria_over70;
     public Integer categoria_forze_armate;
     public Integer categoria_personale_scolastico;
 

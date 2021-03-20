@@ -108,7 +108,7 @@ public class PlaceholderFragment extends Fragment {
                 int female=0;
                 int categoria_operatori_sanitari_sociosanitari=0;
                 int categoria_ospiti_rsa=0;
-                int categoria_over80=0;
+                int categoria_altro=0;
                 int categoria_forze_armate=0;
                 int categoria_personale_scolastico=0;
                 int categoria_personale_non_sanitario=0;
@@ -126,7 +126,7 @@ public class PlaceholderFragment extends Fragment {
                     female+=var.sesso_femminile;
                     categoria_operatori_sanitari_sociosanitari+=var.categoria_operatori_sanitari_sociosanitari;
                     categoria_ospiti_rsa+=var.categoria_ospiti_rsa;
-                    categoria_over80+=var.categoria_over80;
+                    categoria_altro+=var.categoria_over80+var.categoria_over75+var.categoria_over70;
                     categoria_forze_armate+=var.categoria_forze_armate;
                     categoria_personale_scolastico+=var.categoria_personale_scolastico;
                     categoria_personale_non_sanitario+=var.categoria_personale_non_sanitario;
@@ -141,7 +141,7 @@ public class PlaceholderFragment extends Fragment {
 
                 tv_operatori_sanitari.setText(Common.AddDotToInteger(categoria_operatori_sanitari_sociosanitari));
                 tv_ospiti_rsa.setText(Common.AddDotToInteger(categoria_ospiti_rsa));
-                tv_others.setText(Common.AddDotToInteger(categoria_over80));
+                tv_others.setText(Common.AddDotToInteger(categoria_altro));
                 tv_law_enforcement.setText(Common.AddDotToInteger(categoria_forze_armate));
                 tv_school_staff.setText(Common.AddDotToInteger(categoria_personale_scolastico));
                 tv_non_healtcare.setText(Common.AddDotToInteger(categoria_personale_non_sanitario));
@@ -164,7 +164,7 @@ public class PlaceholderFragment extends Fragment {
 
                         tv_operatori_sanitari.setText(Common.AddDotToInteger(var.categoria_operatori_sanitari_sociosanitari));
                         tv_ospiti_rsa.setText(Common.AddDotToInteger(var.categoria_ospiti_rsa));
-                        tv_others.setText(Common.AddDotToInteger(var.categoria_over80));
+                        tv_others.setText(Common.AddDotToInteger(var.categoria_over80+var.categoria_over75+var.categoria_over70));
                         tv_law_enforcement.setText(Common.AddDotToInteger(var.categoria_forze_armate));
                         tv_school_staff.setText(Common.AddDotToInteger(var.categoria_personale_scolastico));
                         tv_non_healtcare.setText(Common.AddDotToInteger(var.categoria_personale_non_sanitario));

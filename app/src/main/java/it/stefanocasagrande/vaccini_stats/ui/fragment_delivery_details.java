@@ -105,7 +105,7 @@ public class fragment_delivery_details extends Fragment {
                         lista.get(0).categoria_ospiti_rsa,
                         lista.get(0).categoria_forze_armate,
                         lista.get(0).categoria_personale_scolastico,
-                        lista.get(0).categoria_over80
+                        lista.get(0).categoria_over80+lista.get(0).categoria_over75+lista.get(0).categoria_over70
                 );
         });
 
