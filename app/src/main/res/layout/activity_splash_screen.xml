@@ -49,6 +49,7 @@
             android:textAlignment="center"
             android:layout_marginBottom="35dp"
             android:id="@+id/tv_versione"
-            android:text="Versione 1.0.4.3"/>
+            android:textColor="@color/Text_Small"
+            android:text="@string/Number_Placeholder"/>
 
 </RelativeLayout>
