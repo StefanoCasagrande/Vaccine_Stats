@@ -749,7 +749,7 @@ public class MainActivity extends AppCompatActivity {
             File FilesPath = new File(var.getAbsolutePath());
             String dir = FilesPath.toString() + "/";
 
-            Common.Database.Insert_Somministrazioni(Read_CSV(dir+"somministrazioni_vaccini_summary_latest.csv", 17));
+            Common.Database.Insert_Somministrazioni(Read_CSV(dir+"somministrazioni_vaccini_summary_latest.csv", 18));
         }
 
     }

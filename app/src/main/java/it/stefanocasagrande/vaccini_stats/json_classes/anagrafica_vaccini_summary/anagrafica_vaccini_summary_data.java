@@ -51,6 +51,10 @@ public class anagrafica_vaccini_summary_data implements Serializable {
     @Expose
     public Integer categoria_over75;
 
+    @SerializedName("categoria_altro")
+    @Expose
+    public Integer categoria_altro;
+
     @SerializedName("categoria_over70")
     @Expose
     public Integer categoria_over70;
