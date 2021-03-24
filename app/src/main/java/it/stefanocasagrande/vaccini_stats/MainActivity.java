@@ -149,11 +149,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void Check_Update(String last_update, fragment_summary_by_age var)
     {
-        if ((Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("") || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)))
+        if ((Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("")
+                || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)
+                || Common.Database.get_Somministrazioni(20210101,20210102,"").size()==0))
         {
             Common.Database.Set_Configurazione("ultimo_aggiornamento", last_update);
             getSummary_by_Age(var);
         }
+        else
+            Toast.makeText(this,getString(R.string.Already_Update), Toast.LENGTH_SHORT).show();
     }
 
     //endregion

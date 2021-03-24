@@ -83,5 +83,5 @@
     <string name="Previsioni_Explanation">Quanto segue è una stima basata sul numero di persone già vaccinate ad oggi e il numero di vaccini somministrato mediamente negli ultimi 7 giorni. All\'aumentare del numero di vaccini somministrati giornalmente le tempistiche potrebbero variare in maniera importante, l\'eventuale arrivo di un vaccino che necessita di una sola dose ( i vaccini attuali richiedono un secondo richiamo ) dimezzerebbe i tempi attuali.</string>
 
     <string name="Herd_immunity">Immunità di gruppo</string>
-
+    <string name="Already_Update">I dati presenti sono già aggiornati all\'ultima versione disponibile</string>
 </resources>

@@ -116,5 +116,5 @@
     <string name="Vaccinazione_Massa_Text" translatable="false">L\'Italia ha calcolato in 30 milioni circa le persone a rischio ( personale socio-sanitario, personale scolastico, forze armate, over 55, persone vulnerabili di qualsiasi età ) che hanno diritto alla precedenza nella somministrazione dei vaccini.&lt;br /&gt;&lt;br /&gt;Chi non rientra in una fascia protetta ( under 55 senza particolari patologie ) dovrebbe potersi vaccinare tra %1$s giorni quindi a partire dal %2$s </string>
 
     <string name="Math_Formula" translatable="false">* Le formule matematiche utilizzate sono qui disponibili in chiaro per eventuale verifica o segnalazione errori. I valori sono moltiplicati per 2 perchè ogni persona deve ricevere 2 dosi.\n\nImmunità di gregge:\n70%% popolazione italiana: %1$s \nVaccini già somministrati: %2$s \nMedia vaccinazioni / giorno: %3$s \n\n( ( %1$s*2 ) - %2$s ) / %3$s\nRisultato: %4$s \n\nVaccinazione di massa:\nPopolazione a rischio: %5$s \nVaccini già somministrati: %2$s \nMedia vaccinazioni / giorno: %3$s \n\n( ( %5$s*2 ) - %2$s ) / %3$s\nRisultato: %6$s\n</string>
-
+    <string name="Already_Update">Data are already up to date</string>
 </resources>
