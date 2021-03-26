@@ -378,8 +378,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.reload:
 
-                Common.Data_Already_Loaded=false;
-                goToSummary();
+                if (GlobalVariables.isNetworkConnected)
+                {
+                    Common.Database.Set_Configurazione("ultimo_aggiornamento","20200101");
+                    Common.Data_Already_Loaded=false;
+                    goToSummary();
+                }
+                else
+                    Toast.makeText(this, getString(R.string.Internet_Missing), Toast.LENGTH_LONG).show();
+                
                 break;
             default:
                 return super.onOptionsItemSelected(item);
