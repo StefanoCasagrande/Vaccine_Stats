@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
     PieChart pieChart;
     BarChart chart;
 
+    ProgressDialog waiting_bar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getSummary_by_Age(fragment_summary_by_age var)
     {
-        final ProgressDialog waiting_bar = getprogressDialog();
+        waiting_bar = getprogressDialog();
         waiting_bar.show();
 
         Retrofit retrofit= NetworkClient.getRetrofitClient();
@@ -195,9 +197,10 @@ public class MainActivity extends AppCompatActivity {
                     if (var.isVisible())
                         var.newDataAvailable();
 
-                    waiting_bar.dismiss();
                     getdeliveries();
                 }
+                else
+                    waiting_bar.dismiss();
             }
 
             @Override
@@ -228,6 +231,8 @@ public class MainActivity extends AppCompatActivity {
 
                     getSummaryVaccini();
                 }
+                else
+                    waiting_bar.dismiss();
             }
 
             @Override
@@ -258,9 +263,12 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         getCSVsomministrazione();
                     } catch (IOException e) {
+                        waiting_bar.dismiss();
                         e.printStackTrace();
                     }
                 }
+                else
+                    waiting_bar.dismiss();
             }
 
             @Override
@@ -754,6 +762,8 @@ public class MainActivity extends AppCompatActivity {
             String dir = FilesPath.toString() + "/";
 
             Common.Database.Insert_Somministrazioni(Read_CSV(dir+"somministrazioni_vaccini_summary_latest.csv", 18));
+            waiting_bar.dismiss();
+
         }
 
     }
