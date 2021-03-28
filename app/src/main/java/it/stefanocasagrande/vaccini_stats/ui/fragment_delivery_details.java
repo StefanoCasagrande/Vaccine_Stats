@@ -94,18 +94,39 @@ public class fragment_delivery_details extends Fragment {
 
         hideKeyboard(getActivity());
 
+        Button btn_doses_administered_detail = v.findViewById(R.id.btn_doses_administered_detail);
+        btn_doses_administered_detail.setOnClickListener(v2 -> {
+            ((MainActivity)getActivity()).Show_Administered_Doses_per_Area(area_name);
+        });
+
         Button btn_category_graph = v.findViewById(R.id.btn_category_graph);
         btn_category_graph.setOnClickListener(v2 -> {
 
             List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(0,99990101, area_name);
 
+            int categoria_operatori_sanitari_sociosanitari=0;
+            int categoria_personale_non_sanitario=0;
+            int categoria_ospiti_rsa=0;
+            int categoria_forze_armate=0;
+            int categoria_personale_scolastico = 0;
+            int categoria_altro = 0;
+
+            for (somministrazioni_data var : lista)
+            {
+                categoria_operatori_sanitari_sociosanitari += var.categoria_operatori_sanitari_sociosanitari;
+                categoria_personale_non_sanitario += var.categoria_personale_non_sanitario;
+                categoria_ospiti_rsa += var.categoria_ospiti_rsa;
+                categoria_forze_armate += var.categoria_forze_armate;
+                categoria_personale_scolastico += var.categoria_personale_scolastico;
+                categoria_altro += var.categoria_over80+var.categoria_over75+var.categoria_over70+var.categoria_altro;
+            }
                 ((MainActivity)getActivity()).Show_Graph(
-                        lista.get(0).categoria_operatori_sanitari_sociosanitari,
-                        lista.get(0).categoria_personale_non_sanitario,
-                        lista.get(0).categoria_ospiti_rsa,
-                        lista.get(0).categoria_forze_armate,
-                        lista.get(0).categoria_personale_scolastico,
-                        lista.get(0).categoria_over80+lista.get(0).categoria_over75+lista.get(0).categoria_over70+lista.get(0).categoria_altro
+                        categoria_operatori_sanitari_sociosanitari,
+                        categoria_personale_non_sanitario,
+                        categoria_ospiti_rsa,
+                        categoria_forze_armate,
+                        categoria_personale_scolastico,
+                        categoria_altro
                 );
         });
 

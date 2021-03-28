@@ -9,6 +9,8 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -487,12 +489,12 @@ public class DB extends SQLiteOpenHelper {
     {
         String sql_query = "SELECT data_somministrazione,sum(totale), sum(categoria_operatori_sanitari_sociosanitari), sum(categoria_personale_non_sanitario), sum(categoria_ospiti_rsa), sum(categoria_over80), sum(categoria_over70), sum(categoria_over75), sum(categoria_forze_armate), sum(categoria_personale_scolastico), sum(categoria_altro) from SOMMINISTRAZIONI  ";
 
-        sql_query +=String.format(" where data_somministrazione between %s and %s group by data_somministrazione ", start_date, end_date);
+        sql_query +=String.format(" where data_somministrazione between %s and %s ", start_date, end_date);
 
-        if (!area_name.equals(""))
+        if (!TextUtils.isEmpty(area_name))
             sql_query+= String.format(" and nome_area=%s ", Validate_String(area_name));
 
-        sql_query+=" order by data_somministrazione";
+        sql_query+=" group by data_somministrazione order by data_somministrazione";
 
         SQLiteDatabase db = this.getWritableDatabase();
         List<somministrazioni_data> lista = new ArrayList<>();

@@ -70,6 +70,7 @@ import it.stefanocasagrande.vaccini_stats.json_classes.last_update_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_dataset;
 import it.stefanocasagrande.vaccini_stats.ui.fragment_delivery_details;
 import it.stefanocasagrande.vaccini_stats.ui.fragment_delivery_group;
+import it.stefanocasagrande.vaccini_stats.ui.fragment_storico_andamento;
 import it.stefanocasagrande.vaccini_stats.ui.fragment_summary_by_age;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -633,6 +634,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //endregion
+
+    public void Show_Administered_Doses_per_Area(String p_area_name)
+    {
+        Fragment fragment = fragment_storico_andamento.newInstance(p_area_name);
+        String tag=getString(R.string.fragment_storico_andamento);
+        Show_Fragment(fragment, tag);
+    }
 
     public void Show_News()
     {

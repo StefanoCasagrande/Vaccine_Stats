@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,14 +52,17 @@ public class fragment_storico_andamento extends Fragment {
     EditText et_data_1;
     EditText et_data_2;
     TextView tv_media;
+    static String area_name;
 
     public fragment_storico_andamento() {
         // Required empty public constructor
     }
 
-    public static fragment_storico_andamento newInstance() {
+    public static fragment_storico_andamento newInstance(String p_area_name) {
         fragment_storico_andamento fragment = new fragment_storico_andamento();
         Bundle args = new Bundle();
+
+        area_name = p_area_name;
 
         fragment.setArguments(args);
         return fragment;
@@ -233,7 +237,7 @@ public class fragment_storico_andamento extends Fragment {
 
     private boolean setData() {
 
-        List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(get_int_from_DDMMYYYY(et_data_1.getText().toString()),get_int_from_DDMMYYYY(et_data_2.getText().toString()), "");
+        List<somministrazioni_data> lista = Common.Database.get_Somministrazioni(get_int_from_DDMMYYYY(et_data_1.getText().toString()),get_int_from_DDMMYYYY(et_data_2.getText().toString()), area_name);
 
         int totale = 0;
 
@@ -256,6 +260,9 @@ public class fragment_storico_andamento extends Fragment {
         et_data_2.setText(String.format("%s/%s/%s", Day, Month, Year));
 
         tv_media.setText(String.format(getString(R.string.Media_Desc), String.valueOf(lista.size()), Common.AddDotToInteger(totale/lista.size())));
+
+        if (!TextUtils.isEmpty(area_name))
+            tv_media.setText(String.format("%s %s %s", tv_media.getText(), getString(R.string.Area_Of), area_name));
 
         ArrayList<Entry> values = new ArrayList<>();
 
