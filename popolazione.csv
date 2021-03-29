@@ -1,210 +1,211 @@
-0-15;Abruzzo;169897
-16-19;Abruzzo;46751
-20-29;Abruzzo;130083
-30-39;Abruzzo;150713
-40-49;Abruzzo;190060
-50-59;Abruzzo;204157
-60-69;Abruzzo;167705
-70-79;Abruzzo;130572
-80-89;Abruzzo;84488
-90+;Abruzzo;19515
-0-15;Basilicata;69994
-16-19;Basilicata;22032
-20-29;Basilicata;61183
-30-39;Basilicata;65204
-40-49;Basilicata;78467
-50-59;Basilicata;87822
-60-69;Basilicata;72817
-70-79;Basilicata;51805
-80-89;Basilicata;36107
-90+;Basilicata;7823
-0-15;Calabria;266388
-16-19;Calabria;76743
-20-29;Calabria;213889
-30-39;Calabria;236668
-40-49;Calabria;266417
-50-59;Calabria;286804
-60-69;Calabria;241215
-70-79;Calabria;175208
-80-89;Calabria;107720
-90+;Calabria;23058
-0-15;Campania;877867
-16-19;Campania;261694
-20-29;Campania;693479
-30-39;Campania;715258
-40-49;Campania;835597
-50-59;Campania;868684
-60-69;Campania;670867
-70-79;Campania;484380
-80-89;Campania;255273
-90+;Campania;49044
-0-15;Emilia-Romagna;616071
-16-19;Emilia-Romagna;160045
-20-29;Emilia-Romagna;420660
-30-39;Emilia-Romagna;501241
-40-49;Emilia-Romagna;693312
-50-59;Emilia-Romagna;704097
-60-69;Emilia-Romagna;542211
-70-79;Emilia-Romagna;457129
-80-89;Emilia-Romagna;297666
-90+;Emilia-Romagna;71687
-0-15;Friuli-Venezia Giulia;153354
-16-19;Friuli-Venezia Giulia;42431
-20-29;Friuli-Venezia Giulia;109351
-30-39;Friuli-Venezia Giulia;125629
-40-49;Friuli-Venezia Giulia;178677
-50-59;Friuli-Venezia Giulia;196083
-60-69;Friuli-Venezia Giulia;155789
-70-79;Friuli-Venezia Giulia;141409
-80-89;Friuli-Venezia Giulia;83307
-90+;Friuli-Venezia Giulia;20186
-0-15;Lazio;807708
-16-19;Lazio;211964
-20-29;Lazio;564461
-30-39;Lazio;682708
-40-49;Lazio;906328
-50-59;Lazio;932830
-60-69;Lazio;697089
-70-79;Lazio;552007
-80-89;Lazio;331378
-90+;Lazio;69227
-0-15;Liguria;179680
-16-19;Liguria;51388
-20-29;Liguria;136323
-30-39;Liguria;147602
-40-49;Liguria;212370
-50-59;Liguria;252685
-60-69;Liguria;202775
-70-79;Liguria;186034
-80-89;Liguria;125810
-90+;Liguria;30159
-0-15;Lombardia;1439162
-16-19;Lombardia;377933
-20-29;Lombardia;986159
-30-39;Lombardia;1164199
-40-49;Lombardia;1545073
-50-59;Lombardia;1592109
-60-69;Lombardia;1189118
-70-79;Lombardia;996209
-80-89;Lombardia;609477
-90+;Lombardia;128163
-0-15;Marche;201264
-16-19;Marche;55166
-20-29;Marche;146739
-30-39;Marche;166387
-40-49;Marche;224450
-50-59;Marche;236194
-60-69;Marche;193166
-70-79;Marche;155941
-80-89;Marche;107825
-90+;Marche;25540
-0-15;Molise;36137
-16-19;Molise;10882
-20-29;Molise;32122
-30-39;Molise;34661
-40-49;Molise;42214
-50-59;Molise;47443
-60-69;Molise;40509
-70-79;Molise;30291
-80-89;Molise;21038
-90+;Molise;5219
-0-15;Piemonte;563551
-16-19;Piemonte;153619
-20-29;Piemonte;406190
-30-39;Piemonte;459367
-40-49;Piemonte;632745
-50-59;Piemonte;688698
-60-69;Piemonte;558231
-70-79;Piemonte;477416
-80-89;Piemonte;306712
-90+;Piemonte;64688
-0-15;Provincia Autonoma Bolzano / Bozen;89024
-16-19;Provincia Autonoma Bolzano / Bozen;23269
-20-29;Provincia Autonoma Bolzano / Bozen;61094
-30-39;Provincia Autonoma Bolzano / Bozen;63127
-40-49;Provincia Autonoma Bolzano / Bozen;75664
-50-59;Provincia Autonoma Bolzano / Bozen;83539
-60-69;Provincia Autonoma Bolzano / Bozen;57041
-70-79;Provincia Autonoma Bolzano / Bozen;46613
-80-89;Provincia Autonoma Bolzano / Bozen;27108
-90+;Provincia Autonoma Bolzano / Bozen;6165
-0-15;Provincia Autonoma Trento;82562
-16-19;Provincia Autonoma Trento;22424
-20-29;Provincia Autonoma Trento;57755
-30-39;Provincia Autonoma Trento;61062
-40-49;Provincia Autonoma Trento;78088
-50-59;Provincia Autonoma Trento;85805
-60-69;Provincia Autonoma Trento;67027
-70-79;Provincia Autonoma Trento;52316
-80-89;Provincia Autonoma Trento;30464
-90+;Provincia Autonoma Trento;7922
-0-15;Puglia;548090
-16-19;Puglia;166541
-20-29;Puglia;439275
-30-39;Puglia;460961
-40-49;Puglia;583292
-50-59;Puglia;605586
-60-69;Puglia;490900
-70-79;Puglia;390534
-80-89;Puglia;222224
-90+;Puglia;45902
-0-15;Sardegna;190520
-16-19;Sardegna;55615
-20-29;Sardegna;152275
-30-39;Sardegna;185432
-40-49;Sardegna;250930
-50-59;Sardegna;266068
-60-69;Sardegna;223641
-70-79;Sardegna;170857
-80-89;Sardegna;95172
-90+;Sardegna;21111
-0-15;Sicilia;713016
-16-19;Sicilia;207885
-20-29;Sicilia;559157
-30-39;Sicilia;589747
-40-49;Sicilia;698439
-50-59;Sicilia;732965
-60-69;Sicilia;601201
-70-79;Sicilia;456965
-80-89;Sicilia;263130
-90+;Sicilia;52785
-0-15;Toscana;482795
-16-19;Toscana;130759
-20-29;Toscana;339743
-30-39;Toscana;401488
-40-49;Toscana;556667
-50-59;Toscana;587110
-60-69;Toscana;463253
-70-79;Toscana;410151
-80-89;Toscana;259653
-90+;Toscana;60936
-0-15;Umbria;114314
-16-19;Umbria;30749
-20-29;Umbria;81348
-30-39;Umbria;97163
-40-49;Umbria;127832
-50-59;Umbria;135299
-60-69;Umbria;110539
-70-79;Umbria;95004
-80-89;Umbria;62778
-90+;Umbria;15139
-0-15;Valle d'Aosta / Vallée d'Aoste;17259
-16-19;Valle d'Aosta / Vallée d'Aoste;4706
-20-29;Valle d'Aosta / Vallée d'Aoste;11870
-30-39;Valle d'Aosta / Vallée d'Aoste;13174
-40-49;Valle d'Aosta / Vallée d'Aoste;18555
-50-59;Valle d'Aosta / Vallée d'Aoste;20757
-60-69;Valle d'Aosta / Vallée d'Aoste;16060
-70-79;Valle d'Aosta / Vallée d'Aoste;13089
-80-89;Valle d'Aosta / Vallée d'Aoste;7800
-90+;Valle d'Aosta / Vallée d'Aoste;1764
-0-15;Veneto;681111
-16-19;Veneto;186250
-20-29;Veneto;481226
-30-39;Veneto;532841
-40-49;Veneto;742052
-50-59;Veneto;799460
-60-69;Veneto;603210
-70-79;Veneto;494443
-80-89;Veneto;293030
-90+;Veneto;65510
+Age,Location,Total
+0-15,Abruzzo,169897
+16-19,Abruzzo,46751
+20-29,Abruzzo,130083
+30-39,Abruzzo,150713
+40-49,Abruzzo,190060
+50-59,Abruzzo,204157
+60-69,Abruzzo,167705
+70-79,Abruzzo,130572
+80-89,Abruzzo,84488
+90+,Abruzzo,19515
+0-15,Basilicata,69994
+16-19,Basilicata,22032
+20-29,Basilicata,61183
+30-39,Basilicata,65204
+40-49,Basilicata,78467
+50-59,Basilicata,87822
+60-69,Basilicata,72817
+70-79,Basilicata,51805
+80-89,Basilicata,36107
+90+,Basilicata,7823
+0-15,Calabria,266388
+16-19,Calabria,76743
+20-29,Calabria,213889
+30-39,Calabria,236668
+40-49,Calabria,266417
+50-59,Calabria,286804
+60-69,Calabria,241215
+70-79,Calabria,175208
+80-89,Calabria,107720
+90+,Calabria,23058
+0-15,Campania,877867
+16-19,Campania,261694
+20-29,Campania,693479
+30-39,Campania,715258
+40-49,Campania,835597
+50-59,Campania,868684
+60-69,Campania,670867
+70-79,Campania,484380
+80-89,Campania,255273
+90+,Campania,49044
+0-15,Emilia-Romagna,616071
+16-19,Emilia-Romagna,160045
+20-29,Emilia-Romagna,420660
+30-39,Emilia-Romagna,501241
+40-49,Emilia-Romagna,693312
+50-59,Emilia-Romagna,704097
+60-69,Emilia-Romagna,542211
+70-79,Emilia-Romagna,457129
+80-89,Emilia-Romagna,297666
+90+,Emilia-Romagna,71687
+0-15,Friuli-Venezia Giulia,153354
+16-19,Friuli-Venezia Giulia,42431
+20-29,Friuli-Venezia Giulia,109351
+30-39,Friuli-Venezia Giulia,125629
+40-49,Friuli-Venezia Giulia,178677
+50-59,Friuli-Venezia Giulia,196083
+60-69,Friuli-Venezia Giulia,155789
+70-79,Friuli-Venezia Giulia,141409
+80-89,Friuli-Venezia Giulia,83307
+90+,Friuli-Venezia Giulia,20186
+0-15,Lazio,807708
+16-19,Lazio,211964
+20-29,Lazio,564461
+30-39,Lazio,682708
+40-49,Lazio,906328
+50-59,Lazio,932830
+60-69,Lazio,697089
+70-79,Lazio,552007
+80-89,Lazio,331378
+90+,Lazio,69227
+0-15,Liguria,179680
+16-19,Liguria,51388
+20-29,Liguria,136323
+30-39,Liguria,147602
+40-49,Liguria,212370
+50-59,Liguria,252685
+60-69,Liguria,202775
+70-79,Liguria,186034
+80-89,Liguria,125810
+90+,Liguria,30159
+0-15,Lombardia,1439162
+16-19,Lombardia,377933
+20-29,Lombardia,986159
+30-39,Lombardia,1164199
+40-49,Lombardia,1545073
+50-59,Lombardia,1592109
+60-69,Lombardia,1189118
+70-79,Lombardia,996209
+80-89,Lombardia,609477
+90+,Lombardia,128163
+0-15,Marche,201264
+16-19,Marche,55166
+20-29,Marche,146739
+30-39,Marche,166387
+40-49,Marche,224450
+50-59,Marche,236194
+60-69,Marche,193166
+70-79,Marche,155941
+80-89,Marche,107825
+90+,Marche,25540
+0-15,Molise,36137
+16-19,Molise,10882
+20-29,Molise,32122
+30-39,Molise,34661
+40-49,Molise,42214
+50-59,Molise,47443
+60-69,Molise,40509
+70-79,Molise,30291
+80-89,Molise,21038
+90+,Molise,5219
+0-15,Piemonte,563551
+16-19,Piemonte,153619
+20-29,Piemonte,406190
+30-39,Piemonte,459367
+40-49,Piemonte,632745
+50-59,Piemonte,688698
+60-69,Piemonte,558231
+70-79,Piemonte,477416
+80-89,Piemonte,306712
+90+,Piemonte,64688
+0-15,Provincia Autonoma Bolzano / Bozen,89024
+16-19,Provincia Autonoma Bolzano / Bozen,23269
+20-29,Provincia Autonoma Bolzano / Bozen,61094
+30-39,Provincia Autonoma Bolzano / Bozen,63127
+40-49,Provincia Autonoma Bolzano / Bozen,75664
+50-59,Provincia Autonoma Bolzano / Bozen,83539
+60-69,Provincia Autonoma Bolzano / Bozen,57041
+70-79,Provincia Autonoma Bolzano / Bozen,46613
+80-89,Provincia Autonoma Bolzano / Bozen,27108
+90+,Provincia Autonoma Bolzano / Bozen,6165
+0-15,Provincia Autonoma Trento,82562
+16-19,Provincia Autonoma Trento,22424
+20-29,Provincia Autonoma Trento,57755
+30-39,Provincia Autonoma Trento,61062
+40-49,Provincia Autonoma Trento,78088
+50-59,Provincia Autonoma Trento,85805
+60-69,Provincia Autonoma Trento,67027
+70-79,Provincia Autonoma Trento,52316
+80-89,Provincia Autonoma Trento,30464
+90+,Provincia Autonoma Trento,7922
+0-15,Puglia,548090
+16-19,Puglia,166541
+20-29,Puglia,439275
+30-39,Puglia,460961
+40-49,Puglia,583292
+50-59,Puglia,605586
+60-69,Puglia,490900
+70-79,Puglia,390534
+80-89,Puglia,222224
+90+,Puglia,45902
+0-15,Sardegna,190520
+16-19,Sardegna,55615
+20-29,Sardegna,152275
+30-39,Sardegna,185432
+40-49,Sardegna,250930
+50-59,Sardegna,266068
+60-69,Sardegna,223641
+70-79,Sardegna,170857
+80-89,Sardegna,95172
+90+,Sardegna,21111
+0-15,Sicilia,713016
+16-19,Sicilia,207885
+20-29,Sicilia,559157
+30-39,Sicilia,589747
+40-49,Sicilia,698439
+50-59,Sicilia,732965
+60-69,Sicilia,601201
+70-79,Sicilia,456965
+80-89,Sicilia,263130
+90+,Sicilia,52785
+0-15,Toscana,482795
+16-19,Toscana,130759
+20-29,Toscana,339743
+30-39,Toscana,401488
+40-49,Toscana,556667
+50-59,Toscana,587110
+60-69,Toscana,463253
+70-79,Toscana,410151
+80-89,Toscana,259653
+90+,Toscana,60936
+0-15,Umbria,114314
+16-19,Umbria,30749
+20-29,Umbria,81348
+30-39,Umbria,97163
+40-49,Umbria,127832
+50-59,Umbria,135299
+60-69,Umbria,110539
+70-79,Umbria,95004
+80-89,Umbria,62778
+90+,Umbria,15139
+0-15,Valle d'Aosta / Vallée d'Aoste,17259
+16-19,Valle d'Aosta / Vallée d'Aoste,4706
+20-29,Valle d'Aosta / Vallée d'Aoste,11870
+30-39,Valle d'Aosta / Vallée d'Aoste,13174
+40-49,Valle d'Aosta / Vallée d'Aoste,18555
+50-59,Valle d'Aosta / Vallée d'Aoste,20757
+60-69,Valle d'Aosta / Vallée d'Aoste,16060
+70-79,Valle d'Aosta / Vallée d'Aoste,13089
+80-89,Valle d'Aosta / Vallée d'Aoste,7800
+90+,Valle d'Aosta / Vallée d'Aoste,1764
+0-15,Veneto,681111
+16-19,Veneto,186250
+20-29,Veneto,481226
+30-39,Veneto,532841
+40-49,Veneto,742052
+50-59,Veneto,799460
+60-69,Veneto,603210
+70-79,Veneto,494443
+80-89,Veneto,293030
+90+,Veneto,65510
