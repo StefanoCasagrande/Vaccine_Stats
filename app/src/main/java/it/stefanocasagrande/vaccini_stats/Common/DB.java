@@ -6,14 +6,20 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.stefanocasagrande.vaccini_stats.MainActivity;
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.somministrazioni_data;
@@ -44,6 +50,9 @@ public class DB extends SQLiteOpenHelper {
 
         sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150), categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_over75 INTEGER, categoria_over70 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, categoria_altro INTEGER)";
         sqLiteDatabase.execSQL(sql_query);
+
+        sql_query="CREATE TABLE POPOLAZIONE (id INTEGER PRIMARY KEY, fascia_anagrafica nvarchar(150), territorio nvarchar(150), totale INTEGER)";
+        sqLiteDatabase.execSQL(sql_query);
     }
 
     @Override
@@ -65,6 +74,9 @@ public class DB extends SQLiteOpenHelper {
         }
 
         sql_query="CREATE TABLE if not exists  SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150), categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_over75 INTEGER, categoria_over70 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, categoria_altro INTEGER)";
+        db.execSQL(sql_query);
+
+        sql_query="CREATE TABLE if not exists POPOLAZIONE (id INTEGER PRIMARY KEY, fascia_anagrafica nvarchar(150), territorio nvarchar(150), totale INTEGER)";
         db.execSQL(sql_query);
 
         if (!doColumnExists("SUMMARY_BY_AGE", "categoria_over75",db))
@@ -523,6 +535,53 @@ public class DB extends SQLiteOpenHelper {
         db.close();
 
         return lista;
+    }
+
+    //endregion
+
+    //region Popolazione
+
+    public boolean Insert_Popolazione(List<List<String>> lista) {
+
+        if (Delete("POPOLAZIONE", "")) {
+
+            List<String> sql_insert_values = new ArrayList<>();
+
+            for (List<String> var : lista)
+                sql_insert_values.add(String.format("(%s, %s, %s)",
+                        Validate_String(var.get(0)),
+                        Validate_String(var.get(1)),
+                        var.get(2)));
+
+            Insert_Multi("INSERT INTO POPOLAZIONE ( fascia_anagrafica, territorio, totale ) VALUES ", sql_insert_values);
+        }
+
+        return true;
+    }
+
+    public int Get_Popolazione(String age, String location)
+    {
+        String sql_query="SELECT SUM(TOTALE) from POPOLAZIONE WHERE 1=1 ";
+        int value=0;
+
+        if (!TextUtils.isEmpty(age))
+            sql_query+=" AND FASCIA_ANAGRAFICA=" + Validate_String(age);
+
+        if (!TextUtils.isEmpty(location))
+            sql_query+=" AND territorio=" + Validate_String(location);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()){
+            do {
+                value = c.getInt(0);
+
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return value;
     }
 
     //endregion

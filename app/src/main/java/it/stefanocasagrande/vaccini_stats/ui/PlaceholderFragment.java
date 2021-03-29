@@ -56,6 +56,7 @@ public class PlaceholderFragment extends Fragment {
         final TextView tv_age = root.findViewById(R.id.tv_age);
         final TextView tv_last_update = root.findViewById(R.id.tv_last_update);
         final TextView tv_first_dose = root.findViewById(R.id.tv_first_dose);
+        final TextView tv_population = root.findViewById(R.id.tv_population);
 
         final TextView tv_second_dose = root.findViewById(R.id.tv_second_dose);
 
@@ -101,6 +102,7 @@ public class PlaceholderFragment extends Fragment {
 
             if (s.equals("Totale"))
             {
+                tv_population.setText(Common.AddDotToInteger(Common.Database.Get_Popolazione("","")));
                 tv_age.setText(getString(R.string.General_Data));
                 int male=0;
                 int female=0;
@@ -144,6 +146,7 @@ public class PlaceholderFragment extends Fragment {
             }
             else
             {
+                tv_population.setText(Common.AddDotToInteger(Common.Database.Get_Popolazione(s,"")));
                 tv_age.setText(String.format("%s: %s",getString(R.string.Age_Group), s));
 
                 for(anagrafica_vaccini_summary_data var : lista)

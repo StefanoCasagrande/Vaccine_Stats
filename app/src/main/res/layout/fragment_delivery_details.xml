@@ -156,6 +156,50 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="top">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/free_solid_900"
+                    android:textSize="35sp"
+                    android:textColor="@color/Icons"
+                    android:layout_gravity="center_vertical"
+                    android:text=""/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:id="@+id/tv_population"
+                        android:textColor="@color/Text_Big"
+                        android:text="@string/Big_Title_Placeholder"/>
+
+                    <TextView
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/Text_Small"
+                        android:text="@string/population"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <View
                 android:layout_width="fill_parent"
                 android:background="@color/Dividing_Bar"

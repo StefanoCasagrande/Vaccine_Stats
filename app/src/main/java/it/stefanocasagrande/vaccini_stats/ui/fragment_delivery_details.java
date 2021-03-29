@@ -48,6 +48,7 @@ public class fragment_delivery_details extends Fragment {
     TextView tv_doses_administered;
     TextView tv_total_delivered;
     TextView tv_total_delivered_desc;
+    TextView tv_population;
 
     public fragment_delivery_details() {
         // Required empty public constructor
@@ -73,6 +74,7 @@ public class fragment_delivery_details extends Fragment {
         View  v = inflater.inflate(R.layout.fragment_delivery_details, container, false);
 
         tv_location = v.findViewById(R.id.tv_location);
+        tv_population = v.findViewById(R.id.tv_population);
 
         tv_doses_administered = v.findViewById(R.id.tv_doses_administered);
         tv_total_delivered = v.findViewById(R.id.tv_total_delivered);
@@ -139,6 +141,7 @@ public class fragment_delivery_details extends Fragment {
         List<vaccini_summary_data> list_administered = Common.Database.Get_vaccini_summary(area_name);
 
         tv_location.setText(list_to_load.get(0).nome_area);
+        tv_population.setText(Common.AddDotToInteger(Common.Database.Get_Popolazione("", list_to_load.get(0).nome_area)));
         tv_doses_administered.setText(Common.AddDotToInteger(list_administered.get(0).dosi_somministrate));
         tv_total_delivered.setText(Common.AddDotToInteger(list_administered.get(0).dosi_consegnate));
 

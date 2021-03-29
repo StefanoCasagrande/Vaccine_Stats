@@ -109,6 +109,15 @@ public class MainActivity extends AppCompatActivity {
 
         Common.Database = new DB(this);
         Common.Database.Check_Table();
+
+        try {
+            Common.Database.Insert_Popolazione(Read_CSV(getAssets().open("popolazione.csv"), 3));
+        }
+        catch (Exception ex)
+        {
+
+        }
+
     }
 
     @Override
@@ -308,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void getCSVsomministrazione() throws IOException {
         new DownloadFileFromURL().execute("");
-
     }
 
     //endregion
@@ -666,38 +674,53 @@ public class MainActivity extends AppCompatActivity {
 
     //region Download
 
+    private List<List<String>> Read_CSV(InputStream inputStream, int numero_campi)
+    {
+        List<List<String>> list = new ArrayList<>();
+
+        InputStreamReader inputreader = new InputStreamReader(inputStream);
+        BufferedReader buffreader = new BufferedReader(inputreader);
+
+        String myLine;
+        int i=0;
+
+        try {
+        while((myLine=buffreader.readLine())!=null)
+        {
+            i++;
+
+            if(i==1)
+                continue; //La prima riga contiene l'intestazione
+
+            if (myLine.endsWith(","))
+                myLine=myLine+" ";
+
+            String[] values = myLine.split(",");
+
+            List<String> valori = new ArrayList<>();
+            if(values.length != numero_campi )
+                continue;
+            else
+                valori.addAll(Arrays.asList(values).subList(0, numero_campi));
+
+            list.add(valori);
+        }
+        }
+        catch (IOException e)
+        {
+            Log.d("Main", e.toString());
+        }
+
+        return list;
+    }
+
     private List<List<String>> Read_CSV(String FilePath, int numero_campi)
     {
         List<List<String>> list = new ArrayList<>();
 
         try {
             InputStream inputStream = new FileInputStream(FilePath);
-            InputStreamReader inputreader = new InputStreamReader(inputStream);
-            BufferedReader buffreader = new BufferedReader(inputreader);
-
-            String myLine;
-            int i=0;
-
-            while((myLine=buffreader.readLine())!=null)
-            {
-                i++;
-
-                if(i==1)
-                    continue; //La prima riga contiene l'intestazione
-
-                if (myLine.endsWith(","))
-                    myLine=myLine+" ";
-
-                String[] values = myLine.split(",");
-
-                List<String> valori = new ArrayList<>();
-                if(values.length != numero_campi )
-                    continue;
-                else
-                    valori.addAll(Arrays.asList(values).subList(0, numero_campi));
-
-                list.add(valori);
-            }
+            list = Read_CSV(inputStream, numero_campi);
 
         }
         catch (IOException e)
