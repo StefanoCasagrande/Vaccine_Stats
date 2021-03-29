@@ -55,12 +55,10 @@ public class PlaceholderFragment extends Fragment {
 
         final TextView tv_age = root.findViewById(R.id.tv_age);
         final TextView tv_last_update = root.findViewById(R.id.tv_last_update);
-        final TextView tv_female = root.findViewById(R.id.tv_female);
-        final TextView tv_total = root.findViewById(R.id.tv_total);
+        final TextView tv_first_dose = root.findViewById(R.id.tv_first_dose);
 
         final TextView tv_second_dose = root.findViewById(R.id.tv_second_dose);
 
-        final TextView tv_male = root.findViewById(R.id.tv_male);
         final TextView tv_operatori_sanitari = root.findViewById(R.id.tv_operatori_sanitari);
         final TextView tv_ospiti_rsa = root.findViewById(R.id.tv_ospiti_rsa);
         final TextView tv_others = root.findViewById(R.id.tv_others);
@@ -134,9 +132,7 @@ public class PlaceholderFragment extends Fragment {
                     second_dose+=var.seconda_dose;
                 }
 
-                tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(female)));
-                tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(male)));
-
+                tv_first_dose.setText(Common.AddDotToInteger(female+male-second_dose));
                 tv_second_dose.setText(Common.AddDotToInteger(second_dose));
 
                 tv_operatori_sanitari.setText(Common.AddDotToInteger(categoria_operatori_sanitari_sociosanitari));
@@ -145,8 +141,6 @@ public class PlaceholderFragment extends Fragment {
                 tv_law_enforcement.setText(Common.AddDotToInteger(categoria_forze_armate));
                 tv_school_staff.setText(Common.AddDotToInteger(categoria_personale_scolastico));
                 tv_non_healtcare.setText(Common.AddDotToInteger(categoria_personale_non_sanitario));
-
-                tv_total.setText(String.format("%s: %s",getString(R.string.tab_text_1),  Common.AddDotToInteger(male+female)));
             }
             else
             {
@@ -157,8 +151,7 @@ public class PlaceholderFragment extends Fragment {
                     if (var.fascia_anagrafica.equals(s))
                     {
                         tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(var.ultimo_aggiornamento)));
-                        tv_female.setText(String.format("%s: %s","F",  Common.AddDotToInteger(var.sesso_femminile)));
-                        tv_male.setText(String.format("%s: %s","M",  Common.AddDotToInteger(var.sesso_maschile)));
+                        tv_first_dose.setText(Common.AddDotToInteger(var.sesso_femminile+var.sesso_maschile-var.seconda_dose));
 
                         tv_second_dose.setText(Common.AddDotToInteger(var.seconda_dose));
 
@@ -168,8 +161,6 @@ public class PlaceholderFragment extends Fragment {
                         tv_law_enforcement.setText(Common.AddDotToInteger(var.categoria_forze_armate));
                         tv_school_staff.setText(Common.AddDotToInteger(var.categoria_personale_scolastico));
                         tv_non_healtcare.setText(Common.AddDotToInteger(var.categoria_personale_non_sanitario));
-
-                        tv_total.setText(String.format("%s: %s",getString(R.string.tab_text_1),  Common.AddDotToInteger(var.sesso_maschile+var.sesso_femminile)));
                     }
                 }
             }

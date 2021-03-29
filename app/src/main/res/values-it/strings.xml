@@ -86,5 +86,6 @@
     <string name="Herd_immunity">Immunità di gruppo</string>
     <string name="Already_Update">I dati presenti sono già aggiornati all\'ultima versione disponibile</string>
 
+    <string name="population">Popolazione</string>
     <string name="Area_Of">nella zona di</string>
 </resources>

@@ -120,5 +120,6 @@
     <string name="Math_Formula" translatable="false">* Le formule matematiche utilizzate sono qui disponibili in chiaro per eventuale verifica o segnalazione errori. I valori sono moltiplicati per 2 perchè ogni persona deve ricevere 2 dosi.\n\nImmunità di gregge:\n70%% popolazione italiana: %1$s \nVaccini già somministrati: %2$s \nMedia vaccinazioni / giorno: %3$s \n\n( ( %1$s*2 ) - %2$s ) / %3$s\nRisultato: %4$s \n\nVaccinazione di massa:\nPopolazione a rischio: %5$s \nVaccini già somministrati: %2$s \nMedia vaccinazioni / giorno: %3$s \n\n( ( %5$s*2 ) - %2$s ) / %3$s\nRisultato: %6$s\n</string>
     <string name="Already_Update">Data are already up to date</string>
 
+    <string name="population">Population</string>
     <string name="Area_Of">in the area of</string>
 </resources>
