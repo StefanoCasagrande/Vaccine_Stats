@@ -1,5 +1,6 @@
 package it.stefanocasagrande.vaccini_stats.ui;
 
+import android.app.AppOpsManager;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -57,6 +58,7 @@ public class PlaceholderFragment extends Fragment {
         final TextView tv_last_update = root.findViewById(R.id.tv_last_update);
         final TextView tv_first_dose = root.findViewById(R.id.tv_first_dose);
         final TextView tv_population = root.findViewById(R.id.tv_population);
+        final TextView tv_percent = root.findViewById(R.id.tv_percent);
 
         final TextView tv_second_dose = root.findViewById(R.id.tv_second_dose);
 
@@ -99,10 +101,13 @@ public class PlaceholderFragment extends Fragment {
 
             final ProgressDialog waiting_bar = ((MainActivity)getActivity()).getprogressDialog();
             waiting_bar.show();
+            int popolazione=0;
 
             if (s.equals("Totale"))
             {
-                tv_population.setText(Common.AddDotToInteger(Common.Database.Get_Popolazione("","")));
+                popolazione = Common.Database.Get_Popolazione("","");
+
+                tv_population.setText(Common.AddDotToInteger(popolazione));
                 tv_age.setText(getString(R.string.General_Data));
                 int male=0;
                 int female=0;
@@ -143,10 +148,18 @@ public class PlaceholderFragment extends Fragment {
                 tv_law_enforcement.setText(Common.AddDotToInteger(categoria_forze_armate));
                 tv_school_staff.setText(Common.AddDotToInteger(categoria_personale_scolastico));
                 tv_non_healtcare.setText(Common.AddDotToInteger(categoria_personale_non_sanitario));
+
+                if (popolazione>0)
+                {
+                    double percent = (((female+male)*100)/ (double)popolazione);
+                    tv_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
+                }
             }
             else
             {
-                tv_population.setText(Common.AddDotToInteger(Common.Database.Get_Popolazione(s,"")));
+                popolazione = Common.Database.Get_Popolazione(s,"");
+
+                tv_population.setText(Common.AddDotToInteger(popolazione));
                 tv_age.setText(String.format("%s: %s",getString(R.string.Age_Group), s));
 
                 for(anagrafica_vaccini_summary_data var : lista)
@@ -164,6 +177,12 @@ public class PlaceholderFragment extends Fragment {
                         tv_law_enforcement.setText(Common.AddDotToInteger(var.categoria_forze_armate));
                         tv_school_staff.setText(Common.AddDotToInteger(var.categoria_personale_scolastico));
                         tv_non_healtcare.setText(Common.AddDotToInteger(var.categoria_personale_non_sanitario));
+
+                        if (popolazione>0)
+                        {
+                            double percent = (((var.sesso_femminile+var.sesso_maschile)*100)/(double) popolazione);
+                            tv_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
+                        }
                     }
                 }
             }

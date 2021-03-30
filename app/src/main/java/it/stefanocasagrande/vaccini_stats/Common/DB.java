@@ -274,7 +274,7 @@ public class DB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         List<consegne_vaccini_data> lista = new ArrayList<>();
 
-        String sql_query = "select Sum(numero_dosi), nome_area, max(data_consegna) from DELIVERIES group by nome_area";
+        String sql_query = "select dosi_consegnate, a.nome_area, ultima_consegna, dosi_somministrate from ( select Sum(numero_dosi) as dosi_consegnate, DELIVERIES.nome_area, max(data_consegna) as ultima_consegna from DELIVERIES group by DELIVERIES.nome_area ) a inner join ( select sum(totale) as dosi_somministrate, nome_area from SOMMINISTRAZIONI group by nome_area ) b on b.nome_area = a.nome_area ";
 
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){
@@ -284,6 +284,7 @@ public class DB extends SQLiteOpenHelper {
                 var.numero_dosi = c.getInt(0);
                 var.nome_area = c.getString(1);
                 var.data_consegna = c.getString(2);
+                var.dosi_somministrate = c.getInt(3);
                 lista.add(var);
 
             } while(c.moveToNext());

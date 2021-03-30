@@ -55,6 +55,8 @@ public class fragment_storico_andamento extends Fragment {
     static String area_name;
 
     public fragment_storico_andamento() {
+
+        area_name=null;
         // Required empty public constructor
     }
 

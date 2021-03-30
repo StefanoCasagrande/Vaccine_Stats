@@ -76,7 +76,7 @@
                 android:maxLines="1"
                 android:textSize="12sp"
                 android:textColor="@color/Text_Small"
-                android:text="@string/Doses_Delivered"/>
+                android:text="@string/Population_Vaccined"/>
         </LinearLayout>
 
         </LinearLayout>

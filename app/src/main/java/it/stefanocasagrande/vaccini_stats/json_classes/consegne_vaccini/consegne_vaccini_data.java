@@ -39,5 +39,7 @@ public class consegne_vaccini_data implements Serializable {
     @Expose
     public String nome_area;
 
+    public Integer dosi_somministrate;
+
 
 }

@@ -135,6 +135,13 @@
                             android:textColor="@color/Text_Small"
                             android:text="@string/population"/>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="15sp"
+                            android:id="@+id/tv_percent"
+                            android:textColor="@color/Text_Small" />
+
                     </LinearLayout>
 
                 </LinearLayout>
