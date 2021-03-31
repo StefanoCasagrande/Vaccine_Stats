@@ -514,6 +514,24 @@ public class DB extends SQLiteOpenHelper {
         return true;
     }
 
+    public int get_Prime_Dosi_Null()
+    {
+        String sql_query = "SELECT sum(prima_dose) from SOMMINISTRAZIONI ";
+        SQLiteDatabase db = this.getWritableDatabase();
+        int dosi=0;
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()) {
+            do {
+                dosi = c.getInt(0);
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return dosi;
+    }
+
     public List<somministrazioni_data> get_Somministrazioni(int start_date, int end_date, String area_name)
     {
         String sql_query = "SELECT data_somministrazione,sum(totale), sum(categoria_operatori_sanitari_sociosanitari), sum(categoria_personale_non_sanitario), sum(categoria_ospiti_rsa), sum(categoria_over80), sum(categoria_over70), sum(categoria_over75), sum(categoria_forze_armate), sum(categoria_personale_scolastico), sum(categoria_altro) from SOMMINISTRAZIONI  ";

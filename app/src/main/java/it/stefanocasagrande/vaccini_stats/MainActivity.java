@@ -163,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
     {
         if ((Common.Database.Get_Configurazione("ultimo_aggiornamento").equals("")
                 || !Common.Database.Get_Configurazione("ultimo_aggiornamento").equals(last_update)
-                || Common.Database.get_Somministrazioni(20210101,20210102,"").size()==0))
+                || Common.Database.get_Somministrazioni(20210101,20210102,"").size()==0
+                || Common.Database.get_Prime_Dosi_Null()==0))
         {
             Common.Database.Set_Configurazione("ultimo_aggiornamento", last_update);
             getSummary_by_Age(var);
