@@ -3,6 +3,7 @@
     <!--translatable-->
     <string name="Italian_Situation">Situazione italiana</string>
     <string name="doses_administered">Dosi somministrate</string>
+    <string name="doses_administered_first_second">Doses Administered ( prima + seconda dose )</string>
     <string name="app_name">Report Vaccini</string>
     <string name="Vaccine_Detail">Dettaglio consegne</string>
     <string name="Vaccine_Detail_Small">Clicca sul grafico per maggiori info..</string>
@@ -88,5 +89,5 @@
 
     <string name="population">Popolazione</string>
     <string name="Area_Of">nella zona di</string>
-    <string name="Population_Vaccined">Popolazione vaccinata</string>
+    <string name="Population_Vaccined">Vaccinati</string>
 </resources>

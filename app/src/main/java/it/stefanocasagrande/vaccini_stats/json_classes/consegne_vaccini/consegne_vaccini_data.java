@@ -41,5 +41,6 @@ public class consegne_vaccini_data implements Serializable {
 
     public Integer dosi_somministrate;
 
+    public Integer prima_dose;
 
 }

@@ -20,6 +20,7 @@
     <!--translatable-->
     <string name="Italian_Situation">Italian Situation</string>
     <string name="doses_administered">Doses Administered</string>
+    <string name="doses_administered_first_second">Doses Administered ( first + second doses)</string>
     <string name="app_name">Vaccine Report</string>
     <string name="Vaccine_Detail">Deliveries Details</string>
     <string name="Vaccine_Detail_Small">Click on the graph for more info..</string>

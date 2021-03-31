@@ -48,7 +48,7 @@ public class DB extends SQLiteOpenHelper {
         sql_query="CREATE TABLE SUMMARY_BY_LOCATION (id INTEGER PRIMARY KEY, area nvarchar(150), dosi_somministrate INTEGER, dosi_consegnate INTEGER, ultimo_aggiornamento NVARCHAR(50), nome_area nvarchar(50))";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150), categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_over75 INTEGER, categoria_over70 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, categoria_altro INTEGER)";
+        sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150), categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_over75 INTEGER, categoria_over70 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, categoria_altro INTEGER, prima_dose INTEGER, seconda_dose INTEGER)";
         sqLiteDatabase.execSQL(sql_query);
 
         sql_query="CREATE TABLE POPOLAZIONE (id INTEGER PRIMARY KEY, fascia_anagrafica nvarchar(150), territorio nvarchar(150), totale INTEGER)";
@@ -113,6 +113,18 @@ public class DB extends SQLiteOpenHelper {
         if (!doColumnExists("SOMMINISTRAZIONI", "categoria_altro",db))
         {
             sql_query="ALTER TABLE SOMMINISTRAZIONI ADD COLUMN categoria_altro INTEGER";
+            db.execSQL(sql_query);
+        }
+
+        if (!doColumnExists("SOMMINISTRAZIONI", "prima_dose",db))
+        {
+            sql_query="ALTER TABLE SOMMINISTRAZIONI ADD COLUMN prima_dose INTEGER";
+            db.execSQL(sql_query);
+        }
+
+        if (!doColumnExists("SOMMINISTRAZIONI", "seconda_dose",db))
+        {
+            sql_query="ALTER TABLE SOMMINISTRAZIONI ADD COLUMN seconda_dose INTEGER";
             db.execSQL(sql_query);
         }
     }
@@ -274,7 +286,7 @@ public class DB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         List<consegne_vaccini_data> lista = new ArrayList<>();
 
-        String sql_query = "select dosi_consegnate, a.nome_area, ultima_consegna, dosi_somministrate from ( select Sum(numero_dosi) as dosi_consegnate, DELIVERIES.nome_area, max(data_consegna) as ultima_consegna from DELIVERIES group by DELIVERIES.nome_area ) a inner join ( select sum(totale) as dosi_somministrate, nome_area from SOMMINISTRAZIONI group by nome_area ) b on b.nome_area = a.nome_area ";
+        String sql_query = "select dosi_consegnate, a.nome_area, ultima_consegna, dosi_somministrate, prima_dose from ( select Sum(numero_dosi) as dosi_consegnate, DELIVERIES.nome_area, max(data_consegna) as ultima_consegna from DELIVERIES group by DELIVERIES.nome_area ) a inner join ( select sum(totale) as dosi_somministrate, nome_area, sum(prima_dose) as prima_dose from SOMMINISTRAZIONI group by nome_area ) b on b.nome_area = a.nome_area ";
 
         Cursor c = db.rawQuery(sql_query, null);
         if (c.moveToFirst()){
@@ -285,6 +297,7 @@ public class DB extends SQLiteOpenHelper {
                 var.nome_area = c.getString(1);
                 var.data_consegna = c.getString(2);
                 var.dosi_somministrate = c.getInt(3);
+                var.prima_dose = c.getInt(4);
                 lista.add(var);
 
             } while(c.moveToNext());
@@ -438,10 +451,10 @@ public class DB extends SQLiteOpenHelper {
 
     public List<vaccini_summary_data> Get_vaccini_summary(String area_name)
     {
-        String sql_query = "SELECT area, dosi_somministrate, dosi_consegnate, ultimo_aggiornamento, nome_area from SUMMARY_BY_LOCATION ";
+        String sql_query = "SELECT area, dosi_somministrate, dosi_consegnate, ultimo_aggiornamento, SUMMARY_BY_LOCATION.nome_area, prima_dose from SUMMARY_BY_LOCATION inner join ( select nome_area, sum(prima_dose) as prima_dose from SOMMINISTRAZIONI group by nome_area ) b on b.nome_area = SUMMARY_BY_LOCATION.nome_area ";
 
         if (!area_name.equals(""))
-            sql_query+=" where nome_area=" + Validate_String(area_name);
+            sql_query+=" where SUMMARY_BY_LOCATION.nome_area=" + Validate_String(area_name);
 
         SQLiteDatabase db = this.getWritableDatabase();
         List<vaccini_summary_data> lista = new ArrayList<>();
@@ -456,6 +469,7 @@ public class DB extends SQLiteOpenHelper {
                 var.dosi_consegnate = c.getInt(2);
                 var.ultimo_aggiornamento = c.getString(3);
                 var.nome_area = c.getString(4);
+                var.prima_dose = c.getInt(5);
                 lista.add(var);
 
             } while(c.moveToNext());
@@ -479,7 +493,7 @@ public class DB extends SQLiteOpenHelper {
             List<String> sql_insert_values = new ArrayList<>();
 
             for (List<String> var : lista)
-                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         Common.get_int_from_Date(var.get(0)),
                         Validate_String(var.get(1)),
                         var.get(2),
@@ -490,9 +504,11 @@ public class DB extends SQLiteOpenHelper {
                         var.get(8),
                         var.get(9),
                         var.get(10),
-                        var.get(11)));
+                        var.get(11),
+                        var.get(12),
+                        var.get(13)));
 
-            Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_altro, categoria_ospiti_rsa, categoria_over80, categoria_forze_armate, categoria_personale_scolastico ) VALUES ", sql_insert_values);
+            Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_altro, categoria_ospiti_rsa, categoria_over80, categoria_forze_armate, categoria_personale_scolastico, prima_dose, seconda_dose ) VALUES ", sql_insert_values);
         }
 
         return true;

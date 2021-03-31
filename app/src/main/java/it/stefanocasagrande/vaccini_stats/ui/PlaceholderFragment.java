@@ -151,7 +151,7 @@ public class PlaceholderFragment extends Fragment {
 
                 if (popolazione>0)
                 {
-                    double percent = (((female+male)*100)/ (double)popolazione);
+                    double percent = (((female+male-second_dose)*100)/ (double)popolazione);
                     tv_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
                 }
             }
@@ -180,7 +180,7 @@ public class PlaceholderFragment extends Fragment {
 
                         if (popolazione>0)
                         {
-                            double percent = (((var.sesso_femminile+var.sesso_maschile)*100)/(double) popolazione);
+                            double percent = (((var.sesso_femminile+var.sesso_maschile-var.seconda_dose)*100)/(double) popolazione);
                             tv_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
                         }
                     }

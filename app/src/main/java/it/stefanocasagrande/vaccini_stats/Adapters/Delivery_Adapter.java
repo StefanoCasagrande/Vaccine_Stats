@@ -68,9 +68,9 @@ public class Delivery_Adapter extends ArrayAdapter<consegne_vaccini_data> {
         mViewHolder.secondText.setText(String.format("%s: %s", context.getString(R.string.Last_delivery), Common.get_dd_MM_yyyy(list.get(position).data_consegna)));
 
         int popolazione =  Common.Database.Get_Popolazione("", list.get(position).nome_area);
-        int somministrate = list.get(position).dosi_somministrate;
+        int somministrate_prima_dose = list.get(position).prima_dose;
 
-        double percent = (((somministrate)*100)/ (double)popolazione);
+        double percent = (((somministrate_prima_dose)*100)/ (double)popolazione);
 
         mViewHolder.tv_doses.setText(String.format("%.2f", percent) + "%");
 

@@ -143,6 +143,7 @@ public class fragment_delivery_details extends Fragment {
         List<vaccini_summary_data> list_administered = Common.Database.Get_vaccini_summary(area_name);
 
         int popolazione=Common.Database.Get_Popolazione("", list_to_load.get(0).nome_area);
+        int somministrate_prima_dose = list_administered.get(0).prima_dose;
         int somministrate = list_administered.get(0).dosi_somministrate;
 
         tv_location.setText(list_to_load.get(0).nome_area);
@@ -152,7 +153,7 @@ public class fragment_delivery_details extends Fragment {
 
         if (popolazione>0)
         {
-            double percent = (((somministrate)*100)/ (double)popolazione);
+            double percent = (((somministrate_prima_dose)*100)/ (double)popolazione);
             tv_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
         }
 

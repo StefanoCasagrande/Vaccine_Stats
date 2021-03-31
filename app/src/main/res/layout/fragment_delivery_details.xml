@@ -105,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
                         android:textColor="@color/Text_Small"
-                        android:text="@string/doses_administered"/>
+                        android:text="@string/doses_administered_first_second"/>
 
                 </LinearLayout>
 

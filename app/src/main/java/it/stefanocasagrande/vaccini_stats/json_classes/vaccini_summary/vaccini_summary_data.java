@@ -27,4 +27,6 @@ public class vaccini_summary_data implements Serializable {
     @Expose
     public String nome_area;
 
+    public Integer prima_dose;
+
 }
