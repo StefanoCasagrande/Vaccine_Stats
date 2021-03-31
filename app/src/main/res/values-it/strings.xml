@@ -3,7 +3,7 @@
     <!--translatable-->
     <string name="Italian_Situation">Situazione italiana</string>
     <string name="doses_administered">Dosi somministrate</string>
-    <string name="doses_administered_first_second">Doses Administered ( prima + seconda dose )</string>
+    <string name="doses_administered_first_second">Dosi somministrate\n( prima + seconda dose )</string>
     <string name="app_name">Report Vaccini</string>
     <string name="Vaccine_Detail">Dettaglio consegne</string>
     <string name="Vaccine_Detail_Small">Clicca sul grafico per maggiori info..</string>
@@ -77,7 +77,7 @@
 
     <string name="Start_Date">Data iniziale</string>
     <string name="End_Date">Data finale</string>
-    <string name="Media_Desc">Nel periodo indicato ( %1$s giorni ) sono stati somministrati in media %2$s vaccini al giorno. Clicca sulle date per imposare un diverso lasso temporale.</string>
+    <string name="Media_Desc">Nel periodo indicato ( %1$s giorni ) sono stati somministrati in media %2$s vaccini al giorno %3$s. Clicca sulle date per imposare un diverso lasso temporale.</string>
 
     <string name="Graph_Categories_Detail">Somministrazioni per categoria</string>
     <string name="Graph_Administered_Detail">Dettaglio somministrazioni al giorno</string>

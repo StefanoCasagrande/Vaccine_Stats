@@ -20,7 +20,7 @@
     <!--translatable-->
     <string name="Italian_Situation">Italian Situation</string>
     <string name="doses_administered">Doses Administered</string>
-    <string name="doses_administered_first_second">Doses Administered ( first + second doses)</string>
+    <string name="doses_administered_first_second">Doses Administered\n( first + second doses)</string>
     <string name="app_name">Vaccine Report</string>
     <string name="Vaccine_Detail">Deliveries Details</string>
     <string name="Vaccine_Detail_Small">Click on the graph for more info..</string>
@@ -105,7 +105,7 @@
 
     <string name="Start_Date">Start Date</string>
     <string name="End_Date">End Date</string>
-    <string name="Media_Desc">In the range selected ( %1$s days ) a media of %2$s vaccines a day have been administered</string>
+    <string name="Media_Desc">In the range selected ( %1$s days ) a media of %2$s vaccines a day have been administered  %3$s</string>
 
     <string name="Graph_Categories_Detail">Graph for category distribution</string>
     <string name="Graph_Administered_Detail">Graph for administered doses</string>

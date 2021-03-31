@@ -261,10 +261,7 @@ public class fragment_storico_andamento extends Fragment {
         Day=data_selezionata.substring(6,8);
         et_data_2.setText(String.format("%s/%s/%s", Day, Month, Year));
 
-        tv_media.setText(String.format(getString(R.string.Media_Desc), String.valueOf(lista.size()), Common.AddDotToInteger(totale/lista.size())));
-
-        if (!TextUtils.isEmpty(area_name))
-            tv_media.setText(String.format("%s %s %s", tv_media.getText(), getString(R.string.Area_Of), area_name));
+        tv_media.setText(String.format(getString(R.string.Media_Desc), String.valueOf(lista.size()), Common.AddDotToInteger(totale/lista.size()), (!TextUtils.isEmpty(area_name)? ( getString(R.string.Area_Of)+ " " + ((area_name))):"")));
 
         ArrayList<Entry> values = new ArrayList<>();
 
