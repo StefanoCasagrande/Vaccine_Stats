@@ -14,6 +14,8 @@
     <string name="Pfizer_BioNTech" translatable="false">Pfizer/BioNTech</string>
     <string name="Pfizer_BioNTech_Short" translatable="false">Pfizer</string>
     <string name="AstraZeneca" translatable="false">AstraZeneca</string>
+    <string name="AstraZeneca_2" translatable="false">Vaxzevria (AstraZeneca)</string>
+    <string name="janssen" translatable="false">janssen</string>
     <string name="Moderna" translatable="false">Moderna</string>
     <string name="Data" translatable="false">Data</string>
 
@@ -73,6 +75,7 @@
     <string name="law_enforcement">Law enforcement</string>
     <string name="School_Staff">School Staff</string>
     <string name="non_health_care_professional">Non health care professional</string>
+    <string name="Fragili">Fragili</string>
 
     <string name="First_Dose">First Dose</string>
     <string name="Second_Dose">Second Dose</string>
