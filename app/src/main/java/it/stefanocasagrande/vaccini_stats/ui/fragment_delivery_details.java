@@ -114,6 +114,7 @@ public class fragment_delivery_details extends Fragment {
             int categoria_forze_armate=0;
             int categoria_personale_scolastico = 0;
             int categoria_altro = 0;
+            int fragili=0;
 
             for (somministrazioni_data var : lista)
             {
@@ -122,7 +123,8 @@ public class fragment_delivery_details extends Fragment {
                 categoria_ospiti_rsa += var.categoria_ospiti_rsa;
                 categoria_forze_armate += var.categoria_forze_armate;
                 categoria_personale_scolastico += var.categoria_personale_scolastico;
-                categoria_altro += var.categoria_over80+var.categoria_over75+var.categoria_over70+var.categoria_altro;
+                fragili += var.categoria_fragili;
+                categoria_altro += var.categoria_over80+var.categoria_over75+var.categoria_over70+var.categoria_altro+var.categoria_60_69+var.categoria_70_79;
             }
                 ((MainActivity)getActivity()).Show_Graph(
                         categoria_operatori_sanitari_sociosanitari,
@@ -130,7 +132,8 @@ public class fragment_delivery_details extends Fragment {
                         categoria_ospiti_rsa,
                         categoria_forze_armate,
                         categoria_personale_scolastico,
-                        categoria_altro
+                        categoria_altro,
+                        fragili
                 );
         });
 
@@ -161,6 +164,7 @@ public class fragment_delivery_details extends Fragment {
         int doses_type2=0;
         int doses_type3=0;
         int doses_type4=0;
+        int doses_type5=0;
 
         String last_consegna="";
 
@@ -171,17 +175,19 @@ public class fragment_delivery_details extends Fragment {
 
             if (var.fornitore.toUpperCase().equals(getString(R.string.Pfizer_BioNTech).toUpperCase()))
                 doses_type1 += var.numero_dosi;
-            else if (var.fornitore.toUpperCase().equals(getString(R.string.AstraZeneca).toUpperCase()))
+            else if (var.fornitore.toUpperCase().equals(getString(R.string.AstraZeneca).toUpperCase()) || var.fornitore.toUpperCase().equals(getString(R.string.AstraZeneca_2).toUpperCase()))
                 doses_type2 += var.numero_dosi;
             else if (var.fornitore.toUpperCase().equals(getString(R.string.Moderna).toUpperCase()))
                 doses_type3 += var.numero_dosi;
-            else
+            else if (var.fornitore.toUpperCase().equals(getString(R.string.janssen).toUpperCase()))
                 doses_type4 += var.numero_dosi;
+            else
+                doses_type5 += var.numero_dosi;
         }
 
         tv_total_delivered_desc.setText(String.format("%s%s%s - %s", getString(R.string.Doses_Delivered), System.lineSeparator(), getString(R.string.Last_delivery), Common.get_dd_MM_yyyy(last_consegna)));
 
-        showPieChart(doses_type1, doses_type2, doses_type3, doses_type4);
+        showPieChart(doses_type1, doses_type2, doses_type3, doses_type4, doses_type5);
 
         return true;
     }
@@ -232,7 +238,7 @@ public class fragment_delivery_details extends Fragment {
 
     }
 
-    private void showPieChart(int doses_type1, int doses_type2, int doses_type3, int doses_type4){
+    private void showPieChart(int doses_type1, int doses_type2, int doses_type3, int doses_type4, int  doses_type5){
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
@@ -250,7 +256,12 @@ public class fragment_delivery_details extends Fragment {
 
         if (doses_type4>0) {
             colors.add(Color.parseColor("#7400b8"));
-            typeAmountMap.put(getString(R.string.Other_Vaccines), doses_type4);
+            typeAmountMap.put(getString(R.string.janssen), doses_type4);
+        }
+
+        if (doses_type5>0) {
+            colors.add(Color.parseColor("#00b874"));
+            typeAmountMap.put(getString(R.string.Other_Vaccines), doses_type5);
         }
 
         //input data and fit data into pie chart entry

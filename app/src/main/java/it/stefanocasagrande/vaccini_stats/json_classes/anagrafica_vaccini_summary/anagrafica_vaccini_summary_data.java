@@ -67,6 +67,18 @@ public class anagrafica_vaccini_summary_data implements Serializable {
     @Expose
     public Integer categoria_personale_scolastico;
 
+    @SerializedName("categoria_70_79")
+    @Expose
+    public Integer categoria_70_79;
+
+    @SerializedName("categoria_60_69")
+    @Expose
+    public Integer categoria_60_69;
+
+    @SerializedName("categoria_soggetti_fragili")
+    @Expose
+    public Integer categoria_soggetti_fragili;
+
     @SerializedName("prima_dose")
     @Expose
     public Integer prima_dose;

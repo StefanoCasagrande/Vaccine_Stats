@@ -249,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NotNull Call call, @NotNull Throwable t) {
                 Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
+                waiting_bar.dismiss();
             }
         });
     }
@@ -528,7 +529,7 @@ public class MainActivity extends AppCompatActivity {
 
     //region Graph Category
 
-    public void Show_Graph(int operatori_sanitari_sociosanitari, int personale_non_sanitario, int ospiti_rsa, int forze_armate, int personale_scolastico, int over_80)
+    public void Show_Graph(int operatori_sanitari_sociosanitari, int personale_non_sanitario, int ospiti_rsa, int forze_armate, int personale_scolastico, int altro, int fragili)
     {
         final Dialog custom_dialog = new Dialog(this);
         custom_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -541,9 +542,9 @@ public class MainActivity extends AppCompatActivity {
         Button btn_ok = custom_dialog.findViewById(R.id.btn_ok);
         btn_ok.setOnClickListener(v -> custom_dialog.cancel());
 
-        int totale = operatori_sanitari_sociosanitari+ personale_non_sanitario+ ospiti_rsa+ forze_armate+ personale_scolastico+ over_80;
+        int totale = operatori_sanitari_sociosanitari+ personale_non_sanitario+ ospiti_rsa+ forze_armate+ personale_scolastico+ altro+fragili;
 
-        showPieChart((double)(operatori_sanitari_sociosanitari*100)/totale, (double)(personale_non_sanitario*100)/totale, (double)(ospiti_rsa*100)/totale, (double)(forze_armate*100)/totale, (double)(personale_scolastico*100)/totale, (double)(over_80*100)/totale);
+        showPieChart((double)(operatori_sanitari_sociosanitari*100)/totale, (double)(personale_non_sanitario*100)/totale, (double)(ospiti_rsa*100)/totale, (double)(forze_armate*100)/totale, (double)(personale_scolastico*100)/totale, (double)(altro*100)/totale, (double)(fragili*100)/totale);
 
         custom_dialog.show();
     }
@@ -568,7 +569,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showPieChart(double operatori_sanitari_sociosanitari, double personale_non_sanitario, double ospiti_rsa, double forze_armate, double personale_scolastico, double over_80)
+    private void showPieChart(double operatori_sanitari_sociosanitari, double personale_non_sanitario, double ospiti_rsa, double forze_armate, double personale_scolastico, double altro, double fragili)
     {
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
@@ -591,9 +592,9 @@ public class MainActivity extends AppCompatActivity {
             colors.add(Color.parseColor("#8ecae6"));
         }
 
-        if (over_80>0)
+        if (altro>0)
         {
-            typeAmountMap.put(getString(R.string.Others),over_80);
+            typeAmountMap.put(getString(R.string.Others),altro);
             colors.add(Color.parseColor("#e07a5f"));
         }
 
@@ -616,7 +617,11 @@ public class MainActivity extends AppCompatActivity {
             colors.add(Color.parseColor("#fb8500"));
         }
 
-
+        if (fragili>0)
+        {
+            typeAmountMap.put(getString(R.string.Fragili),fragili);
+            colors.add(Color.parseColor("#999b84"));
+        }
 
         //input data and fit data into pie chart entry
         for(String type: typeAmountMap.keySet()){
@@ -800,7 +805,7 @@ public class MainActivity extends AppCompatActivity {
             File FilesPath = new File(var.getAbsolutePath());
             String dir = FilesPath.toString() + "/";
 
-            Common.Database.Insert_Somministrazioni(Read_CSV(dir+"somministrazioni_vaccini_summary_latest.csv", 18));
+            Common.Database.Insert_Somministrazioni(Read_CSV(dir+"somministrazioni_vaccini_summary_latest.csv", 21));
             waiting_bar.dismiss();
 
         }

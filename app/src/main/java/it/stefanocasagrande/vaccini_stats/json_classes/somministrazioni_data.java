@@ -15,5 +15,8 @@ public class somministrazioni_data {
     public Integer categoria_altro;
     public Integer categoria_forze_armate;
     public Integer categoria_personale_scolastico;
+    public Integer categoria_fragili;
+    public Integer categoria_70_79;
+    public Integer categoria_60_69;
 
 }

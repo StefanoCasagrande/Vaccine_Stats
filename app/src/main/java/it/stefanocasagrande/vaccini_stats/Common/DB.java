@@ -42,13 +42,13 @@ public class DB extends SQLiteOpenHelper {
         sql_query="CREATE TABLE DELIVERIES (id INTEGER PRIMARY KEY, area nvarchar(150), fornitore nvarchar(150), numero_dosi INTEGER, data_consegna nvarchar(24), codice_NUTS1 nvarchar(150), codice_NUTS2 nvarchar(150), codice_regione_ISTAT INTEGER, nome_area nvarchar(150))";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE SUMMARY_BY_AGE (id INTEGER PRIMARY KEY, fascia_anagrafica nvarchar(150), ultimo_aggiornamento nvarchar(150), totale INTEGER, sesso_maschile INTEGER, sesso_femminile INTEGER, categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_over75 INTEGER, categoria_over70 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, categoria_altro INTEGER, prima_dose INTEGER, seconda_dose INTEGER)";
+        sql_query="CREATE TABLE SUMMARY_BY_AGE (id INTEGER PRIMARY KEY, fascia_anagrafica nvarchar(150), ultimo_aggiornamento nvarchar(150), totale INTEGER, sesso_maschile INTEGER, sesso_femminile INTEGER, categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_over75 INTEGER, categoria_over70 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, categoria_altro INTEGER, categoria_70_79 INTEGER, categoria_60_69 INTEGER, categoria_soggetti_fragili INTEGER, prima_dose INTEGER, seconda_dose INTEGER)";
         sqLiteDatabase.execSQL(sql_query);
 
         sql_query="CREATE TABLE SUMMARY_BY_LOCATION (id INTEGER PRIMARY KEY, area nvarchar(150), dosi_somministrate INTEGER, dosi_consegnate INTEGER, ultimo_aggiornamento NVARCHAR(50), nome_area nvarchar(50))";
         sqLiteDatabase.execSQL(sql_query);
 
-        sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150), categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_over75 INTEGER, categoria_over70 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, categoria_altro INTEGER, prima_dose INTEGER, seconda_dose INTEGER)";
+        sql_query="CREATE TABLE SOMMINISTRAZIONI (id INTEGER PRIMARY KEY, data_somministrazione integer,area nvarchar(150),totale INTEGER, nome_area nvarchar(150), categoria_operatori_sanitari_sociosanitari INTEGER, categoria_personale_non_sanitario INTEGER, categoria_ospiti_rsa INTEGER, categoria_over80 INTEGER, categoria_over75 INTEGER, categoria_over70 INTEGER, categoria_forze_armate INTEGER, categoria_personale_scolastico INTEGER, categoria_altro INTEGER, categoria_70_79 INTEGER, categoria_60_69 INTEGER, categoria_soggetti_fragili INTEGER, prima_dose INTEGER, seconda_dose INTEGER)";
         sqLiteDatabase.execSQL(sql_query);
 
         sql_query="CREATE TABLE POPOLAZIONE (id INTEGER PRIMARY KEY, fascia_anagrafica nvarchar(150), territorio nvarchar(150), totale INTEGER)";
@@ -125,6 +125,30 @@ public class DB extends SQLiteOpenHelper {
         if (!doColumnExists("SOMMINISTRAZIONI", "seconda_dose",db))
         {
             sql_query="ALTER TABLE SOMMINISTRAZIONI ADD COLUMN seconda_dose INTEGER";
+            db.execSQL(sql_query);
+        }
+
+        if (!doColumnExists("SOMMINISTRAZIONI", "categoria_70_79",db))
+        {
+            sql_query="ALTER TABLE SOMMINISTRAZIONI ADD COLUMN categoria_70_79 INTEGER";
+            db.execSQL(sql_query);
+
+            sql_query="ALTER TABLE SOMMINISTRAZIONI ADD COLUMN categoria_60_69 INTEGER";
+            db.execSQL(sql_query);
+
+            sql_query="ALTER TABLE SOMMINISTRAZIONI ADD COLUMN categoria_soggetti_fragili INTEGER";
+            db.execSQL(sql_query);
+        }
+
+        if (!doColumnExists("SUMMARY_BY_AGE", "categoria_70_79",db))
+        {
+            sql_query="ALTER TABLE SUMMARY_BY_AGE ADD COLUMN categoria_70_79 INTEGER";
+            db.execSQL(sql_query);
+
+            sql_query="ALTER TABLE SUMMARY_BY_AGE ADD COLUMN categoria_60_69 INTEGER";
+            db.execSQL(sql_query);
+
+            sql_query="ALTER TABLE SUMMARY_BY_AGE ADD COLUMN categoria_soggetti_fragili INTEGER";
             db.execSQL(sql_query);
         }
     }
@@ -348,7 +372,7 @@ public class DB extends SQLiteOpenHelper {
             List<String> sql_insert_values = new ArrayList<>();
 
             for (anagrafica_vaccini_summary_data var : lista)
-                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         Validate_String(var.fascia_anagrafica),
                         var.totale,
                         var.sesso_maschile,
@@ -362,12 +386,15 @@ public class DB extends SQLiteOpenHelper {
                         var.categoria_altro,
                         var.categoria_forze_armate,
                         var.categoria_personale_scolastico,
+                        var.categoria_60_69,
+                        var.categoria_70_79,
+                        var.categoria_soggetti_fragili,
                         var.prima_dose,
                         var.seconda_dose,
                         Validate_String(var.ultimo_aggiornamento)
                 ));
 
-            Insert_Multi("INSERT INTO SUMMARY_BY_AGE ( fascia_anagrafica, totale, sesso_maschile, sesso_femminile, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_ospiti_rsa, categoria_over80, categoria_over75, categoria_over70, categoria_altro, categoria_forze_armate, categoria_personale_scolastico, prima_dose, seconda_dose, ultimo_aggiornamento ) VALUES ", sql_insert_values);
+            Insert_Multi("INSERT INTO SUMMARY_BY_AGE ( fascia_anagrafica, totale, sesso_maschile, sesso_femminile, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_ospiti_rsa, categoria_over80, categoria_over75, categoria_over70, categoria_altro, categoria_forze_armate, categoria_personale_scolastico, categoria_60_69, categoria_70_79, categoria_soggetti_fragili, prima_dose, seconda_dose, ultimo_aggiornamento ) VALUES ", sql_insert_values);
         }
 
         return true;
@@ -385,7 +412,7 @@ public class DB extends SQLiteOpenHelper {
 
     public List<anagrafica_vaccini_summary_data> Get_anagrafica_vaccini_summary()
     {
-        String sql_query = "SELECT fascia_anagrafica, totale, sesso_maschile, sesso_femminile, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_ospiti_rsa, categoria_over80, categoria_over75, categoria_over70, categoria_forze_armate, categoria_personale_scolastico, categoria_altro, prima_dose, seconda_dose, ultimo_aggiornamento from SUMMARY_BY_AGE ";
+        String sql_query = "SELECT fascia_anagrafica, totale, sesso_maschile, sesso_femminile, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_ospiti_rsa, categoria_over80, categoria_over75, categoria_over70, categoria_forze_armate, categoria_personale_scolastico, categoria_altro, categoria_60_69, categoria_70_79, categoria_soggetti_fragili, prima_dose, seconda_dose, ultimo_aggiornamento from SUMMARY_BY_AGE ";
 
         SQLiteDatabase db = this.getWritableDatabase();
         List<anagrafica_vaccini_summary_data> lista = new ArrayList<>();
@@ -408,9 +435,12 @@ public class DB extends SQLiteOpenHelper {
                 var.categoria_forze_armate = c.getInt(10);
                 var.categoria_personale_scolastico = c.getInt(11);
                 var.categoria_altro = c.getInt(12);
-                var.prima_dose = c.getInt(13);
-                var.seconda_dose = c.getInt(14);
-                var.ultimo_aggiornamento = c.getString(15);
+                var.categoria_60_69 = c.getInt(13);
+                var.categoria_70_79 = c.getInt(14);
+                var.categoria_soggetti_fragili = c.getInt(15);
+                var.prima_dose = c.getInt(16);
+                var.seconda_dose = c.getInt(17);
+                var.ultimo_aggiornamento = c.getString(18);
                 lista.add(var);
 
             } while(c.moveToNext());
@@ -493,22 +523,25 @@ public class DB extends SQLiteOpenHelper {
             List<String> sql_insert_values = new ArrayList<>();
 
             for (List<String> var : lista)
-                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         Common.get_int_from_Date(var.get(0)),
                         Validate_String(var.get(1)),
                         var.get(2),
-                        Validate_String(var.get(17)),
-                        var.get(5),
-                        var.get(6),
-                        var.get(7),
-                        var.get(8),
-                        var.get(9),
-                        var.get(10),
-                        var.get(11),
-                        var.get(12),
-                        var.get(13)));
+                        Validate_String(var.get(20)),
+                        var.get(5),         // sanitario
+                        var.get(6),         // non sanitario
+                        var.get(14),        // altro
+                        var.get(7),         // rsa
+                        var.get(11),        // over80
+                        var.get(13),        // forze armate
+                        var.get(8),         // scolastico
+                        var.get(10),        // 70-79
+                        var.get(9),         // 60-69
+                        var.get(12),        // fragili
+                        var.get(15),        // prima dose
+                        var.get(16)));      // seconda dose
 
-            Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_altro, categoria_ospiti_rsa, categoria_over80, categoria_forze_armate, categoria_personale_scolastico, prima_dose, seconda_dose ) VALUES ", sql_insert_values);
+            Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_altro, categoria_ospiti_rsa, categoria_over80, categoria_forze_armate, categoria_personale_scolastico, categoria_70_79, categoria_60_69, categoria_soggetti_fragili, prima_dose, seconda_dose ) VALUES ", sql_insert_values);
         }
 
         return true;
@@ -534,7 +567,7 @@ public class DB extends SQLiteOpenHelper {
 
     public List<somministrazioni_data> get_Somministrazioni(int start_date, int end_date, String area_name)
     {
-        String sql_query = "SELECT data_somministrazione,sum(totale), sum(categoria_operatori_sanitari_sociosanitari), sum(categoria_personale_non_sanitario), sum(categoria_ospiti_rsa), sum(categoria_over80), sum(categoria_over70), sum(categoria_over75), sum(categoria_forze_armate), sum(categoria_personale_scolastico), sum(categoria_altro) from SOMMINISTRAZIONI  ";
+        String sql_query = "SELECT data_somministrazione,sum(totale), sum(categoria_operatori_sanitari_sociosanitari), sum(categoria_personale_non_sanitario), sum(categoria_ospiti_rsa), sum(categoria_over80), sum(categoria_over70), sum(categoria_over75), sum(categoria_forze_armate), sum(categoria_personale_scolastico), sum(categoria_altro), sum(categoria_soggetti_fragili), sum(categoria_70_79), sum(categoria_60_69) from SOMMINISTRAZIONI  ";
 
         sql_query +=String.format(" where data_somministrazione between %s and %s ", start_date, end_date);
 
@@ -562,6 +595,9 @@ public class DB extends SQLiteOpenHelper {
                 var.categoria_forze_armate = c.getInt(8);
                 var.categoria_personale_scolastico = c.getInt(9);
                 var.categoria_altro=c.getInt(10);
+                var.categoria_fragili = c.getInt(11);
+                var.categoria_70_79 = c.getInt(12);
+                var.categoria_60_69 = c.getInt(13);
                 lista.add(var);
 
             } while(c.moveToNext());

@@ -68,6 +68,7 @@ public class PlaceholderFragment extends Fragment {
         final TextView tv_law_enforcement = root.findViewById(R.id.tv_law_enforcement);
         final TextView tv_non_healtcare = root.findViewById(R.id.tv_non_healtcare);
         final TextView tv_school_staff = root.findViewById(R.id.tv_school_staff);
+        final TextView tv_fragili = root.findViewById(R.id.tv_fragili);
 
         final TextView tv_age_click_for_graph = root.findViewById(R.id.tv_age_click_for_graph);
 
@@ -81,7 +82,8 @@ public class PlaceholderFragment extends Fragment {
                         Integer.parseInt(tv_ospiti_rsa.getText().toString().replace(".","")),
                         Integer.parseInt(tv_law_enforcement.getText().toString().replace(".","")),
                         Integer.parseInt(tv_school_staff.getText().toString().replace(".","")),
-                        Integer.parseInt(tv_others.getText().toString().replace(".",""))
+                        Integer.parseInt(tv_others.getText().toString().replace(".","")),
+                        Integer.parseInt(tv_fragili.getText().toString().replace(".",""))
                 );
             }
             else
@@ -117,6 +119,7 @@ public class PlaceholderFragment extends Fragment {
                 int categoria_forze_armate=0;
                 int categoria_personale_scolastico=0;
                 int categoria_personale_non_sanitario=0;
+                int fragili=0;
                 int first_dose=0;
                 int second_dose=0;
 
@@ -131,10 +134,11 @@ public class PlaceholderFragment extends Fragment {
                     female+=var.sesso_femminile;
                     categoria_operatori_sanitari_sociosanitari+=var.categoria_operatori_sanitari_sociosanitari;
                     categoria_ospiti_rsa+=var.categoria_ospiti_rsa;
-                    categoria_altro+=var.categoria_over80+var.categoria_over75+var.categoria_over70+var.categoria_altro;
+                    categoria_altro+=var.categoria_over80+var.categoria_over75+var.categoria_over70+var.categoria_altro+var.categoria_70_79+var.categoria_60_69;
                     categoria_forze_armate+=var.categoria_forze_armate;
                     categoria_personale_scolastico+=var.categoria_personale_scolastico;
                     categoria_personale_non_sanitario+=var.categoria_personale_non_sanitario;
+                    fragili+=var.categoria_soggetti_fragili;
                     first_dose+=var.prima_dose;
                     second_dose+=var.seconda_dose;
                 }
@@ -148,6 +152,7 @@ public class PlaceholderFragment extends Fragment {
                 tv_law_enforcement.setText(Common.AddDotToInteger(categoria_forze_armate));
                 tv_school_staff.setText(Common.AddDotToInteger(categoria_personale_scolastico));
                 tv_non_healtcare.setText(Common.AddDotToInteger(categoria_personale_non_sanitario));
+                tv_fragili.setText(Common.AddDotToInteger(fragili));
 
                 if (popolazione>0)
                 {
@@ -173,10 +178,11 @@ public class PlaceholderFragment extends Fragment {
 
                         tv_operatori_sanitari.setText(Common.AddDotToInteger(var.categoria_operatori_sanitari_sociosanitari));
                         tv_ospiti_rsa.setText(Common.AddDotToInteger(var.categoria_ospiti_rsa));
-                        tv_others.setText(Common.AddDotToInteger(var.categoria_over80+var.categoria_over75+var.categoria_over70+var.categoria_altro));
+                        tv_others.setText(Common.AddDotToInteger(var.categoria_over80+var.categoria_over75+var.categoria_over70+var.categoria_altro+var.categoria_60_69+var.categoria_70_79));
                         tv_law_enforcement.setText(Common.AddDotToInteger(var.categoria_forze_armate));
                         tv_school_staff.setText(Common.AddDotToInteger(var.categoria_personale_scolastico));
                         tv_non_healtcare.setText(Common.AddDotToInteger(var.categoria_personale_non_sanitario));
+                        tv_fragili.setText(Common.AddDotToInteger(var.categoria_soggetti_fragili));
 
                         if (popolazione>0)
                         {

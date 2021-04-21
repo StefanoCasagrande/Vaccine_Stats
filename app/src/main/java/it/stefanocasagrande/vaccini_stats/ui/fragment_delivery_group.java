@@ -113,20 +113,23 @@ public class fragment_delivery_group extends Fragment {
         int doses_type2=0;
         int doses_type3=0;
         int doses_type4=0;
+        int doses_type5=0;
 
         for (consegne_vaccini_data var : Common.Database.Get_Deliveries(""))
         {
             if (var.fornitore.toUpperCase().equals(getString(R.string.Pfizer_BioNTech).toUpperCase()))
                 doses_type1 += var.numero_dosi;
-            else if (var.fornitore.toUpperCase().equals(getString(R.string.AstraZeneca).toUpperCase()))
+            else if (var.fornitore.toUpperCase().equals(getString(R.string.AstraZeneca).toUpperCase()) || var.fornitore.toUpperCase().equals(getString(R.string.AstraZeneca_2).toUpperCase()))
                 doses_type2 += var.numero_dosi;
             else if (var.fornitore.toUpperCase().equals(getString(R.string.Moderna).toUpperCase()))
                 doses_type3 += var.numero_dosi;
-            else
+            else if (var.fornitore.toUpperCase().equals(getString(R.string.janssen).toUpperCase()))
                 doses_type4 += var.numero_dosi;
+            else
+                doses_type5 += var.numero_dosi;
         }
 
-        tv_total_delivered.setText(Common.AddDotToInteger(doses_type1+doses_type2+doses_type3+doses_type4));
+        tv_total_delivered.setText(Common.AddDotToInteger(doses_type1+doses_type2+doses_type3+doses_type4+doses_type5));
 
         List<vaccini_summary_data> list_administered = Common.Database.Get_vaccini_summary("");
         int administered=0;
