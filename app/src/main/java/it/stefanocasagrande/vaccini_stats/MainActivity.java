@@ -688,26 +688,19 @@ public class MainActivity extends AppCompatActivity {
         BufferedReader buffreader = new BufferedReader(inputreader);
 
         String myLine;
-        int i=0;
-
         try {
         while((myLine=buffreader.readLine())!=null)
         {
-            i++;
-
-            if(i==1)
-                continue; //La prima riga contiene l'intestazione
-
             if (myLine.endsWith(","))
                 myLine=myLine+" ";
 
             String[] values = myLine.split(",");
 
             List<String> valori = new ArrayList<>();
-            if(values.length != numero_campi )
+            if(values.length < numero_campi )
                 continue;
             else
-                valori.addAll(Arrays.asList(values).subList(0, numero_campi));
+                valori.addAll(Arrays.asList(values));
 
             list.add(valori);
         }

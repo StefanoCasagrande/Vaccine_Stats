@@ -6,20 +6,12 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.stefanocasagrande.vaccini_stats.MainActivity;
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.somministrazioni_data;
@@ -407,7 +399,10 @@ public class DB extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(sql_query, null);
 
         c.moveToFirst();
-        return c.getInt(0);
+        int valore =  c.getInt(0);
+
+        c.close();
+        return valore;
     }
 
     public List<anagrafica_vaccini_summary_data> Get_anagrafica_vaccini_summary()
@@ -515,31 +510,138 @@ public class DB extends SQLiteOpenHelper {
     //region SOMMINISTRAZIONI
 
     public boolean Insert_Somministrazioni(List<List<String>> lista) {
-        if (lista.size() == 0)
+
+        if (lista.size() <2)
             return false;
 
         if (Delete("SOMMINISTRAZIONI", "")) {
 
             List<String> sql_insert_values = new ArrayList<>();
 
+            int i =0;
+            int posizione_data_somministrazione=0;
+            int posizione_area=0;
+            int posizione_totale=0;
+            int posizione_sesso_maschile=0;
+            int posizione_sesso_femminile=0;
+            int posizione_categoria_operatori_sanitari_sociosanitari=0;
+            int posizione_categoria_personale_non_sanitario=0;
+            int posizione_categoria_ospiti_rsa=0;
+            int posizione_categoria_personale_scolastico=0;
+            int posizione_categoria_60_69=0;
+            int posizione_categoria_70_79=0;
+            int posizione_categoria_over80=0;
+            int posizione_categoria_soggetti_fragili=0;
+            int posizione_categoria_forze_armate=0;
+            int posizione_categoria_altro=0;
+            int posizione_prima_dose=0;
+            int posizione_seconda_dose=0;
+            int posizione_codice_NUTS1=0;
+            int posizione_codice_NUTS2=0;
+            int posizione_codice_regione_ISTAT=0;
+            int posizione_nome_area=0;
+
             for (List<String> var : lista)
-                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                        Common.get_int_from_Date(var.get(0)),
-                        Validate_String(var.get(1)),
-                        var.get(2),
-                        Validate_String(var.get(20)),
-                        var.get(5),         // sanitario
-                        var.get(6),         // non sanitario
-                        var.get(14),        // altro
-                        var.get(7),         // rsa
-                        var.get(11),        // over80
-                        var.get(13),        // forze armate
-                        var.get(8),         // scolastico
-                        var.get(10),        // 70-79
-                        var.get(9),         // 60-69
-                        var.get(12),        // fragili
-                        var.get(15),        // prima dose
-                        var.get(16)));      // seconda dose
+            {
+                if (i==0)
+                {
+                    i=i+1;
+                    /*
+                    ,,,,,,,,,,,,,,
+                     */
+
+
+                    for (int posizione=0;posizione<var.size();posizione++)
+                    {
+                        switch (var.get(posizione).toLowerCase())
+                        {
+                            case "data_somministrazione":
+                                posizione_data_somministrazione=posizione;
+                                break;
+                            case "area":
+                                posizione_area=posizione;
+                                break;
+                            case "totale":
+                                posizione_totale=posizione;
+                                break;
+                            case "sesso_maschile":
+                                posizione_sesso_maschile=posizione;
+                                break;
+                            case "sesso_femminile":
+                                posizione_sesso_femminile=posizione;
+                                break;
+                            case "categoria_operatori_sanitari_sociosanitari":
+                                posizione_categoria_operatori_sanitari_sociosanitari=posizione;
+                                break;
+                            case "categoria_personale_non_sanitario":
+                                posizione_categoria_personale_non_sanitario=posizione;
+                                break;
+                            case "categoria_ospiti_rsa":
+                                posizione_categoria_ospiti_rsa=posizione;
+                                break;
+                            case "categoria_personale_scolastico":
+                                posizione_categoria_personale_scolastico=posizione;
+                                break;
+                            case "categoria_60_69":
+                                posizione_categoria_60_69=posizione;
+                                break;
+                            case "categoria_70_79":
+                                posizione_categoria_70_79=posizione;
+                                break;
+                            case "categoria_over80":
+                                posizione_categoria_over80=posizione;
+                                break;
+                            case "categoria_soggetti_fragili":
+                                posizione_categoria_soggetti_fragili=posizione;
+                                break;
+                            case "categoria_forze_armate":
+                                posizione_categoria_forze_armate=posizione;
+                                break;
+                            case "categoria_altro":
+                                posizione_categoria_altro=posizione;
+                                break;
+                            case "prima_dose":
+                                posizione_prima_dose=posizione;
+                                break;
+                            case "seconda_dose":
+                                posizione_seconda_dose=posizione;
+                                break;
+                            case "codice_NUTS1":
+                                posizione_codice_NUTS1=posizione;
+                                break;
+                            case "codice_NUTS2":
+                                posizione_codice_NUTS2=posizione;
+                                break;
+                            case "codice_regione_ISTAT":
+                                posizione_codice_regione_ISTAT=posizione;
+                                break;
+                            case "nome_area":
+                                posizione_nome_area=posizione;
+                                break;
+                        }
+                    }
+                }
+                else {
+
+                    sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                            Common.get_int_from_Date(var.get(posizione_data_somministrazione)),
+                            Validate_String(var.get(posizione_area)),
+                            var.get(posizione_totale),
+                            Validate_String(var.get(posizione_nome_area)),
+                            var.get(posizione_categoria_operatori_sanitari_sociosanitari),         // sanitario
+                            var.get(posizione_categoria_personale_non_sanitario),         // non sanitario
+                            var.get(posizione_categoria_altro),        // altro
+                            var.get(posizione_categoria_ospiti_rsa),         // rsa
+                            var.get(posizione_categoria_over80),        // over80
+                            var.get(posizione_categoria_forze_armate),        // forze armate
+                            var.get(posizione_categoria_personale_scolastico),         // scolastico
+                            var.get(posizione_categoria_70_79),        // 70-79
+                            var.get(posizione_categoria_60_69),         // 60-69
+                            var.get(posizione_categoria_soggetti_fragili),        // fragili
+                            var.get(posizione_prima_dose),        // prima dose
+                            var.get(posizione_seconda_dose)));      // seconda dose
+                }
+            }
 
             Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area, categoria_operatori_sanitari_sociosanitari, categoria_personale_non_sanitario, categoria_altro, categoria_ospiti_rsa, categoria_over80, categoria_forze_armate, categoria_personale_scolastico, categoria_70_79, categoria_60_69, categoria_soggetti_fragili, prima_dose, seconda_dose ) VALUES ", sql_insert_values);
         }
@@ -618,11 +720,43 @@ public class DB extends SQLiteOpenHelper {
 
             List<String> sql_insert_values = new ArrayList<>();
 
+            int posizione_age=0;
+            int posizione_location=0;
+            int posizione_total=0;
+
+            int i=0;
+
             for (List<String> var : lista)
-                sql_insert_values.add(String.format("(%s, %s, %s)",
-                        Validate_String(var.get(0)),
-                        Validate_String(var.get(1)),
-                        var.get(2)));
+            {
+                if (i==0)
+                {
+                    i+=1;
+
+                    for(int posizione=0;posizione<var.size();posizione++)
+                    {
+                        switch (var.get(posizione).toLowerCase())
+                        {
+                            case "age":
+                                posizione_age=posizione;
+                                break;
+                            case "location":
+                                posizione_location=posizione;
+                                break;
+                            case "total":
+                                posizione_total=posizione;
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    sql_insert_values.add(String.format("(%s, %s, %s)",
+                            Validate_String(var.get(posizione_age)),
+                            Validate_String(var.get(posizione_location)),
+                            var.get(posizione_total)));
+                }
+            }
+
 
             Insert_Multi("INSERT INTO POPOLAZIONE ( fascia_anagrafica, territorio, totale ) VALUES ", sql_insert_values);
         }
