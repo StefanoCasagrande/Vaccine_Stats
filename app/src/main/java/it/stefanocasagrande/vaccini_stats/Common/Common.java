@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import it.stefanocasagrande.vaccini_stats.R;
 
 public class Common {
 
@@ -70,9 +67,7 @@ public class Common {
     {
         try {
             DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-            Date date = format.parse(value);
-
-            return date;
+            return format.parse(value);
         }
         catch (ParseException ex)
         {

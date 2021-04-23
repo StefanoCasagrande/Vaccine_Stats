@@ -15,8 +15,6 @@ import it.stefanocasagrande.vaccini_stats.Common.Common;
 import it.stefanocasagrande.vaccini_stats.R;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
 
-import static it.stefanocasagrande.vaccini_stats.Common.Common.AddDotToInteger;
-
 public class Delivery_Adapter extends ArrayAdapter<consegne_vaccini_data> {
 
     private final List<consegne_vaccini_data> list;
@@ -72,7 +70,7 @@ public class Delivery_Adapter extends ArrayAdapter<consegne_vaccini_data> {
 
         double percent = (((somministrate_prima_dose)*100)/ (double)popolazione);
 
-        mViewHolder.tv_doses.setText(String.format("%.2f", percent) + "%");
+        mViewHolder.tv_doses.setText(String.format("%.2f%%", percent));
 
         return convertView;
     }

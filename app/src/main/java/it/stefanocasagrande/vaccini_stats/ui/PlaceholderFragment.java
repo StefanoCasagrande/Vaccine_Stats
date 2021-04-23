@@ -1,6 +1,5 @@
 package it.stefanocasagrande.vaccini_stats.ui;
 
-import android.app.AppOpsManager;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -103,7 +102,7 @@ public class PlaceholderFragment extends Fragment {
 
             final ProgressDialog waiting_bar = ((MainActivity)getActivity()).getprogressDialog();
             waiting_bar.show();
-            int popolazione=0;
+            int popolazione;
 
             if (s.equals("Totale"))
             {

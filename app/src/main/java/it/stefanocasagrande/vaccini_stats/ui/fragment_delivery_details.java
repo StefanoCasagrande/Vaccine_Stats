@@ -99,9 +99,7 @@ public class fragment_delivery_details extends Fragment {
         hideKeyboard(getActivity());
 
         Button btn_doses_administered_detail = v.findViewById(R.id.btn_doses_administered_detail);
-        btn_doses_administered_detail.setOnClickListener(v2 -> {
-            ((MainActivity)getActivity()).Show_Administered_Doses_per_Area(area_name);
-        });
+        btn_doses_administered_detail.setOnClickListener(v2 -> ((MainActivity)getActivity()).Show_Administered_Doses_per_Area(area_name));
 
         Button btn_category_graph = v.findViewById(R.id.btn_category_graph);
         btn_category_graph.setOnClickListener(v2 -> {
