@@ -87,14 +87,20 @@ public class fragment_previsioni extends Fragment {
             c.setTime(new Date());
             c.add(Calendar.DATE, (int)giorni);
 
-            tv_herd_immunity_text.setText(Html.fromHtml(String.format(getString(R.string.Herd_Immunity_Text), Common.AddDotToInteger(media_vaccinazioni_7_giorni), "<b>" + (((int) giorni)) +"</b>", "<b>" + sdf.format(c.getTime()) +"</b>")));
+            if (giorni>0)
+                tv_herd_immunity_text.setText(Html.fromHtml(String.format(getString(R.string.Herd_Immunity_Text), Common.AddDotToInteger(media_vaccinazioni_7_giorni), "<b>" + (((int) giorni)) +"</b>", "<b>" + sdf.format(c.getTime()) +"</b>")));
+            else
+                tv_herd_immunity_text.setText(Html.fromHtml(String.format(getString(R.string.Herd_Immunity_Reached), sdf.format(c.getTime()) +"</b>")));
 
             float giorni_massa = (float)((fascia_rischio*2)-vaccinati)/media_vaccinazioni_7_giorni;
 
             c.setTime(new Date());
             c.add(Calendar.DATE, (int)giorni_massa);
 
-            tv_vaccinazione_massa_text.setText(Html.fromHtml(String.format(getString(R.string.Vaccinazione_Massa_Text), "<b>" + (((int) giorni_massa)) +"</b>", "<b>" + sdf.format(c.getTime()) +"</b>")));
+            if (giorni_massa>0)
+                tv_vaccinazione_massa_text.setText(Html.fromHtml(String.format(getString(R.string.Vaccinazione_Massa_Text), "<b>" + (((int) giorni_massa)) +"</b>", "<b>" + sdf.format(c.getTime()) +"</b>")));
+            else
+                 tv_vaccinazione_massa_text.setText(Html.fromHtml(getString(R.string.Vaccinazione_Massa_Reached)));
 
             DecimalFormat df = new DecimalFormat();
             df.setMaximumFractionDigits(2);
