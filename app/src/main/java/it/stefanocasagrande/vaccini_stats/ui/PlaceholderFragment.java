@@ -86,13 +86,6 @@ public class PlaceholderFragment extends Fragment {
                 tv_age.setText(getString(R.string.General_Data));
                 int male=0;
                 int female=0;
-                int categoria_operatori_sanitari_sociosanitari=0;
-                int categoria_ospiti_rsa=0;
-                int categoria_altro=0;
-                int categoria_forze_armate=0;
-                int categoria_personale_scolastico=0;
-                int categoria_personale_non_sanitario=0;
-                int fragili=0;
                 int first_dose=0;
                 int second_dose=0;
 
@@ -105,13 +98,6 @@ public class PlaceholderFragment extends Fragment {
                 for(anagrafica_vaccini_summary_data var : lista) {
                     male+=var.sesso_maschile;
                     female+=var.sesso_femminile;
-                    categoria_operatori_sanitari_sociosanitari+=var.categoria_operatori_sanitari_sociosanitari;
-                    categoria_ospiti_rsa+=var.categoria_ospiti_rsa;
-                    categoria_altro+=var.categoria_over80+var.categoria_over75+var.categoria_over70+var.categoria_altro+var.categoria_70_79+var.categoria_60_69;
-                    categoria_forze_armate+=var.categoria_forze_armate;
-                    categoria_personale_scolastico+=var.categoria_personale_scolastico;
-                    categoria_personale_non_sanitario+=var.categoria_personale_non_sanitario;
-                    fragili+=var.categoria_soggetti_fragili;
                     first_dose+=var.prima_dose;
                     second_dose+=var.seconda_dose;
                 }
