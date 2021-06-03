@@ -4,14 +4,14 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "it.stefanocasagrande.vaccini_stats"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 1059
-        versionName "1.0.5.9"
+        versionCode 1061
+        versionName "1.0.6.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
