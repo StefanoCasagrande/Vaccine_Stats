@@ -15,7 +15,7 @@ public class PageViewModel extends ViewModel {
             case 1:
                 return "Totale";
             case 2:
-                return "16-19";
+                return "12-19";
             case 3:
                 return "20-29";
             case 4:

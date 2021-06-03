@@ -59,7 +59,7 @@
     <string name="Age_Group">Age group</string>
 
     <string name="tab_text_1">Totale</string>
-    <string name="tab_text_2" translatable="false">16-19</string>
+    <string name="tab_text_2" translatable="false">12-19</string>
     <string name="tab_text_3" translatable="false">20-29</string>
     <string name="tab_text_4" translatable="false">30-39</string>
     <string name="tab_text_5" translatable="false">40-49</string>
