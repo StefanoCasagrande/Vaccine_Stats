@@ -318,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getCSVsomministrazione() throws IOException {
-        new DownloadFileFromURL().execute("");
+        new DownloadFileSomministrazioni().execute("");
     }
 
     //endregion
@@ -730,7 +730,7 @@ public class MainActivity extends AppCompatActivity {
         return list;
     }
 
-    class DownloadFileFromURL extends AsyncTask<String, String, String> {
+    class DownloadFileSomministrazioni extends AsyncTask<String, String, String> {
 
         /**
          * Before starting background thread
