@@ -430,7 +430,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (GlobalVariables.isNetworkConnected)
                 {
-                    Common.Database.Set_Configurazione("ultimo_aggiornamento","20200101");
+                    Common.Database.Set_Configurazione("ultimo_aggiornamento","2020-01-01");
                     Common.Data_Already_Loaded=false;
                     goToSummary();
                 }
