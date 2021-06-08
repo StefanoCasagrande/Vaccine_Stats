@@ -9,6 +9,8 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +63,9 @@ public class DB extends SQLiteOpenHelper {
         db.execSQL(sql_query);
 
         sql_query="CREATE TABLE if not exists POPOLAZIONE (id INTEGER PRIMARY KEY, fascia_anagrafica nvarchar(150), territorio nvarchar(150), totale INTEGER)";
+        db.execSQL(sql_query);
+
+        sql_query="CREATE TABLE if not exists SUMMARY_BY_LOCATION_AGE (id INTEGER PRIMARY KEY, area nvarchar(150), fascia_anagrafica nvarchar(150), prima_dose INTEGER, seconda_dose INTEGER)";
         db.execSQL(sql_query);
 
         if (!doColumnExists("SOMMINISTRAZIONI", "prima_dose",db))
@@ -351,6 +356,86 @@ public class DB extends SQLiteOpenHelper {
         db.close();
 
         return lista;
+    }
+
+    //endregion
+
+    //region Anagrafica Regione
+
+    private List<String> get_Area_List()
+    {
+        String sql_query="select area from SUMMARY_BY_LOCATION group by area";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<String> lista = new ArrayList<>();
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()) {
+            do {
+                lista.add(c.getString(0));
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return lista;
+    }
+
+    private List<String> get_Eta_List()
+    {
+        String sql_query="select fascia_anagrafica from SUMMARY_BY_AGE group by fascia_anagrafica";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<String> lista = new ArrayList<>();
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()) {
+            do {
+                lista.add(c.getString(0));
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return lista;
+    }
+
+    public boolean Insert_Anagrafica_Regione(JsonObject lista_anagrafica_regione)
+    {
+        if (lista_anagrafica_regione==null)
+            return false;
+
+        List<String> sql_insert_values = new ArrayList<>();
+
+        if (Delete("SUMMARY_BY_LOCATION_AGE", "")) {
+
+            List<String> lista_area = get_Area_List();
+            List<String> lista_eta = get_Eta_List();
+
+            for(String area : lista_area)
+            {
+                for(String eta : lista_eta)
+                {
+                    if (lista_anagrafica_regione.getAsJsonObject("dataset")==null || lista_anagrafica_regione.getAsJsonObject("dataset").getAsJsonObject(area)==null || lista_anagrafica_regione.getAsJsonObject("dataset").getAsJsonObject(area).getAsJsonObject(eta)==null)
+                        break;
+
+                    int prima_dose = lista_anagrafica_regione.getAsJsonObject("dataset").getAsJsonObject(area).getAsJsonObject(eta).get("prima_dose").getAsInt();
+                    int seconda_dose = lista_anagrafica_regione.getAsJsonObject("dataset").getAsJsonObject(area).getAsJsonObject(eta).get("prima_dose").getAsInt();
+
+                    sql_insert_values.add(String.format("(%s, %s, %s, %s)",
+                            Validate_String(eta),
+                            Validate_String(area),
+                            prima_dose,
+                            seconda_dose
+                    ));
+
+                }
+            }
+
+            Insert_Multi("INSERT INTO SUMMARY_BY_LOCATION_AGE ( fascia_anagrafica, area, prima_dose, seconda_dose ) VALUES ", sql_insert_values);
+        }
+
+        return true;
     }
 
     //endregion

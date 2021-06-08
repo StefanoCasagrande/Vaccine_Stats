@@ -1,5 +1,7 @@
 package it.stefanocasagrande.vaccini_stats.Network;
 
+import com.google.gson.JsonObject;
+
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_dataset;
 import it.stefanocasagrande.vaccini_stats.json_classes.last_update_dataset;
@@ -24,5 +26,8 @@ public interface API {
 
     @GET("platea.json")
     Call<platea_dataset> getPopolazione();
+
+    @GET("anagrafica-per-regione.json")
+    Call<JsonObject> getAnagraficaRegione();
 
 }

@@ -5,8 +5,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkClient {
 
-    public static final String BASE_URL="https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/";
-
     public static Retrofit retrofit;
 
    /*
@@ -14,7 +12,10 @@ public class NetworkClient {
     anywhere in the appplication
     */
 
-    public static Retrofit getRetrofitClient(){
+    public static Retrofit getRetrofitClient(String BASE_URL, boolean rigenera){
+
+        if (rigenera)
+            retrofit=null;
 
         //If condition to ensure we don't create multiple retrofit instances in a single application
         if (retrofit==null) {

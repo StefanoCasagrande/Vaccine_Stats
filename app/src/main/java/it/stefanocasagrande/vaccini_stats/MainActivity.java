@@ -28,6 +28,8 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -40,6 +42,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -84,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
     BarChart chart;
 
     ProgressDialog waiting_bar;
+
+    static String url_github="https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/";
+    static String url_sole24="https://lab24.ilsole24ore.com/_json/vaccini/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,14 +189,15 @@ public class MainActivity extends AppCompatActivity {
     // 2. getSummary_by_Age
     // 3. getdeliveries
     // 4. getSummaryVaccini
-    // 5. getCSVsomministrazione
+    // 5. getAnagraficaRegione
+    // 6. getCSVsomministrazione
 
     public void getSummary_by_Age(fragment_summary_by_age var)
     {
         waiting_bar = getprogressDialog();
         waiting_bar.show();
 
-        Retrofit retrofit= NetworkClient.getRetrofitClient();
+        Retrofit retrofit= NetworkClient.getRetrofitClient(url_github, true);
 
         API VacciniAPIs = retrofit.create(API.class);
 
@@ -224,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getdeliveries()
     {
-        Retrofit retrofit= NetworkClient.getRetrofitClient();
+        Retrofit retrofit= NetworkClient.getRetrofitClient(url_github, false);
 
         API VacciniAPIs = retrofit.create(API.class);
 
@@ -239,11 +247,11 @@ public class MainActivity extends AppCompatActivity {
                 if (response.body()!=null) {
                     consegne_vaccini_dataset wResponse = (consegne_vaccini_dataset) response.body();
                     Common.Database.Insert_Deliveries(wResponse.getData());
-
-                    getSummaryVaccini();
                 }
                 else
                     waiting_bar.dismiss();
+
+                getSummaryVaccini();
             }
 
             @Override
@@ -256,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getSummaryVaccini()
     {
-        Retrofit retrofit= NetworkClient.getRetrofitClient();
+        Retrofit retrofit= NetworkClient.getRetrofitClient(url_github, false);
 
         API VacciniAPIs = retrofit.create(API.class);
 
@@ -271,16 +279,47 @@ public class MainActivity extends AppCompatActivity {
                 if (response.body()!=null) {
                     vaccini_summary_dataset wResponse = (vaccini_summary_dataset) response.body();
                     Common.Database.Insert_vaccini_summary(wResponse.getData());
-
-                    try {
-                        getCSVsomministrazione();
-                    } catch (IOException e) {
-                        waiting_bar.dismiss();
-                        e.printStackTrace();
-                    }
                 }
                 else
                     waiting_bar.dismiss();
+
+                getAnagraficaRegione();
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                Toast.makeText(getApplicationContext(),String.format(getString(R.string.API_Error), t.getMessage()), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void getAnagraficaRegione()
+    {
+        Retrofit retrofit= NetworkClient.getRetrofitClient(url_sole24, true);
+
+        API VacciniAPIs = retrofit.create(API.class);
+
+        Call call = VacciniAPIs.getAnagraficaRegione();
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+              /*This is the success callback. Though the response type is JSON, with Retrofit we get
+              the response in the form of WResponse POJO class
+              */
+                if (response.body()!=null) {
+                    JsonObject wResponse = (JsonObject) response.body();
+                    Common.Database.Insert_Anagrafica_Regione(wResponse);
+                }
+                else
+                    waiting_bar.dismiss();
+
+                try {
+                    getCSVsomministrazione();
+                } catch (IOException e) {
+                    waiting_bar.dismiss();
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -292,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getLastUpdate(fragment_summary_by_age var)
     {
-        Retrofit retrofit= NetworkClient.getRetrofitClient();
+        Retrofit retrofit= NetworkClient.getRetrofitClient(url_github, false);
 
         API VacciniAPIs = retrofit.create(API.class);
 
