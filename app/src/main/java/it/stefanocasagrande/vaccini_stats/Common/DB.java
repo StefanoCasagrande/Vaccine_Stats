@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_regioni_eta;
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_vaccini_summary.anagrafica_vaccini_summary_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.somministrazioni_data;
@@ -400,6 +401,28 @@ public class DB extends SQLiteOpenHelper {
         return lista;
     }
 
+    public anagrafica_regioni_eta Get_Anagrafica_Regione(String area, String fascia_eta)
+    {
+        String sql_query=String.format("select fascia_anagrafica, prima_dose, seconda_dose from SUMMARY_BY_LOCATION_AGE inner join ( select area, nome_area from SUMMARY_BY_LOCATION group by area, nome_area ) desc_zone on desc_zone.area = SUMMARY_BY_LOCATION_AGE.area where nome_area=%s and fascia_anagrafica=%s", Validate_String(area), Validate_String(fascia_eta));
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        anagrafica_regioni_eta oggetto = new anagrafica_regioni_eta();
+
+        Cursor c = db.rawQuery(sql_query, null);
+        if (c.moveToFirst()) {
+            do {
+                oggetto.fascia_eta = c.getString(0);
+                oggetto.area = area;
+                oggetto.prima_dose = c.getInt(1);
+                oggetto.seconda_dose = c.getInt(2);
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return oggetto;
+    }
+
     public boolean Insert_Anagrafica_Regione(JsonObject lista_anagrafica_regione)
     {
         if (lista_anagrafica_regione==null)
@@ -420,7 +443,7 @@ public class DB extends SQLiteOpenHelper {
                         break;
 
                     int prima_dose = lista_anagrafica_regione.getAsJsonObject("dataset").getAsJsonObject(area).getAsJsonObject(eta).get("prima_dose").getAsInt();
-                    int seconda_dose = lista_anagrafica_regione.getAsJsonObject("dataset").getAsJsonObject(area).getAsJsonObject(eta).get("prima_dose").getAsInt();
+                    int seconda_dose = lista_anagrafica_regione.getAsJsonObject("dataset").getAsJsonObject(area).getAsJsonObject(eta).get("seconda_dose").getAsInt();
 
                     sql_insert_values.add(String.format("(%s, %s, %s, %s)",
                             Validate_String(eta),
