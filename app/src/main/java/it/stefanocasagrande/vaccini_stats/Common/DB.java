@@ -382,7 +382,7 @@ public class DB extends SQLiteOpenHelper {
         return lista;
     }
 
-    private List<String> get_Eta_List()
+    public List<String> get_Eta_List()
     {
         String sql_query="select fascia_anagrafica from SUMMARY_BY_AGE group by fascia_anagrafica";
 

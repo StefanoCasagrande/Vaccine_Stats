@@ -200,90 +200,72 @@ public class fragment_delivery_details extends Fragment {
 
         //region PopolaEta
 
-        anagrafica_regioni_eta var =Common.Database.Get_Anagrafica_Regione(area_name, getString(R.string.tab_age_1));
+        List<String> lista_eta = Common.Database.get_Eta_List();
 
-        if (var.fascia_eta==null)
-            age_data_region.setVisibility(View.GONE);
-        else {
+        for (String eta : lista_eta)
+        {
+            anagrafica_regioni_eta var =Common.Database.Get_Anagrafica_Regione(area_name, eta);
 
-            tv_age1_doses.setText(String.format("%s %s - %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
-            popolazione = Common.Database.Get_Popolazione(getString(R.string.tab_age_1), list_to_load.get(0).nome_area);
-
-            if (popolazione > 0) {
-                double percent = (((var.prima_dose) * 100) / (double) popolazione);
-                tv_age1_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
+            if (var.fascia_eta==null) {
+                age_data_region.setVisibility(View.GONE);
+                break;
             }
+            else
+            {
+                String doses = (String.format("%s %s + %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
+                popolazione = Common.Database.Get_Popolazione(var.fascia_eta, list_to_load.get(0).nome_area);
+                String tv_percent="";
 
-            var = Common.Database.Get_Anagrafica_Regione(area_name, getString(R.string.tab_age_2));
-            tv_age2_doses.setText(String.format("%s %s - %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
-            popolazione = Common.Database.Get_Popolazione(getString(R.string.tab_age_2), list_to_load.get(0).nome_area);
+                if (popolazione > 0) {
+                    double percent = (((var.prima_dose) * 100) / (double) popolazione);
+                    tv_percent = String.format(getString(R.string.Percent_Population), String.format("%.2f", percent));
+                }
 
-            if (popolazione > 0) {
-                double percent = (((var.prima_dose) * 100) / (double) popolazione);
-                tv_age2_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
-            }
-
-            var = Common.Database.Get_Anagrafica_Regione(area_name, getString(R.string.tab_age_3));
-            tv_age3_doses.setText(String.format("%s %s - %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
-            popolazione = Common.Database.Get_Popolazione(getString(R.string.tab_age_3), list_to_load.get(0).nome_area);
-
-            if (popolazione > 0) {
-                double percent = (((var.prima_dose) * 100) / (double) popolazione);
-                tv_age3_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
-            }
-
-            var = Common.Database.Get_Anagrafica_Regione(area_name, getString(R.string.tab_age_4));
-            tv_age4_doses.setText(String.format("%s %s - %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
-            popolazione = Common.Database.Get_Popolazione(getString(R.string.tab_age_4), list_to_load.get(0).nome_area);
-
-            if (popolazione > 0) {
-                double percent = (((var.prima_dose) * 100) / (double) popolazione);
-                tv_age4_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
-            }
-
-            var = Common.Database.Get_Anagrafica_Regione(area_name, getString(R.string.tab_age_5));
-            tv_age5_doses.setText(String.format("%s %s - %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
-            popolazione = Common.Database.Get_Popolazione(getString(R.string.tab_age_5), list_to_load.get(0).nome_area);
-
-            if (popolazione > 0) {
-                double percent = (((var.prima_dose) * 100) / (double) popolazione);
-                tv_age5_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
-            }
-
-            var = Common.Database.Get_Anagrafica_Regione(area_name, getString(R.string.tab_age_6));
-            tv_age6_doses.setText(String.format("%s %s - %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
-            popolazione = Common.Database.Get_Popolazione(getString(R.string.tab_age_6), list_to_load.get(0).nome_area);
-
-            if (popolazione > 0) {
-                double percent = (((var.prima_dose) * 100) / (double) popolazione);
-                tv_age6_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
-            }
-
-            var = Common.Database.Get_Anagrafica_Regione(area_name, getString(R.string.tab_age_7));
-            tv_age7_doses.setText(String.format("%s %s + %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
-            popolazione = Common.Database.Get_Popolazione(getString(R.string.tab_age_7), list_to_load.get(0).nome_area);
-
-            if (popolazione > 0) {
-                double percent = (((var.prima_dose) * 100) / (double) popolazione);
-                tv_age7_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
-            }
-
-            var = Common.Database.Get_Anagrafica_Regione(area_name, getString(R.string.tab_age_8));
-            tv_age8_doses.setText(String.format("%s %s - %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
-            popolazione = Common.Database.Get_Popolazione(getString(R.string.tab_age_8), list_to_load.get(0).nome_area);
-
-            if (popolazione > 0) {
-                double percent = (((var.prima_dose) * 100) / (double) popolazione);
-                tv_age8_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
-            }
-
-            var = Common.Database.Get_Anagrafica_Regione(area_name, getString(R.string.tab_age_9));
-            tv_age9_doses.setText(String.format("%s %s - %s %s", Common.AddDotToInteger(var.prima_dose), getString(R.string.First_Dose), Common.AddDotToInteger(var.seconda_dose), getString(R.string.Second_Dose)));
-            popolazione = Common.Database.Get_Popolazione(getString(R.string.tab_age_9), list_to_load.get(0).nome_area);
-
-            if (popolazione > 0) {
-                double percent = (((var.prima_dose) * 100) / (double) popolazione);
-                tv_age9_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
+                if (eta.equals(getString(R.string.tab_age_1)))
+                {
+                    tv_age1_doses.setText(doses);
+                    tv_age1_percent.setText(tv_percent);
+                }
+                else if (eta.equals(getString(R.string.tab_age_2)))
+                {
+                    tv_age2_doses.setText(doses);
+                    tv_age2_percent.setText(tv_percent);
+                }
+                else if (eta.equals(getString(R.string.tab_age_3)))
+                {
+                    tv_age3_doses.setText(doses);
+                    tv_age3_percent.setText(tv_percent);
+                }
+                else if (eta.equals(getString(R.string.tab_age_4)))
+                {
+                    tv_age4_doses.setText(doses);
+                    tv_age4_percent.setText(tv_percent);
+                }
+                else if (eta.equals(getString(R.string.tab_age_5)))
+                {
+                    tv_age5_doses.setText(doses);
+                    tv_age5_percent.setText(tv_percent);
+                }
+                else if (eta.equals(getString(R.string.tab_age_6)))
+                {
+                    tv_age6_doses.setText(doses);
+                    tv_age6_percent.setText(tv_percent);
+                }
+                else if (eta.equals(getString(R.string.tab_age_7)))
+                {
+                    tv_age7_doses.setText(doses);
+                    tv_age7_percent.setText(tv_percent);
+                }
+                else if (eta.equals(getString(R.string.tab_age_8)))
+                {
+                    tv_age8_doses.setText(doses);
+                    tv_age8_percent.setText(tv_percent);
+                }
+                else if (eta.equals(getString(R.string.tab_age_9)))
+                {
+                    tv_age9_doses.setText(doses);
+                    tv_age9_percent.setText(tv_percent);
+                }
             }
         }
 
