@@ -14,7 +14,6 @@
 
     <string name="Summary_By_Age">Somministrazione per età</string>
     <string name="Group_Deliveries">Situazione per Regione</string>
-    <string name="Points">Punti Somministrazione</string>
     <string name="History_Vaccines">Andamento vaccinazioni</string>
     <string name="Prevision">Previsioni di copertura</string>
 
@@ -55,7 +54,7 @@
     <string name="Info_About">Tutte le informazioni vengono dal database pubblico della %1$s, organizzato %2$s e ospitato su %3$s\n\nApp sviluppata da %4$s</string>
 
     <string name="News_Title">Novità</string>
-    <string name="News_Text">In questa nuova versione abbiamo aggiunto una nuova voce nel menù per verificare il numero di vaccini somministrati per giorno e abbiamo aggiunto nella pagina generale due nuovi grafici ( per età e per categoria ) sulla distribuzione dei vaccini</string>
+    <string name="News_Text">In questa nuova versione abbiamo aggiunto i dati riguardo l\'età e la relativa percentuale di copertura per ogni regione, quindi potete verificare caso per caso come le diverse entità territoriali stanno portando avanti la campagna vaccinale di copertura delle diverse fasce.</string>
 
 
     <string name="Instruction_Title">Istruzioni</string>

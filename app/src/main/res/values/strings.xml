@@ -32,8 +32,7 @@
     <string name="Wash_Your_Hand">Wash your hands</string>
 
     <string name="Summary_By_Age">Summary By Age</string>
-    <string name="Group_Deliveries">Deliveries Situation</string>
-    <string name="Points">Punti Somministrazione</string>
+    <string name="Group_Deliveries">Regions details</string>
     <string name="History_Vaccines">Storico Somministrazioni</string>
     <string name="Prevision">Prevision</string>
 
@@ -84,7 +83,7 @@
     <string name="Info_About">All the info comes from public data by %1$s, collected by %2$s and hosted on %3$s\n\nApp developed by %4$s</string>
 
     <string name="News_Title">Announcements</string>
-    <string name="News_Text">In this new version we add a Vaccine progression history in the menù in the upper left and a new graphs in the summary by the age ( by age e by category )</string>
+    <string name="News_Text">In this new version we add age data for every single region, so you can use the menù in the upper left to surf to region data and take a look how it\'s going in different part of Italy</string>
 
     <string name="Instruction_Title">Instruction</string>
     <string name="Instruction_Text">You can click on the menù upper left ( 3 horizontal stripes ) to navigate to region details, prevision about date of herd immunity in Italy and so on..</string>

@@ -565,7 +565,7 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.News_Title))
                 .setMessage(getString(R.string.News_Text))
-                .setPositiveButton(getString(R.string.Dont_Show_Anymore), (dialog2, which) -> Common.Database.Set_Configurazione("HIDE_NEWS_2021_03","1"))
+                .setPositiveButton(getString(R.string.Dont_Show_Anymore), (dialog2, which) -> Common.Database.Set_Configurazione("HIDE_NEWS_2021_06","1"))
                 .show();
     }
 
@@ -577,7 +577,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.Dont_Show_Anymore), (dialog2, which) ->
                         {
                             Common.Database.Set_Configurazione("HIDE_INSTRUCTION","1");
-                            Common.Database.Set_Configurazione("HIDE_NEWS_2021_03","1");
+                            Common.Database.Set_Configurazione("HIDE_NEWS_2021_06","1");
                         })
                 .show();
     }
