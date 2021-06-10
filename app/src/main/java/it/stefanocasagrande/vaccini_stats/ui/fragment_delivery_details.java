@@ -34,7 +34,6 @@ import it.stefanocasagrande.vaccini_stats.MainActivity;
 import it.stefanocasagrande.vaccini_stats.R;
 import it.stefanocasagrande.vaccini_stats.json_classes.anagrafica_regioni_eta;
 import it.stefanocasagrande.vaccini_stats.json_classes.consegne_vaccini.consegne_vaccini_data;
-import it.stefanocasagrande.vaccini_stats.json_classes.somministrazioni_data;
 import it.stefanocasagrande.vaccini_stats.json_classes.vaccini_summary.vaccini_summary_data;
 
 import static it.stefanocasagrande.vaccini_stats.Common.Common.get_int_from_Date;

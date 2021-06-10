@@ -69,14 +69,6 @@
     <string name="tab_age_8" translatable="false">80-89</string>
     <string name="tab_age_9" translatable="false">90+</string>
 
-    <string name="Health_Workers">Health workers</string>
-    <string name="RSA_Guests">RSA Guests</string>
-    <string name="Others">Others ( no particular condition )</string>
-    <string name="law_enforcement">Law enforcement</string>
-    <string name="School_Staff">School Staff</string>
-    <string name="non_health_care_professional">Non health care professional</string>
-    <string name="Fragili">Fragili</string>
-
     <string name="First_Dose">First Dose</string>
     <string name="Second_Dose">Second Dose</string>
 

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -86,7 +85,6 @@ public class PlaceholderFragment extends Fragment {
                 tv_age.setText(getString(R.string.General_Data));
                 int male=0;
                 int female=0;
-                int first_dose=0;
                 int second_dose=0;
 
                 tv_age_click_for_graph.setVisibility(View.VISIBLE);
@@ -98,7 +96,6 @@ public class PlaceholderFragment extends Fragment {
                 for(anagrafica_vaccini_summary_data var : lista) {
                     male+=var.sesso_maschile;
                     female+=var.sesso_femminile;
-                    first_dose+=var.prima_dose;
                     second_dose+=var.seconda_dose;
                 }
 

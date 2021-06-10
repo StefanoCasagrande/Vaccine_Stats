@@ -3,7 +3,6 @@ package it.stefanocasagrande.vaccini_stats;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,22 +12,15 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import androidx.fragment.app.Fragment;
@@ -42,8 +34,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -58,9 +48,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import it.stefanocasagrande.vaccini_stats.Common.Common;
 import it.stefanocasagrande.vaccini_stats.Common.DB;
@@ -84,7 +72,6 @@ import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    PieChart pieChart;
     BarChart chart;
 
     ProgressDialog waiting_bar;
@@ -566,128 +553,6 @@ public class MainActivity extends AppCompatActivity {
 
     //endregion
 
-    //region Graph Category
-
-    public void Show_Graph(int operatori_sanitari_sociosanitari, int personale_non_sanitario, int ospiti_rsa, int forze_armate, int personale_scolastico, int altro, int fragili)
-    {
-        final Dialog custom_dialog = new Dialog(this);
-        custom_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        custom_dialog.setContentView(R.layout.alertdialog_category_graph);
-        custom_dialog.setCancelable(true);
-
-        pieChart = custom_dialog.findViewById(R.id.pieChart_view);
-        initPieChart();
-
-        Button btn_ok = custom_dialog.findViewById(R.id.btn_ok);
-        btn_ok.setOnClickListener(v -> custom_dialog.cancel());
-
-        int totale = operatori_sanitari_sociosanitari+ personale_non_sanitario+ ospiti_rsa+ forze_armate+ personale_scolastico+ altro+fragili;
-
-        showPieChart((double)(operatori_sanitari_sociosanitari*100)/totale, (double)(personale_non_sanitario*100)/totale, (double)(ospiti_rsa*100)/totale, (double)(forze_armate*100)/totale, (double)(personale_scolastico*100)/totale, (double)(altro*100)/totale, (double)(fragili*100)/totale);
-
-        custom_dialog.show();
-    }
-
-    private void initPieChart(){
-
-        //remove the description label on the lower left corner, default true if not set
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setEntryLabelColor(R.color.Dividing_Bar);
-
-        //enabling the user to rotate the chart, default true
-        pieChart.setRotationEnabled(true);
-        //adding friction when rotating the pie chart
-        pieChart.setDragDecelerationFrictionCoef(0.9f);
-        //setting the first entry start from right hand side, default starting from top
-        pieChart.setRotationAngle(0);
-
-        //highlight the entry when it is tapped, default true if not set
-        pieChart.setHighlightPerTapEnabled(true);
-        //adding animation so the entries pop up from 0 degree
-        pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
-
-    }
-
-    private void showPieChart(double operatori_sanitari_sociosanitari, double personale_non_sanitario, double ospiti_rsa, double forze_armate, double personale_scolastico, double altro, double fragili)
-    {
-
-        ArrayList<PieEntry> pieEntries = new ArrayList<>();
-
-        //initializing data
-        Map<String, Double> typeAmountMap = new HashMap<>();
-        //initializing colors for the entries
-        ArrayList<Integer> colors = new ArrayList<>();
-
-
-        if (forze_armate>0)
-        {
-            typeAmountMap.put(getString(R.string.law_enforcement),forze_armate);
-            colors.add(Color.parseColor("#ffb703"));
-        }
-
-        if (operatori_sanitari_sociosanitari>0)
-        {
-            typeAmountMap.put(getString(R.string.Health_Workers),operatori_sanitari_sociosanitari);
-            colors.add(Color.parseColor("#8ecae6"));
-        }
-
-        if (altro>0)
-        {
-            typeAmountMap.put(getString(R.string.Others),altro);
-            colors.add(Color.parseColor("#e07a5f"));
-        }
-
-        if (personale_non_sanitario>0)
-        {
-            typeAmountMap.put(getString(R.string.non_health_care_professional),personale_non_sanitario);
-            colors.add(Color.parseColor("#219ebc"));
-        }
-
-
-        if (ospiti_rsa>0)
-        {
-            typeAmountMap.put(getString(R.string.RSA_Guests),ospiti_rsa);
-            colors.add(Color.parseColor("#687175"));
-        }
-
-        if (personale_scolastico>0)
-        {
-            typeAmountMap.put(getString(R.string.School_Staff),personale_scolastico);
-            colors.add(Color.parseColor("#fb8500"));
-        }
-
-        if (fragili>0)
-        {
-            typeAmountMap.put(getString(R.string.Fragili),fragili);
-            colors.add(Color.parseColor("#999b84"));
-        }
-
-        //input data and fit data into pie chart entry
-        for(String type: typeAmountMap.keySet()){
-            pieEntries.add(new PieEntry(typeAmountMap.get(type).floatValue(), type));
-        }
-
-        //collecting the entries with label name
-        PieDataSet pieDataSet = new PieDataSet(pieEntries,"");
-        //setting text size of the value
-        pieDataSet.setValueTextSize(15f);
-        //providing color list for coloring different entries
-        pieDataSet.setColors(colors);
-        //grouping the data set from entry to chart
-        PieData pieData = new PieData(pieDataSet);
-        //showing the value of the entries, default true if not set
-        pieData.setDrawValues(true);
-
-        pieData.setValueFormatter(new PercentFormatter());
-
-        pieChart.getLegend().setEnabled(false);
-
-        pieChart.setData(pieData);
-        pieChart.invalidate();
-    }
-
-    //endregion
-
     public void Show_Administered_Doses_per_Area(String p_area_name)
     {
         Fragment fragment = fragment_storico_andamento.newInstance(p_area_name);
@@ -735,11 +600,11 @@ public class MainActivity extends AppCompatActivity {
 
             String[] values = myLine.split(",");
 
-            List<String> valori = new ArrayList<>();
+            List<String> valori;
             if(values.length < numero_campi )
                 continue;
             else
-                valori.addAll(Arrays.asList(values));
+                valori = new ArrayList<>(Arrays.asList(values));
 
             list.add(valori);
         }
@@ -805,7 +670,7 @@ public class MainActivity extends AppCompatActivity {
                 // Output stream to write file
 
                 OutputStream output = new FileOutputStream(dir+"somministrazioni_vaccini_summary_latest.csv");
-                byte data[] = new byte[1024];
+                byte[] data = new byte[1024];
 
                 while ((count = input.read(data)) != -1)
                     output.write(data, 0, count);
