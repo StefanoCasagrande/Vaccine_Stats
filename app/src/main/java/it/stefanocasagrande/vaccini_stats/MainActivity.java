@@ -463,7 +463,6 @@ public class MainActivity extends AppCompatActivity {
 
         List<anagrafica_vaccini_summary_data> lista = Common.Database.Get_anagrafica_vaccini_summary();
 
-        int fascia_0=0;
         int fascia_1=0;
         int fascia_2=0;
         int fascia_3=0;
@@ -472,30 +471,31 @@ public class MainActivity extends AppCompatActivity {
         int fascia_6=0;
         int fascia_7=0;
         int fascia_8=0;
+        int fascia_9=0;
 
         for(anagrafica_vaccini_summary_data var : lista)
         {
-            if (var.fascia_anagrafica.equals(getString(R.string.tab_text_2)))
-                fascia_0=var.totale;
-            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_3)))
+            if (var.fascia_anagrafica.equals(getString(R.string.tab_age_1)))
                 fascia_1=var.totale;
-            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_4)))
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_age_2)))
                 fascia_2=var.totale;
-            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_5)))
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_age_3)))
                 fascia_3=var.totale;
-            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_6)))
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_age_4)))
                 fascia_4=var.totale;
-            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_7)))
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_age_5)))
                 fascia_5=var.totale;
-            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_8)))
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_age_6)))
                 fascia_6=var.totale;
-            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_9)))
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_age_7)))
                 fascia_7=var.totale;
-            else if (var.fascia_anagrafica.equals(getString(R.string.tab_text_10)))
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_age_8)))
                 fascia_8=var.totale;
+            else if (var.fascia_anagrafica.equals(getString(R.string.tab_age_9)))
+                fascia_9=var.totale;
         }
 
-        ShowBarGraph(fascia_0, fascia_1, fascia_2, fascia_3, fascia_4, fascia_5, fascia_6, fascia_7, fascia_8);
+        ShowBarGraph(fascia_1, fascia_2, fascia_3, fascia_4, fascia_5, fascia_6, fascia_7, fascia_8, fascia_9);
 
         custom_dialog.show();
     }
@@ -545,15 +545,15 @@ public class MainActivity extends AppCompatActivity {
         set1.setBarBorderWidth(set1.getBarBorderWidth() == 1.f ? 0.f : 1.f);
 
         String[] xAxisLables = new String[]{
-                getString(R.string.tab_text_2),
-                getString(R.string.tab_text_3),
-                getString(R.string.tab_text_4),
-                getString(R.string.tab_text_5),
-                getString(R.string.tab_text_6),
-                getString(R.string.tab_text_7),
-                getString(R.string.tab_text_8),
-                getString(R.string.tab_text_9),
-                getString(R.string.tab_text_10)
+                getString(R.string.tab_age_1),
+                getString(R.string.tab_age_2),
+                getString(R.string.tab_age_3),
+                getString(R.string.tab_age_4),
+                getString(R.string.tab_age_5),
+                getString(R.string.tab_age_6),
+                getString(R.string.tab_age_7),
+                getString(R.string.tab_age_8),
+                getString(R.string.tab_age_9)
         };
 
         chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLables));

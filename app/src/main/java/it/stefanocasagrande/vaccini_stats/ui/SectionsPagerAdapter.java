@@ -13,7 +13,7 @@ import it.stefanocasagrande.vaccini_stats.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4,R.string.tab_text_5, R.string.tab_text_6, R.string.tab_text_7, R.string.tab_text_8, R.string.tab_text_9, R.string.tab_text_10};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_Total, R.string.tab_age_1, R.string.tab_age_2, R.string.tab_age_3, R.string.tab_age_4,R.string.tab_age_5, R.string.tab_age_6, R.string.tab_age_7, R.string.tab_age_8, R.string.tab_age_9};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {

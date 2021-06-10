@@ -5,10 +5,6 @@
     android:layout_height="fill_parent"
     android:background="@color/Background_1">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -61,630 +57,694 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="fill_parent"
-                android:background="@color/Dividing_Bar"
-                android:layout_height="0.5dp"
-                />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/tab_text_2"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age1_doses"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age1_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
+                <View
+                    android:layout_width="fill_parent"
+                    android:background="@color/Dividing_Bar"
+                    android:layout_height="0.5dp"
+                    />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/age_data_region"
+                    android:layout_marginBottom="10dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/tab_text_3"/>
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
 
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age2_doses"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:fontFamily="@font/free_solid_900"
+                            android:textSize="35sp"
+                            android:textColor="@color/Icons"
+                            android:layout_gravity="center_vertical"
+                            android:text=""/>
 
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/Age_Group"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Doses_For_Age_Graph_Explanation"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age2_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/tab_age_1"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age1_doses"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Small_Text_Placeholder"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age1_percent"
+                                android:text="@string/Small_Text_Placeholder"
+                                android:textColor="@color/Text_Small" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/tab_age_2"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age2_doses"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Small_Text_Placeholder"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age2_percent"
+                                android:text="@string/Small_Text_Placeholder"
+                                android:textColor="@color/Text_Small" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/tab_age_3"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age3_doses"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Small_Text_Placeholder"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age3_percent"
+                                android:text="@string/Small_Text_Placeholder"
+                                android:textColor="@color/Text_Small" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/tab_age_4"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age4_doses"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Small_Text_Placeholder"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age4_percent"
+                                android:text="@string/Small_Text_Placeholder"
+                                android:textColor="@color/Text_Small" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/tab_age_5"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age5_doses"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Small_Text_Placeholder"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age5_percent"
+                                android:text="@string/Small_Text_Placeholder"
+                                android:textColor="@color/Text_Small" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/tab_age_6"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age6_doses"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Small_Text_Placeholder"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age6_percent"
+                                android:text="@string/Small_Text_Placeholder"
+                                android:textColor="@color/Text_Small" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/tab_age_7"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age7_doses"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Small_Text_Placeholder"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age7_percent"
+                                android:text="@string/Small_Text_Placeholder"
+                                android:textColor="@color/Text_Small" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/tab_age_8"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age8_doses"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Small_Text_Placeholder"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age8_percent"
+                                android:text="@string/Small_Text_Placeholder"
+                                android:textColor="@color/Text_Small" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/Text_Big"
+                                android:text="@string/tab_age_9"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age9_doses"
+                                android:textColor="@color/Text_Small"
+                                android:text="@string/Small_Text_Placeholder"/>
+
+                            <TextView
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_age9_percent"
+                                android:text="@string/Small_Text_Placeholder"
+                                android:textColor="@color/Text_Small" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
+                <View
+                    android:layout_width="fill_parent"
+                    android:background="@color/Dividing_Bar"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/tab_text_4"/>
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/free_solid_900"
+                        android:textSize="35sp"
+                        android:textColor="@color/Icons"
+                        android:layout_gravity="center_vertical"
+                        android:text=""/>
 
-                    <TextView
-                        android:layout_marginStart="10dp"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age3_doses"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age3_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_population"
+                            android:textColor="@color/Text_Big"
+                            android:text="@string/Big_Title_Placeholder"/>
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@color/Text_Small"
+                            android:text="@string/population"/>
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:id="@+id/tv_percent"
+                            android:text="@string/Small_Text_Placeholder"
+                            android:textColor="@color/Text_Small" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:gravity="top">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/tab_text_5"/>
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/free_solid_900"
+                        android:textSize="35sp"
+                        android:textColor="@color/Icons"
+                        android:layout_gravity="center_vertical"
+                        android:text=""/>
 
-                    <TextView
-                        android:layout_marginStart="10dp"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age4_doses"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age4_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_doses_administered"
+                            android:textColor="@color/Text_Big"
+                            android:text="@string/Big_Title_Placeholder"/>
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@color/Text_Small"
+                            android:text="@string/doses_administered_first_second"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/tab_text_6"/>
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/free_solid_900"
+                        android:textSize="35sp"
+                        android:textColor="@color/Icons"
+                        android:layout_gravity="center_vertical"
+                        android:text=""/>
 
-                    <TextView
-                        android:layout_marginStart="10dp"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age5_doses"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age5_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:id="@+id/tv_total_delivered"
+                            android:textColor="@color/Text_Big"
+                            android:text="@string/Big_Title_Placeholder"/>
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:id="@+id/tv_total_delivered_desc"
+                            android:textColor="@color/Text_Small"
+                            android:text="@string/Small_Text_Placeholder"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:background="@color/Dividing_Bar"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
+                <Button
+                    android:layout_marginTop="5dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_doses_administered_detail"
+                    android:text="@string/Graph_Administered_Detail"/>
+
+                <View
+                    android:layout_marginTop="10dp"
+                    android:layout_width="fill_parent"
+                    android:background="@color/Dividing_Bar"
+                    android:layout_height="0.5dp"
+                    />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/tab_text_7"/>
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/free_solid_900"
+                        android:textSize="35sp"
+                        android:textColor="@color/Icons"
+                        android:layout_gravity="center_vertical"
+                        android:text=""/>
 
-                    <TextView
-                        android:layout_marginStart="10dp"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age6_doses"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age6_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/Text_Big"
+                            android:text="@string/Vaccine_Detail"/>
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@color/Text_Small"
+                            android:text="@string/Vaccine_Detail_Small"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:background="@color/Dividing_Bar"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/tab_text_8"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age7_doses"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age7_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
+                <com.github.mikephil.charting.charts.PieChart
+                    android:layout_width="fill_parent"
+                    android:layout_height="300dp"
+                    android:id="@+id/pieChart_view"
+                    android:layout_marginBottom="30dp"/>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/tab_text_9"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age8_doses"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age8_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/tab_text_10"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age9_doses"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_age9_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:background="@color/Dividing_Bar"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                />
-
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:fontFamily="@font/free_solid_900"
-                    android:textSize="35sp"
-                    android:textColor="@color/Icons"
-                    android:layout_gravity="center_vertical"
-                    android:text=""/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:id="@+id/tv_population"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/Big_Title_Placeholder"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/population"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_percent"
-                        android:text="@string/Small_Text_Placeholder"
-                        android:textColor="@color/Text_Small" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:gravity="top">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:fontFamily="@font/free_solid_900"
-                    android:textSize="35sp"
-                    android:textColor="@color/Icons"
-                    android:layout_gravity="center_vertical"
-                    android:text=""/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:id="@+id/tv_doses_administered"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/Big_Title_Placeholder"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/doses_administered_first_second"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:fontFamily="@font/free_solid_900"
-                    android:textSize="35sp"
-                    android:textColor="@color/Icons"
-                    android:layout_gravity="center_vertical"
-                    android:text=""/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:id="@+id/tv_total_delivered"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/Big_Title_Placeholder"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:id="@+id/tv_total_delivered_desc"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Small_Text_Placeholder"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:background="@color/Dividing_Bar"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                />
-
-            <Button
-                android:layout_marginTop="5dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_doses_administered_detail"
-                android:text="@string/Graph_Administered_Detail"/>
-
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_width="fill_parent"
-                android:background="@color/Dividing_Bar"
-                android:layout_height="0.5dp"
-                />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="top">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:fontFamily="@font/free_solid_900"
-                    android:textSize="35sp"
-                    android:textColor="@color/Icons"
-                    android:layout_gravity="center_vertical"
-                    android:text=""/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/Text_Big"
-                        android:text="@string/Vaccine_Detail"/>
-
-                    <TextView
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/Text_Small"
-                        android:text="@string/Vaccine_Detail_Small"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:background="@color/Dividing_Bar"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                />
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:layout_width="fill_parent"
-                android:layout_height="300dp"
-                android:id="@+id/pieChart_view"
-                android:layout_marginBottom="30dp"/>
-
+            </ScrollView>
         </LinearLayout>
-
-    </ScrollView>
 </FrameLayout>

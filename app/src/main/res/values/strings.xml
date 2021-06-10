@@ -58,16 +58,16 @@
     <string name="General_Data">General Data</string>
     <string name="Age_Group">Age group</string>
 
-    <string name="tab_text_1">Totale</string>
-    <string name="tab_text_2" translatable="false">12-19</string>
-    <string name="tab_text_3" translatable="false">20-29</string>
-    <string name="tab_text_4" translatable="false">30-39</string>
-    <string name="tab_text_5" translatable="false">40-49</string>
-    <string name="tab_text_6" translatable="false">50-59</string>
-    <string name="tab_text_7" translatable="false">60-69</string>
-    <string name="tab_text_8" translatable="false">70-79</string>
-    <string name="tab_text_9" translatable="false">80-89</string>
-    <string name="tab_text_10" translatable="false">90+</string>
+    <string name="tab_Total">Total</string>
+    <string name="tab_age_1" translatable="false">12-19</string>
+    <string name="tab_age_2" translatable="false">20-29</string>
+    <string name="tab_age_3" translatable="false">30-39</string>
+    <string name="tab_age_4" translatable="false">40-49</string>
+    <string name="tab_age_5" translatable="false">50-59</string>
+    <string name="tab_age_6" translatable="false">60-69</string>
+    <string name="tab_age_7" translatable="false">70-79</string>
+    <string name="tab_age_8" translatable="false">80-89</string>
+    <string name="tab_age_9" translatable="false">90+</string>
 
     <string name="Health_Workers">Health workers</string>
     <string name="RSA_Guests">RSA Guests</string>
@@ -123,7 +123,7 @@
     <string name="Vaccinazione_Massa_Text" translatable="false">L\'Italia ha calcolato in 30 milioni circa le persone a rischio ( personale socio-sanitario, personale scolastico, forze armate, over 55, persone vulnerabili di qualsiasi età ) che hanno diritto alla precedenza nella somministrazione dei vaccini.&lt;br /&gt;&lt;br /&gt;Chi non rientra in una fascia protetta ( under 55 senza particolari patologie ) dovrebbe potersi vaccinare tra %1$s giorni quindi a partire dal %2$s. Il calcolo è valido a condizione che prima di aprire alle classi non a rischio si copra per intero il fabbisogno delle classi a rischio.</string>
     <string name="Vaccinazione_Massa_Reached" translatable="false">Al momento le fasce a rischio risultano aver ricevuto copertura vaccinale e quindi il vaccino è accessibile anche alle classi non a rischio.</string>
 
-    <string name="Percent_Population" translatable="false">%1$s%% ha ricevuto almeno una dose.</string>
+    <string name="Percent_Population">%1$s%% got at least one dose.</string>
 
     <string name="Math_Formula" translatable="false">* Le formule matematiche utilizzate sono qui disponibili in chiaro per eventuale verifica o segnalazione errori. I valori sono moltiplicati per 2 perchè ogni persona deve ricevere 2 dosi.\n\nImmunità di gregge:\n70%% popolazione italiana: %1$s \nVaccini già somministrati: %2$s \nMedia vaccinazioni / giorno: %3$s \n\n( ( %1$s*2 ) - %2$s ) / %3$s\nRisultato: %4$s \n\nVaccinazione di massa:\nPopolazione a rischio: %5$s \nVaccini già somministrati: %2$s \nMedia vaccinazioni / giorno: %3$s \n\n( ( %5$s*2 ) - %2$s ) / %3$s\nRisultato: %6$s\n</string>
     <string name="Already_Update">Data are already up to date</string>
