@@ -80,6 +80,18 @@ public class DB extends SQLiteOpenHelper {
             sql_query="ALTER TABLE SOMMINISTRAZIONI ADD COLUMN seconda_dose INTEGER";
             db.execSQL(sql_query);
         }
+
+        if (!doColumnExists("SUMMARY_BY_AGE", "dose_addizionale_booster",db))
+        {
+            sql_query="ALTER TABLE SUMMARY_BY_AGE ADD COLUMN dose_addizionale_booster INTEGER";
+            db.execSQL(sql_query);
+        }
+
+        if (!doColumnExists("SOMMINISTRAZIONI", "dose_addizionale_booster",db))
+        {
+            sql_query="ALTER TABLE SOMMINISTRAZIONI ADD COLUMN dose_addizionale_booster INTEGER";
+            db.execSQL(sql_query);
+        }
     }
 
     //region Utility
@@ -301,17 +313,18 @@ public class DB extends SQLiteOpenHelper {
             List<String> sql_insert_values = new ArrayList<>();
 
             for (anagrafica_vaccini_summary_data var : lista)
-                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s)",
+                sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s, %s)",
                         Validate_String(var.fascia_anagrafica),
                         var.totale,
                         var.sesso_maschile,
                         var.sesso_femminile,
                         var.prima_dose,
                         var.seconda_dose,
+                        var.dose_addizionale_booster,
                         Validate_String(var.ultimo_aggiornamento)
                 ));
 
-            Insert_Multi("INSERT INTO SUMMARY_BY_AGE ( fascia_anagrafica, totale, sesso_maschile, sesso_femminile, prima_dose, seconda_dose, ultimo_aggiornamento ) VALUES ", sql_insert_values);
+            Insert_Multi("INSERT INTO SUMMARY_BY_AGE ( fascia_anagrafica, totale, sesso_maschile, sesso_femminile, prima_dose, seconda_dose, dose_addizionale_booster, ultimo_aggiornamento ) VALUES ", sql_insert_values);
         }
 
         return true;
@@ -332,7 +345,7 @@ public class DB extends SQLiteOpenHelper {
 
     public List<anagrafica_vaccini_summary_data> Get_anagrafica_vaccini_summary()
     {
-        String sql_query = "SELECT fascia_anagrafica, totale, sesso_maschile, sesso_femminile, prima_dose, seconda_dose, ultimo_aggiornamento from SUMMARY_BY_AGE ";
+        String sql_query = "SELECT fascia_anagrafica, totale, sesso_maschile, sesso_femminile, prima_dose, seconda_dose, dose_addizionale_booster, ultimo_aggiornamento from SUMMARY_BY_AGE ";
 
         SQLiteDatabase db = this.getWritableDatabase();
         List<anagrafica_vaccini_summary_data> lista = new ArrayList<>();
@@ -348,7 +361,8 @@ public class DB extends SQLiteOpenHelper {
                 var.sesso_femminile = c.getInt(3);
                 var.prima_dose = c.getInt(4);
                 var.seconda_dose = c.getInt(5);
-                var.ultimo_aggiornamento = c.getString(6);
+                var.dose_addizionale_booster = c.getInt(6);
+                var.ultimo_aggiornamento = c.getString(7);
                 lista.add(var);
 
             } while(c.moveToNext());
@@ -545,6 +559,7 @@ public class DB extends SQLiteOpenHelper {
             int posizione_codice_NUTS2=0;
             int posizione_codice_regione_ISTAT=0;
             int posizione_nome_area=0;
+            int posizione_dose_addizionale_booster=0;
 
             for (List<String> var : lista)
             {
@@ -593,22 +608,26 @@ public class DB extends SQLiteOpenHelper {
                             case "nome_area":
                                 posizione_nome_area=posizione;
                                 break;
+                            case "dose_addizionale_booster":
+                                posizione_dose_addizionale_booster=posizione;
+                                break;
                         }
                     }
                 }
                 else {
 
-                    sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s)",
+                    sql_insert_values.add(String.format("(%s, %s, %s, %s, %s, %s, %s)",
                             Common.get_int_from_Date(var.get(posizione_data_somministrazione)),
                             Validate_String(var.get(posizione_area)),
                             var.get(posizione_totale),
                             Validate_String(var.get(posizione_nome_area)),
                             var.get(posizione_prima_dose),        // prima dose
-                            var.get(posizione_seconda_dose)));      // seconda dose
+                            var.get(posizione_seconda_dose),      // seconda dose
+                            var.get(posizione_dose_addizionale_booster)));      // seconda dose
                 }
             }
 
-            Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area, prima_dose, seconda_dose ) VALUES ", sql_insert_values);
+            Insert_Multi("INSERT INTO SOMMINISTRAZIONI ( data_somministrazione,area,totale, nome_area, prima_dose, seconda_dose, dose_addizionale_booster ) VALUES ", sql_insert_values);
         }
 
         return true;
@@ -634,7 +653,7 @@ public class DB extends SQLiteOpenHelper {
 
     public List<somministrazioni_data> get_Somministrazioni(int start_date, int end_date, String area_name)
     {
-        String sql_query = "SELECT data_somministrazione,sum(totale) from SOMMINISTRAZIONI  ";
+        String sql_query = "SELECT data_somministrazione,sum(totale), sum(prima_dose), sum(seconda_dose), sum(dose_addizionale_booster) from SOMMINISTRAZIONI  ";
 
         sql_query +=String.format(" where data_somministrazione between %s and %s ", start_date, end_date);
 
@@ -653,6 +672,9 @@ public class DB extends SQLiteOpenHelper {
 
                 var.data_somministrazione = c.getInt(0);
                 var.totale = c.getInt(1);
+                var.prima_dose = c.getInt(2);
+                var.seconda_dose = c.getInt(3);
+                var.terza_dose = c.getInt(4);
                 lista.add(var);
 
             } while(c.moveToNext());

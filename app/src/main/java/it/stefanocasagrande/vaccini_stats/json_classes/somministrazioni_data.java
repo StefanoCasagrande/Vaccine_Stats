@@ -6,5 +6,8 @@ public class somministrazioni_data {
     public Integer data_somministrazione;
     public Integer totale;
     public String nome_area;
+    public Integer prima_dose;
+    public Integer seconda_dose;
+    public Integer terza_dose;
 
 }

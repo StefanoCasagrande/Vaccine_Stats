@@ -59,6 +59,7 @@ public class PlaceholderFragment extends Fragment {
         final TextView tv_percent = root.findViewById(R.id.tv_percent);
 
         final TextView tv_second_dose = root.findViewById(R.id.tv_second_dose);
+        final TextView tv_third_dose = root.findViewById(R.id.tv_third_dose);
 
         final TextView tv_age_click_for_graph = root.findViewById(R.id.tv_age_click_for_graph);
 
@@ -85,7 +86,9 @@ public class PlaceholderFragment extends Fragment {
                 tv_age.setText(getString(R.string.General_Data));
                 int male=0;
                 int female=0;
+                int first_dose=0;
                 int second_dose=0;
+                int third_dose=0;
 
                 tv_age_click_for_graph.setVisibility(View.VISIBLE);
 
@@ -96,15 +99,18 @@ public class PlaceholderFragment extends Fragment {
                 for(anagrafica_vaccini_summary_data var : lista) {
                     male+=var.sesso_maschile;
                     female+=var.sesso_femminile;
+                    first_dose += var.prima_dose;
                     second_dose+=var.seconda_dose;
+                    third_dose += var.dose_addizionale_booster;
                 }
 
-                tv_first_dose.setText(Common.AddDotToInteger(female+male-second_dose));
+                tv_first_dose.setText(Common.AddDotToInteger(first_dose));
                 tv_second_dose.setText(Common.AddDotToInteger(second_dose));
+                tv_third_dose.setText(Common.AddDotToInteger(third_dose));
 
                 if (popolazione>0)
                 {
-                    double percent = ((((double)(female+male-second_dose))/(double)popolazione)*100);
+                    double percent = ((((double)(first_dose))/(double)popolazione)*100);
                     tv_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
                 }
             }
@@ -120,13 +126,15 @@ public class PlaceholderFragment extends Fragment {
                     if (var.fascia_anagrafica.equals(s))
                     {
                         tv_last_update.setText(String.format("%s: %s", getString(R.string.Data), Common.get_dd_MM_yyyy(var.ultimo_aggiornamento)));
-                        tv_first_dose.setText(Common.AddDotToInteger(var.sesso_femminile+var.sesso_maschile-var.seconda_dose));
+                        tv_first_dose.setText(Common.AddDotToInteger(var.prima_dose));
 
                         tv_second_dose.setText(Common.AddDotToInteger(var.seconda_dose));
 
+                        tv_third_dose.setText(Common.AddDotToInteger(var.dose_addizionale_booster));
+
                         if (popolazione>0)
                         {
-                            double percent =  ((((double)(var.sesso_femminile+var.sesso_maschile-var.seconda_dose))/(double)popolazione)*100);
+                            double percent =  ((((double)(var.prima_dose))/(double)popolazione)*100);
                             tv_percent.setText(String.format(getString(R.string.Percent_Population), String.format("%.2f", percent)));
                         }
                     }

@@ -70,6 +70,7 @@
 
     <string name="First_Dose">First Dose</string>
     <string name="Second_Dose">Second Dose</string>
+    <string name="third_Dose">Third Dose</string>
 
     <string name="Summary_Explanation">* I dati si riferiscono al numero di vaccini somministrati, NON al numero di persone vaccinate. Allo stato attuale infatti i vaccini disponibili necessitano di due dosi, per avere il dato delle persone vaccinate la voce da considerare è quella sotto \'seconda dose\'"</string>
     <string name="History_Explanation">* Il grafico riporta il numero di vaccini somministrati giorno per giorno nell\'intervallo di tempo che potete personalizzare in fondo. La rappresentazione permette di aver un\'idea di come la velocità di somministrazione si stia evolvendo.</string>

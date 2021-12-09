@@ -38,4 +38,8 @@ public class anagrafica_vaccini_summary_data implements Serializable {
     @SerializedName("seconda_dose")
     @Expose
     public Integer seconda_dose;
+
+    @SerializedName("dose_addizionale_booster")
+    @Expose
+    public Integer dose_addizionale_booster;
 }
